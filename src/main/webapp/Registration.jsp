@@ -1,4 +1,3 @@
-<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -63,7 +62,7 @@
 <body>
 <div class="container">
     <h1>Traveller</h1>
-    <form action="Validation.jsp" method="post">
+    <form>
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required><br>
@@ -85,13 +84,12 @@
         </div>
 
         <div class="form-group">
-            <label for="Roles">Select Your Role:</label>
-            <input type="text" id="role" name="role" list="Roles">
+            <label for="myInput">Select Your Role:</label>
+            <input type="text" id="myInput" list="Roles">
 
             <datalist id="Roles">
-                <option value="1" selected>Admin</option>
-                <option value="2">Hotel Owner</option>
-                <option value="3">Traveller</option>
+                <option value="Hotel Owner">
+                <option value="Traveller">
             </datalist>
         </div>
 
@@ -100,7 +98,6 @@
         </div>
     </form>
 </div>
-
 </body>
 </html>
 
