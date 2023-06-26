@@ -4,8 +4,10 @@
 <head>
   <title>JSP - Hello World</title>
 </head>
-<body>
-<h1><%= "Hello World!" %></h1>
+<body><%
+String name=(String) request.getAttribute("name_key");
+%>
+<h1><%=name%></h1>
 <br/>
 <a href="HelloServlet">Hello Servlet</a>
 </body>

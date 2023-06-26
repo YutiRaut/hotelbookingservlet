@@ -14,7 +14,7 @@ public class MainConnection extends HttpServlet{
         private Connection connection = null;
         private final String URL = "jdbc:mysql://localhost:3306/hotel-booking";
         private final String USERNAME = "root";
-        private final String PASSWORD = "root";
+        private final String PASSWORD = "";
 
     private MainConnection() {
 

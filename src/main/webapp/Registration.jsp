@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration Form</title>
+    <title>Traveller Registration</title>
     <style>
         body {
-            font-family: "serif","Segoe Print";
+            font-family: "serif", "Segoe Print";
             background-color: #fafafa;
         }
 
@@ -19,8 +19,9 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        h1 {
             text-align: center;
+            font-family: "DejaVu Serif Condensed";
         }
 
         .form-group {
@@ -42,14 +43,15 @@
         }
 
         .form-group button {
+            font-family: DialogInput;
             width: 100%;
             padding: 10px;
-            font-size: 16px;
+            font-size: 20px;
             background-color: skyblue;
             border: none;
             color: #fff;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 50px;
         }
 
         .form-group button:hover {
@@ -59,7 +61,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Registration Form</h1>
+    <h1>Traveller</h1>
     <form>
         <div class="form-group">
             <label for="name">Name:</label>
@@ -72,7 +74,7 @@
         </div>
 
         <div class="form-group">
-            <label for="contact">Contact No</label>
+            <label for="contact">Contact No:</label>
             <input type="text" id="contact" name="contact" required><br>
         </div>
 
@@ -82,10 +84,13 @@
         </div>
 
         <div class="form-group">
-            <label for="birthdate">Date of Birth:</label>
-        </div>
-        <div class="form-group">
-            <input type="date" id="birthdate" name="birthdate" required><br>
+            <label for="myInput">Select Your Role:</label>
+            <input type="text" id="myInput" list="Roles">
+
+            <datalist id="Roles">
+                <option value="Hotel Owner">
+                <option value="Traveller">
+            </datalist>
         </div>
 
         <div class="form-group">

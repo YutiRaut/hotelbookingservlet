@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Instagram Login</title>
+    <title>Traveller Login</title>
     <style>
         body {
             font-family: "serif","Segoe Print";
@@ -22,6 +22,7 @@
 
         h2 {
             text-align: center;
+            font-family: "DejaVu Serif Condensed";
         }
 
         .form-group {
@@ -44,9 +45,10 @@
         }
 
         .form-group button {
+            font-family:DialogInput;
             width: 30%;
             padding: 15px;
-            font-size: 16px;
+            font-size: 18px;
             background-color: violet;
             border: none;
             color: #fff;
@@ -62,7 +64,7 @@
 <body>
 <div class="container">
     <h2>Traveller</h2>
-    <form>
+    <form action="Login" method="post">
         <div class="form-group">
             <b><label for="username">Username</label></b>
             <input type="text" id="username" name="username" placeholder="Enter your username" required>
