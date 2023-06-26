@@ -7,7 +7,7 @@
 <body><%
 String name=(String) request.getAttribute("name_key");
 %>
-<h1><%=name%></h1>
+<h2> Welcome <%=name%></h2>
 <br/>
 <a href="HelloServlet">Hello Servlet</a>
 </body>

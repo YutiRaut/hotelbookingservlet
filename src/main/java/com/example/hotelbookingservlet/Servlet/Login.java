@@ -32,7 +32,7 @@ public class Login extends HttpServlet {
             e.printStackTrace();
         }
         if (user != null) {
-            request.setAttribute("name_key", name);
+            request.setAttribute("name_key",user.getName());
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
             requestDispatcher.forward(request, response);
         } else {
