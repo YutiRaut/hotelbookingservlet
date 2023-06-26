@@ -35,4 +35,26 @@ public class LoginDao {
             throw new DAOException("Something went wrong...", ex);
         }
     }
+
+    public static int addUser(User signIn) throws DAOException {
+        try {
+            String insertQuery = "INSERT INTO user(user_name,email,contact_no,password,verification_code,is_verified,role_id) values(?,?,?,?,?,?,?)";
+            PreparedStatement stmt3;
+            stmt3 = MainConnection.getInstance().getMainConnection().prepareStatement(insertQuery);
+            stmt3.setString(1, signIn.getName());
+            stmt3.setString(2, signIn.getEmail());
+            stmt3.setString(3, signIn.getContact());
+            stmt3.setString(4, signIn.getPassword());
+            stmt3.setString(5, signIn.getVerificationCode());
+            stmt3.setBoolean(6, signIn.isVerified());
+            stmt3.setInt(7, signIn.getRole());
+            return stmt3.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Something went wrong...", ex);
+        } catch (Exception ex) {
+            throw new DAOException("Something went wrong...", ex);
+        }
+    }
+
+
 }
