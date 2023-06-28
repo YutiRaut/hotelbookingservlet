@@ -46,4 +46,14 @@
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>VerifyCode</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.VerifyCode</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/VerifyCode</url-pattern>
+    </servlet-mapping>
+
 </web-app>

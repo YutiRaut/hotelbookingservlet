@@ -56,5 +56,19 @@ public class LoginDao {
         }
     }
 
+    public void updateUserIsVerified(boolean isVerified, String email) throws DAOException {
+        try {
+            String update = "update user set is_verified=? where email=?";
+            PreparedStatement stmt0 = MainConnection.getInstance().getMainConnection().prepareStatement(update);
+            stmt0.setBoolean(1, isVerified);
+            stmt0.setString(2, email);
+            stmt0.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("something went wrong...", e);
+        } catch (Exception e) {
+            throw new DAOException("Something went wrong...", e);
+        }
+    }
+
 
 }

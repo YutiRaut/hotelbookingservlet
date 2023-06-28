@@ -5,7 +5,7 @@
     <title>Traveller Login</title>
     <style>
         body {
-            font-family: "serif","Segoe Print";
+            font-family: "serif", "Segoe Print";
             background-color: #fafafa;
         }
 
@@ -17,7 +17,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align:center;
+            text-align: center;
         }
 
         h2 {
@@ -45,7 +45,7 @@
         }
 
         .form-group button {
-            font-family:DialogInput;
+            font-family: DialogInput;
             width: 30%;
             padding: 15px;
             font-size: 18px;
@@ -53,7 +53,7 @@
             border: none;
             color: #fff;
             cursor: pointer;
-            border-radius:50px;
+            border-radius: 50px;
         }
 
         .form-group button:hover {
@@ -67,7 +67,7 @@
     <form action="Login" method="post">
         <div class="form-group">
             <b><label for="username">Username</label></b>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <input type="text" id="username" name="username" placeholder="Enter your Email" required>
         </div>
         <div class="form-group">
             <b><label for="password">Password</label></b>
