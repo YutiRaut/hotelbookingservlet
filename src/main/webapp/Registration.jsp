@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -84,15 +86,17 @@
         </div>
 
         <div class="form-group">
-            <label for="Roles">Select Your Role:</label>
-            <input type="text" id="role" name="role" list="Roles">
-
-            <datalist id="Roles">
-                <option value="1" selected>Admin</option>
-                <option value="2">Hotel Owner</option>
-                <option value="3">Traveller</option>
+            <label for="role">Select Your Role:</label>
+            <input type="text" id="role" name="role" list="roles" required><br>
+            <datalist id="roles">
+            <% List<Role> role=(List<Role>)request.getAttribute("Role");
+            for (Role role1:role)
+            {%>
+            <option value="<%=role1.getRole()%>"><%=role1.getRoleName()%></option>
+            <%}%>
             </datalist>
         </div>
+
         
         <div class="form-group">
             <button type="submit">Registration</button>

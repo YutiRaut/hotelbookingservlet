@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -18,8 +17,8 @@ public class VerifyCode extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         LoginDao loginDao = new LoginDao();
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("CurrentUser");
+        Login login = new Login();
+        User user = (User) req.getSession().getAttribute("CurrentUser");
         String code = req.getParameter("VerificationCode");
 
         if (code.equals(user.getVerificationCode())) {
@@ -28,8 +27,7 @@ public class VerifyCode extends HttpServlet {
             } catch (DAOException e) {
                 e.printStackTrace();
             }
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login");
-            requestDispatcher.forward(req, resp);
+            login.checkUserRole(req, resp);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/VerifyUser.jsp");
             requestDispatcher.include(req, resp);

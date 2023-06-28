@@ -65,19 +65,19 @@
 </head>
 <body>
 <%
-    String name=(String) request.getAttribute("name_key");
+    String name = (String) session.getAttribute("namekey");
 %>
-<h2>Welcome <%=name%> </h2>
+<h2>Hello <%=name%>!!! </h2>
 
 <!-- Panel -->
 <div class="panel">
     <div class="panel-heading" >Welcome to Traveller</div>
 </div>
-<a href="login.jsp">
-    <div class="box box2">Add Details</div>
+<a href="HotelRegistration">
+    <div class="box box2">Register Your Hotel</div>
 </a>
 <a href="index.jsp.">
-    <div class="box box3">Update Details</div>
+    <div class="box box3">Modify Details</div>
 </a>
 <a href="Registration.jsp">
     <div class=" box box4">View Details</div>

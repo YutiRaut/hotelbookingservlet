@@ -5,18 +5,38 @@ import com.example.hotelbookingservlet.Common.EmailValidator;
 import com.example.hotelbookingservlet.Common.OtpGenarator;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
+import com.example.hotelbookingservlet.DAO.RoleDao;
+import com.example.hotelbookingservlet.Model.Role;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.mail.MessagingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 
 public class Registration extends HttpServlet {
+
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RoleDao roleDao=new RoleDao();
+        try {
+            List<Role> roles=roleDao.getRole();
+            req.setAttribute("Role",roles);
+            RequestDispatcher requestDispatcher= req.getRequestDispatcher("Registration.jsp");
+            requestDispatcher.forward(req,resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
 

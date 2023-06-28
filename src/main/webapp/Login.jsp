@@ -76,7 +76,7 @@
         <div class="form-group">
             <button type="submit">Log In</button>
         </div>
-        <h5>don't have account?&nbsp;&nbsp;<a href="Registration.jsp">SignUp</a></h5>
+        <h5>don't have account?&nbsp;&nbsp;<a href="Registration">SignUp</a></h5>
     </form>
 </div>
 </body>
