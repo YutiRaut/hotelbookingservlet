@@ -67,24 +67,35 @@
         }
 
         .form-section h2 {
-            text-align: center;
+
             margin-bottom: 20px;
         }
 
-        .form-section input[type="text"],
-        .form-section input[type="email"],
-        .form-section input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
+        .form-section input[type="text"]
+         {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 7px;
         }
 
-        .form-section button {
-            width: 30%;
+        .form-section button[type="button1"] {
+            width: 20%;
             padding: 15px;
             font-size: 16px;
+            margin-left: 75%;
+            background-color: violet;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius:50px;
+        }
+        .form-section button[type="button2"] {
+            width: 20%;
+            padding: 15px;
+            font-size: 16px;
+            margin-right: 20%;
             background-color: violet;
             border: none;
             color: #fff;
@@ -95,6 +106,7 @@
         .form-section button:hover {
             background-color: #45a049;
         }
+
     </style>
 </head>
 <body>
@@ -125,7 +137,7 @@
             <input type="text" placeholder="City" required>
             <input type="text" placeholder="Address" required>
             <input type="text" placeholder="Permits" required>
-            <button type="button" onclick="nextStep()">Next</button>
+            <button type="button1" onclick="nextStep()">Next</button>
         </form>
     </div>
     <div class="form-section">
@@ -137,12 +149,12 @@
             <input type="text" placeholder="Deluxe Count" required>
             <input type="text" placeholder="Suite Count" required>
 
+            <button type="button2" onclick="previousStep()">Previous</button>
+            <button type="button1" onclick="nextStep()">Next</button>
 
-
-            <button type="button" onclick="previousStep()">Previous</button>
-            <button type="button" onclick="nextStep()">Next</button>
         </form>
     </div>
+
     <div class="form-section">
         <h2>Step 3:Room Amenity</h2>
         <form>
@@ -150,8 +162,8 @@
             <input type="text" placeholder="Semi Deluxe Amenity" required>
             <input type="text" placeholder="Deluxe Amenity" required>
             <input type="text" placeholder="Suite Amenity" required>
-            <button type="button" onclick="previousStep()">Previous</button>
-            <button type="submit">Submit</button>
+            <button type="button2" onclick="previousStep()">Previous</button>
+            <button type="button1">Submit</button>
         </form>
     </div>
 </div>
