@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class VerifyUserByCodeServlet extends HttpServlet {
+
+    LoginDao loginDao = new LoginDao();
+    LoginServlet loginServlet = new LoginServlet();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        LoginDao loginDao = new LoginDao();
-        LoginServlet loginServlet = new LoginServlet();
+
         User user = (User) req.getSession().getAttribute("CurrentUser");
         String code = req.getParameter("VerificationCode");
 
@@ -32,7 +34,6 @@ public class VerifyUserByCodeServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/VerifyUser.jsp");
             requestDispatcher.include(req, resp);
             resp.setContentType("text/html");
-            out.println("<h2 style='color:red'>Invalid Otp!!!</h2>");
         }
 
     }

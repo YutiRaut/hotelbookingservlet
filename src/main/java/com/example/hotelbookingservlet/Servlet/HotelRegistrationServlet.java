@@ -14,10 +14,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class HotelRegistrationServlet extends HttpServlet {
+    AddressDao addressDao=new AddressDao();
+
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AddressDao addressDao=new AddressDao();
-        Address address=new Address();
+
         try {
             List<Address> addresses=addressDao.getState();
             req.setAttribute("stateID",addresses);

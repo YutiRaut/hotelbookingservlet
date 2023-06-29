@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class LoginServlet extends HttpServlet {
+
+
+
     @Override
     public void init() throws ServletException {
 
@@ -24,7 +27,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -47,7 +49,6 @@ public class LoginServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginServlet.jsp");
             requestDispatcher.include(request, response);
             response.setContentType("text/html");
-            out.println("<h2 style='color:red'>Invalid Credentials!!!</h2>");
         }
 
 

@@ -21,10 +21,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RegistrationServlet extends HttpServlet {
+    LoginDao loginDao = new LoginDao();
+    OtpGenarator sendOtp = new OtpGenarator();
+    RoleDao roleDao=new RoleDao();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RoleDao roleDao=new RoleDao();
+
         try {
             List<Role> roles=roleDao.getRole();
             req.setAttribute("Role",roles);
@@ -40,11 +44,6 @@ public class RegistrationServlet extends HttpServlet {
     @Override
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-
-        LoginDao loginDao = new LoginDao();
-        OtpGenarator sendOtp = new OtpGenarator();
-
 
         String name = req.getParameter("name");
         String email = req.getParameter("email");
