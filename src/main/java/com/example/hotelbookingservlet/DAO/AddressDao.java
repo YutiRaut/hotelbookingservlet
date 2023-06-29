@@ -16,8 +16,8 @@ public class AddressDao {
         ResultSet rs = statement.executeQuery("select * From state ");
         while (rs.next()) {
             Address address = new Address();
-            address.setState_id(rs.getInt(1));
-            address.setViewState(rs.getString(2));
+            address.setStateId(rs.getInt(1));
+            address.setStateList(rs.getString(2));
             addresses.add(address);
         }
         return addresses;
@@ -31,9 +31,9 @@ public class AddressDao {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Address address = new Address();
-                address.setCity(resultSet.getInt(1));
+                address.setCityId(resultSet.getInt(1));
                 address.setViewCity(resultSet.getString(2));
-                address.setState_id(resultSet.getInt(3));
+                address.setStateId(resultSet.getInt(3));
                 addresses1.add(address);
             }
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-
+<%@ page import="com.example.hotelbookingservlet.Model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -65,7 +65,7 @@
 </head>
 <body>
 <%
-    String name = (String) session.getAttribute("namekey");
+    String name = ((User) session.getAttribute("CurrentUser")).getName();
 %>
 <h2>Hello <%=name%>!!! </h2>
 

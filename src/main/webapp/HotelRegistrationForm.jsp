@@ -145,16 +145,16 @@
             <datalist id="state">
                 <% List<Address> addresses = (List<Address>) request.getAttribute("stateID");
                     for (Address address : addresses) {%>
-                <option value="<%=address.getState_id()%>"><%=address.getViewState()%>
+                <option value="<%=address.getStateId()%>"><%=address.getStateList()%>
                 </option>
                 <%}%>
             </datalist>
-            <input type="text" placeholder="Select city" name="City" list="city" required><br>
-            <datalist id="city">
+            <input type="text" placeholder="Select cityId" name="City" list="cityId" required><br>
+            <datalist id="cityId">
                 <% if(request.getAttribute("cityID")!=null){
                     List<Address> addresses1 = (List<Address>) request.getAttribute("cityID");
                     for (Address address : addresses1) {%>
-                <option value="<%=address.getCity()%>"><%=address.getViewCity()%>
+                <option value="<%=address.getCityId()%>"><%=address.getViewCity()%>
                 </option>
                 <%}
                 }%>

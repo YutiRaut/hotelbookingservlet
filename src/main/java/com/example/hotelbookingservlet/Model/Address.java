@@ -1,55 +1,55 @@
 package com.example.hotelbookingservlet.Model;
 
 public class Address {
-    private int address_id;
+    private int addressId;
     private int state;
-    private int state_id;
-    private String viewState;
-    private int city;
+    private int stateId;
+    private String StateList;
+    private int cityId;
     private String viewCity;
     private String address;
     private int pincode;
 
-    public int getAddress_id() {
-        return address_id;
+    public int getAddressId() {
+        return addressId;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public int getState() {
         return state;
     }
-    
+
     public void setState(int state) {
         this.state = state;
     }
 
-    public int getState_id() {
-        return state_id;
+    public int getStateId() {
+        return stateId;
     }
 
-    public void setState_id(int state_id) {
-        this.state_id = state_id;
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
     }
 
 
 
-    public String getViewState() {
-        return viewState;
+    public String getStateList() {
+        return StateList;
     }
 
-    public void setViewState(String viewState) {
-        this.viewState = viewState;
+    public void setStateList(String stateList) {
+        this.StateList = stateList;
     }
 
-    public int getCity() {
-        return city;
+    public int getCityId() {
+        return cityId;
     }
 
-    public void setCity(int city) {
-        this.city = city;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     public String getViewCity() {

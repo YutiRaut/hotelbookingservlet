@@ -3,6 +3,7 @@ package com.example.hotelbookingservlet.Servlet;
 import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
+import com.example.hotelbookingservlet.Model.Role;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -37,8 +38,6 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("CurrentUser", user);
-            session.setAttribute("namekey",user.getName());
-            session.setAttribute("roleId",user.getRole());
             if (!(user.isVerified())) {
                 response.sendRedirect("VerifyUser.jsp");
             } else {
@@ -56,19 +55,16 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void checkUserRole(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        int role= (int) request.getSession().getAttribute("roleId");
-       switch (role) {
-           case Constant.SYSTEM_ADMIN:
-               response.sendRedirect("index.jsp");
-               break;
-           case Constant.HOTEL_ADMIN:
-               response.sendRedirect("Welcome.jsp");
-               break;
-           case Constant.Customer:
-               response.sendRedirect("index.jsp");
-               break;
+        HttpSession session =request.getSession();
+        User user = (User) session.getAttribute("CurrentUser");
 
-       }
+        if (user.getRole() == Constant.SYSTEM_ADMIN) {
+            response.sendRedirect("index.jsp");
+        } else if (user.getRole()==Constant.HOTEL_ADMIN) {
+            response.sendRedirect("Welcome.jsp");
+        } else if (user.getRole()==Constant.Customer) {
+            response.sendRedirect("index.jsp");
+        }
 
        }
 

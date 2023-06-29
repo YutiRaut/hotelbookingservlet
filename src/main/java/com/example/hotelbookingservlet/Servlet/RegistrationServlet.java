@@ -32,6 +32,8 @@ public class RegistrationServlet extends HttpServlet {
             requestDispatcher.forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (DAOException e) {
+            e.printStackTrace();
         }
     }
 
