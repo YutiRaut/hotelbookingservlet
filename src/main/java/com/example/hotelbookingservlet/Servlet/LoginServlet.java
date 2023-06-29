@@ -3,7 +3,6 @@ package com.example.hotelbookingservlet.Servlet;
 import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
-import com.example.hotelbookingservlet.Model.Role;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
 
@@ -46,7 +45,7 @@ public class Login extends HttpServlet {
                 checkUserRole(request,response);
             }
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginServlet.jsp");
             requestDispatcher.include(request, response);
             response.setContentType("text/html");
             out.println("<h2 style='color:red'>Invalid Credentials!!!</h2>");

@@ -1,7 +1,6 @@
 package com.example.hotelbookingservlet.DAO;
 
 import com.example.hotelbookingservlet.Model.Role;
-import com.example.hotelbookingservlet.Model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ public class RoleDao {
 
     public  List<Role> getRole() throws SQLException {
         List<Role> role = new ArrayList<>();
-        Statement statement = MainConnection.getInstance().getMainConnection().createStatement();
+        Statement statement = DbConnection.getInstance().getMainConnection().createStatement();
         ResultSet rs = statement.executeQuery("select * From role ");
         while (rs.next()) {
             Role role1= new Role();

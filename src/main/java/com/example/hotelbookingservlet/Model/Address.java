@@ -21,6 +21,10 @@ public class Address {
     public int getState() {
         return state;
     }
+    
+    public void setState(int state) {
+        this.state = state;
+    }
 
     public int getState_id() {
         return state_id;
@@ -30,9 +34,7 @@ public class Address {
         this.state_id = state_id;
     }
 
-    public void setState(int state) {
-        this.state = state;
-    }
+
 
     public String getViewState() {
         return viewState;

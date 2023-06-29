@@ -9,6 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+</script>
 <head>
     <title> Registration Form</title>
     <style>
@@ -71,8 +75,7 @@
             margin-bottom: 20px;
         }
 
-        .form-section input[type="text"]
-         {
+        .form-section input[type="text"] {
             width: 90%;
             padding: 12px;
             margin-bottom: 20px;
@@ -89,8 +92,9 @@
             border: none;
             color: #fff;
             cursor: pointer;
-            border-radius:50px;
+            border-radius: 50px;
         }
+
         .form-section button[type="button2"] {
             width: 20%;
             padding: 15px;
@@ -100,7 +104,7 @@
             border: none;
             color: #fff;
             cursor: pointer;
-            border-radius:50px;
+            border-radius: 50px;
         }
 
         .form-section button:hover {
@@ -108,6 +112,16 @@
         }
 
     </style>
+    <script>
+        $(document).on('change', '#states', function () {
+            var stateID = $(this).val();
+            const currURL = new URL($(location).attr('href'));
+            currURL.searchParams.set("stateid", stateID)
+            location.replace(currURL.toString());
+        });
+    </script>
+
+
 </head>
 <body>
 <div class="container">
@@ -121,22 +135,33 @@
     </div>
     <div class="form-section current">
         <h2>Step 1: Hotel Information</h2>
-        <form action="HotelRegistration" method="post" >
+        <form action="HotelRegistration" method="post">
             <input type="text" placeholder="Enter Hotel Name" required>
             <input type="text" placeholder="Licence Number" required>
             <input type="text" placeholder="Star Rating" required>
             <input type="text" placeholder="Gst No" required>
-            <input type="text" placeholder="Select State" id="states" name="State" list="state" required><br>
+            <input type="text" placeholder="Permits" required>
+            <input type="text" placeholder="Select State" id="states" list="state" required><br>
             <datalist id="state">
-                <% List<Address> addresses=(List<Address>)request.getAttribute("stateID");
-                    for (Address address:addresses)
-                    {%>
-                <option value="<%=address.getState_id()%>"><%=address.getViewState()%></option>
+                <% List<Address> addresses = (List<Address>) request.getAttribute("stateID");
+                    for (Address address : addresses) {%>
+                <option value="<%=address.getState_id()%>"><%=address.getViewState()%>
+                </option>
                 <%}%>
             </datalist>
-            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="Select city" name="City" list="city" required><br>
+            <datalist id="city">
+                <% if(request.getAttribute("cityID")!=null){
+                    List<Address> addresses1 = (List<Address>) request.getAttribute("cityID");
+                    for (Address address : addresses1) {%>
+                <option value="<%=address.getCity()%>"><%=address.getViewCity()%>
+                </option>
+                <%}
+                }%>
+            </datalist>
+
             <input type="text" placeholder="Address" required>
-            <input type="text" placeholder="Permits" required>
+            <input type="text" placeholder="Pincode" required>
             <button type="button1" onclick="nextStep()">Next</button>
         </form>
     </div>

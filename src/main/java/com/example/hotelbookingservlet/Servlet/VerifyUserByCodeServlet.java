@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class VerifyCode extends HttpServlet {
+public class VerifyUserByCodeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         LoginDao loginDao = new LoginDao();
-        Login login = new Login();
+        LoginServlet loginServlet = new LoginServlet();
         User user = (User) req.getSession().getAttribute("CurrentUser");
         String code = req.getParameter("VerificationCode");
 
@@ -27,7 +27,7 @@ public class VerifyCode extends HttpServlet {
             } catch (DAOException e) {
                 e.printStackTrace();
             }
-            login.checkUserRole(req, resp);
+            loginServlet.checkUserRole(req, resp);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/VerifyUser.jsp");
             requestDispatcher.include(req, resp);

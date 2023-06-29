@@ -18,7 +18,7 @@
 
     <servlet>
         <servlet-name>MainConnection</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.DAO.MainConnection</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.DAO.DbConnection</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.Login</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -38,7 +38,7 @@
 
     <servlet>
         <servlet-name>Registration</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.Registration</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.RegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -48,7 +48,7 @@
 
     <servlet>
         <servlet-name>VerifyCode</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.VerifyCode</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.VerifyUserByCodeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -58,7 +58,7 @@
 
     <servlet>
         <servlet-name>HotelRegistration</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.HotelRegistration</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.HotelRegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

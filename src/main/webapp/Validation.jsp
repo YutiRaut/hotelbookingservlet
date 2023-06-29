@@ -12,12 +12,12 @@
     String email = request.getParameter("email");
     if (!email.matches(EMAIL_REGIX)) {
         PrintWriter pd = response.getWriter();
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Registration.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/RegistrationServlet.jsp");
         requestDispatcher.include(request, response);
         response.setContentType("text/html");
         pd.println("<center><h2 style='color:red'>Invalid Email Format!!!</h2></center>");
     } else {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Registration");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("RegistrationServlet");
         requestDispatcher.forward(request, response);
     }
 %>

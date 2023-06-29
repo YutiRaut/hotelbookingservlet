@@ -1,26 +1,24 @@
 package com.example.hotelbookingservlet.DAO;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import static java.sql.DriverManager.getConnection;
 
-public class MainConnection extends HttpServlet{
+public class DbConnection extends HttpServlet{
 
-        private static MainConnection dbConnection = new MainConnection();
+        private static DbConnection dbConnection = new DbConnection();
         private Connection connection = null;
         private final String URL = "jdbc:mysql://localhost:3306/hotel-booking";
         private final String USERNAME = "root";
         private final String PASSWORD = "";
 
-    private MainConnection() {
+    private DbConnection() {
 
         }
 
-        public static MainConnection getInstance () {
+        public static DbConnection getInstance () {
             return dbConnection;
         }
 

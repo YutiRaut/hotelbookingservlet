@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Registration extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class Registration extends HttpServlet {
         try {
             List<Role> roles=roleDao.getRole();
             req.setAttribute("Role",roles);
-            RequestDispatcher requestDispatcher= req.getRequestDispatcher("Registration.jsp");
+            RequestDispatcher requestDispatcher= req.getRequestDispatcher("RegistrationServlet.jsp");
             requestDispatcher.forward(req,resp);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class Registration extends HttpServlet {
             e.printStackTrace();
         }
 
-        resp.sendRedirect("Login.jsp");
+        resp.sendRedirect("LoginServlet.jsp");
 
     }
 

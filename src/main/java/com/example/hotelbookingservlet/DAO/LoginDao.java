@@ -1,14 +1,10 @@
 package com.example.hotelbookingservlet.DAO;
 
-import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginDao {
 
@@ -17,7 +13,7 @@ public class LoginDao {
         try {
             String loginQuery = "select * from user where email=? AND password=?";
             PreparedStatement stmt2;
-            stmt2 = MainConnection.getInstance().getMainConnection().prepareStatement(loginQuery);
+            stmt2 = DbConnection.getInstance().getMainConnection().prepareStatement(loginQuery);
             stmt2.setString(1, email);
             stmt2.setString(2, password);
             ResultSet resultSet = stmt2.executeQuery();
@@ -44,7 +40,7 @@ public class LoginDao {
         try {
             String insertQuery = "INSERT INTO user(user_name,email,contact_no,password,verification_code,is_verified,role_id) values(?,?,?,?,?,?,?)";
             PreparedStatement stmt3;
-            stmt3 = MainConnection.getInstance().getMainConnection().prepareStatement(insertQuery);
+            stmt3 = DbConnection.getInstance().getMainConnection().prepareStatement(insertQuery);
             stmt3.setString(1, signIn.getName());
             stmt3.setString(2, signIn.getEmail());
             stmt3.setString(3, signIn.getContact());
@@ -63,7 +59,7 @@ public class LoginDao {
     public void updateUserIsVerified(boolean isVerified, String email) throws DAOException {
         try {
             String update = "update user set is_verified=? where email=?";
-            PreparedStatement stmt0 = MainConnection.getInstance().getMainConnection().prepareStatement(update);
+            PreparedStatement stmt0 = DbConnection.getInstance().getMainConnection().prepareStatement(update);
             stmt0.setBoolean(1, isVerified);
             stmt0.setString(2, email);
             stmt0.executeUpdate();
