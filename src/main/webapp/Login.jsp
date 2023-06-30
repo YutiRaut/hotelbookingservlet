@@ -1,3 +1,5 @@
+<%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -64,19 +66,37 @@
 <body>
 <div class="container">
     <h2>Traveller</h2>
-    <form action="Login" method="post">
+    <% ErrorUtil errorUtil=(ErrorUtil) request.getAttribute("errorUtil");%>
+    <% if(errorUtil!=null && !errorUtil.getErrorMessages().isEmpty()){%>
+    <div class="error messages">
+        <ul>
+            <% for (String errorMessage: errorUtil.getErrorMessages()) {%>
+            <li><%= errorMessage%></li>
+            <% } %>
+        </ul>
+    </div>
+        <% } %>
+    <%ErrorUtil errorUtil1=(ErrorUtil) request.getAttribute("InvalidError");%>
+    <%if(errorUtil1 != null){%>
+    <%List<String> message=errorUtil1.getErrorMessages();%>
+    <div class="error-message">
+        <%=message%>
+    </div>
+    <% } %>
+    <form action="FormValidationServlet" method="post">
         <div class="form-group">
             <b><label for="username">Username</label></b>
-            <input type="text" id="username" name="username" placeholder="Enter your Email" required>
+            <input type="text" id="username" name="username" placeholder="Enter your Email">
         </div>
         <div class="form-group">
             <b><label for="password">Password</label></b>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
         </div>
         <div class="form-group">
             <button type="submit">Log In</button>
         </div>
-        <h5>don't have account?&nbsp;&nbsp;<a href="Registration">SignUp</a></h5>
+
+        <h5>don't have account?&nbsp;&nbsp;<a href="RegistrationServlet">SignUp</a></h5>
     </form>
 </div>
 </body>

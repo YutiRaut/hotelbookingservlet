@@ -1,6 +1,7 @@
 package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.Common.Constant;
+import com.example.hotelbookingservlet.Common.ErrorUtil;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
 import com.example.hotelbookingservlet.Model.Role;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class LoginServlet extends HttpServlet {
-
+ErrorUtil errorUtil = new ErrorUtil();
 
 
     @Override
@@ -46,9 +47,11 @@ public class LoginServlet extends HttpServlet {
                 checkUserRole(request,response);
             }
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginServlet.jsp");
-            requestDispatcher.include(request, response);
-            response.setContentType("text/html");
+                errorUtil.addErrorMessage("Invalid Credentials!!");
+                request.setAttribute("InvalidError",errorUtil);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request, response);
+
         }
 
 

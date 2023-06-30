@@ -2,6 +2,7 @@ package com.example.hotelbookingservlet.Servlet;
 
 
 import com.example.hotelbookingservlet.Common.EmailValidator;
+import com.example.hotelbookingservlet.Common.ErrorUtil;
 import com.example.hotelbookingservlet.Common.OtpGenarator;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,11 +32,9 @@ public class RegistrationServlet extends HttpServlet {
         try {
             List<Role> roles=roleDao.getRole();
             req.setAttribute("Role",roles);
-            RequestDispatcher requestDispatcher= req.getRequestDispatcher("RegistrationServlet.jsp");
+            RequestDispatcher requestDispatcher= req.getRequestDispatcher("Registration.jsp");
             requestDispatcher.forward(req,resp);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (DAOException e) {
             e.printStackTrace();
         }
     }
@@ -49,16 +47,20 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String contact = req.getParameter("contact");
         String password = req.getParameter("password");
-        int role = Integer.parseInt(req.getParameter("role"));
+        String role = (req.getParameter("role"));
         String verification = req.getParameter("VerificationCode");
         User user = new User();
         user.setName(name);
+        System.out.println(name);
         user.setEmail(email);
         user.setContact(contact);
         user.setPassword(password);
-        user.setRole(role);
+        user.setRole(Integer.parseInt(role));
         String code = sendOtp.generatesOtp();
         user.setVerificationCode(code);
+        //List<ErrorUtil> errorList = UserValidation.validateUser(user);
+        //if(!errorList.isEmpty()){
+
         try {
             loginDao.addUser(user);
             sendMail(user);
@@ -68,7 +70,15 @@ public class RegistrationServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        resp.sendRedirect("LoginServlet.jsp");
+
+        resp.sendRedirect("Login.jsp");
+
+    }
+
+    private void fillSignUpMasterData(HttpServletRequest request) throws SQLException {
+        RoleDao roleDao = new RoleDao();
+        List<Role> roles= roleDao.getRole();
+        request.setAttribute("Role",roles);
 
     }
 

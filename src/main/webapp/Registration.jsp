@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.hotelbookingservlet.Model.Role" %>
+<%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -59,35 +60,37 @@
         .form-group button:hover {
             background-color: lightskyblue;
         }
+
     </style>
 </head>
 <body>
 <div class="container">
+
     <h1>Traveller</h1>
-    <form action="Validation.jsp" method="post">
+    <form action="RegistrationServlet" method="post">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br>
+            <input type="text" id="name" name="name"><br>
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required><br>
+            <input type="text" id="email" name="email"><br>
         </div>
 
         <div class="form-group">
             <label for="contact">Contact No:</label>
-            <input type="text" id="contact" name="contact" required><br>
+            <input type="text" id="contact" name="contact"><br>
         </div>
 
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <input type="password" id="password" name="password"><br>
         </div>
 
         <div class="form-group">
             <label for="role">Select Your Role:</label>
-            <input type="text" id="role" name="role" list="roles" required><br>
+            <input type="text" id="role" name="role" list="roles"><br>
             <datalist id="roles">
             <% List<Role> role=(List<Role>)request.getAttribute("Role");
             for (Role role1:role)
