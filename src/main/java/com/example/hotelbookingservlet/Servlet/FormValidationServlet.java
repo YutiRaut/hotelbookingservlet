@@ -17,34 +17,36 @@ public class FormValidationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email=req.getParameter("username");
-        String password=req.getParameter("password");
+        String email = req.getParameter("username");
+        String password = req.getParameter("password");
 
-        if(Validation.isEmpty(email)&&Validation.isEmpty(password)){
+        if (Validation.isEmpty(email) && Validation.isEmpty(password)) {
             errorUtil.addErrorMessage("Email and Password can't be Empty");
             req.setAttribute("errorUtil", errorUtil);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(req, resp);
-        }else {
+        } else {
             if (Validation.isEmpty(email)) {
                 errorUtil.addErrorMessage("Email can't be empty");
             }
             if (Validation.isEmpty(password)) {
                 errorUtil.addErrorMessage("password can't be empty");
             }
-            if (!errorUtil.getErrorMessages().isEmpty()) {
-                req.setAttribute("errorUtil", errorUtil);
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login.jsp");
-                requestDispatcher.forward(req, resp);
-            }
+
         }
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/LoginServlet");
+        if (!errorUtil.getErrorMessages().isEmpty()) {
+            req.setAttribute("errorUtil", errorUtil);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(req, resp);
+        }
 
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/LoginServlet");
+        requestDispatcher.forward(req, resp);
+
+    }
         }
 
 
-        }
 
 
 
