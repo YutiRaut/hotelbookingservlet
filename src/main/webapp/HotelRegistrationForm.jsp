@@ -1,11 +1,5 @@
 <%@ page import="com.example.hotelbookingservlet.Model.Address" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: rarti
-  Date: 28-06-2023
-  Time: 09:34
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -135,21 +129,21 @@
     </div>
     <div class="form-section current">
         <h2>Step 1: Hotel Information</h2>
-        <form action="HotelRegistration" method="post">
-            <input type="text" placeholder="Enter Hotel Name" required>
-            <input type="text" placeholder="Licence Number" required>
-            <input type="text" placeholder="Star Rating" required>
-            <input type="text" placeholder="Gst No" required>
-            <input type="text" placeholder="Permits" required>
-            <input type="text" placeholder="Select State" id="states" list="state" required><br>
-            <datalist id="state">
+        <form id="step1" action="HotelRegistrationServlet" method="post">
+            <input type="text" id="HotelName" name="HotelName" placeholder="Enter Hotel Name" >
+            <input type="text" id="LicenceNo" name="LicenceNo" placeholder="Licence Number">
+            <input type="text" id="StarRating" name="StarRating" placeholder="Star Rating">
+            <input type="text" id="GstNo" name="GstNo" placeholder="Gst No">
+            <input type="text" id="permits" name="permits" placeholder="Permits">
+            <input type="text" placeholder="Select State" id="states" list="state"><br>
+            <datalist id="state" onchange="">
                 <% List<Address> addresses = (List<Address>) request.getAttribute("stateID");
                     for (Address address : addresses) {%>
                 <option value="<%=address.getStateId()%>"><%=address.getStateList()%>
                 </option>
                 <%}%>
             </datalist>
-            <input type="text" placeholder="Select cityId" name="City" list="cityId" required><br>
+            <input type="text" placeholder="Select cityId" name="City" list="cityId"><br>
             <datalist id="cityId">
                 <% if(request.getAttribute("cityID")!=null){
                     List<Address> addresses1 = (List<Address>) request.getAttribute("cityID");
@@ -159,20 +153,19 @@
                 <%}
                 }%>
             </datalist>
-
-            <input type="text" placeholder="Address" required>
-            <input type="text" placeholder="Pincode" required>
-            <button type="button1" onclick="nextStep()">Next</button>
+            <input type="text" id="address" name="address" placeholder="Address" required>
+            <input type="text" id="pincode" name="pincode" placeholder="Pincode" required>
+            <button type="button1">Submit</button>
         </form>
     </div>
     <div class="form-section">
         <h2>Step 2: Room Information</h2>
         <form>
-            <input type="text" placeholder="Total Rooms You Want To List" required>
-            <input type="text" placeholder="Premium" required>
-            <input type="text" placeholder="Semi Deluxe Count" required>
-            <input type="text" placeholder="Deluxe Count" required>
-            <input type="text" placeholder="Suite Count" required>
+            <input type="text" id="totalCount" placeholder="Total Rooms You Want To List" required>
+            <input type="text" id="premium" placeholder="Premium" required>
+            <input type="text" id="semiDeluxe" placeholder="Semi Deluxe Count" required>
+            <input type="text" id="deluxe" placeholder="Deluxe Count" required>
+            <input type="text" id="suite" placeholder="Suite Count" required>
 
             <button type="button2" onclick="previousStep()">Previous</button>
             <button type="button1" onclick="nextStep()">Next</button>
@@ -187,7 +180,7 @@
             <input type="text" placeholder="Semi Deluxe Amenity" required>
             <input type="text" placeholder="Deluxe Amenity" required>
             <input type="text" placeholder="Suite Amenity" required>
-            <button type="button2" onclick="previousStep()">Previous</button>
+            <button type="button2" onclick="">Previous</button>
             <button type="button1">Submit</button>
         </form>
     </div>
@@ -233,6 +226,12 @@
                 step.classList.remove('active');
             }
         });
+    }
+
+    function submitAndNext(event){
+        event.preventDefault();
+        alert("Submited form and proceding to next step");
+        document.getElementById("step1").submit();
     }
 </script>
 </body>

@@ -73,7 +73,7 @@
 <div class="panel">
     <div class="panel-heading" >Welcome to Traveller</div>
 </div>
-<a href="HotelRegistration">
+<a href="HotelRegistrationServlet">
     <div class="box box2">Register Your Hotel</div>
 </a>
 <a href="index.jsp.">

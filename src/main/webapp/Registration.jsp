@@ -67,6 +67,18 @@
 <div class="container">
 
     <h1>Traveller</h1>
+
+    <% ErrorUtil errorUtil=(ErrorUtil) request.getAttribute("RegisterError");%>
+    <% if(errorUtil!=null && !errorUtil.getErrorMessages().isEmpty()){%>
+    <div class="error messages">
+        <ul>
+            <% for (String errorMessage: errorUtil.getErrorMessages()) {%>
+            <li><%= errorMessage%></li>
+            <% } %>
+        </ul>
+    </div>
+    <% } %>
+
     <form action="RegistrationServlet" method="post">
         <div class="form-group">
             <label for="name">Name:</label>

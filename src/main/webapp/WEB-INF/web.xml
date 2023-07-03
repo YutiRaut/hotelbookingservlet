@@ -57,23 +57,34 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>HotelRegistration</servlet-name>
+        <servlet-name>HotelRegistrationServlet</servlet-name>
         <servlet-class>com.example.hotelbookingservlet.Servlet.HotelRegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HotelRegistration</servlet-name>
-        <url-pattern>/HotelRegistration</url-pattern>
+        <servlet-name>HotelRegistrationServlet</servlet-name>
+        <url-pattern>/HotelRegistrationServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>FormValidationServlet</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.FormValidationServlet</servlet-class>
-    </servlet>
+    <servlet-name>FormValidationServlet</servlet-name>
+    <servlet-class>com.example.hotelbookingservlet.Servlet.FormValidationServlet</servlet-class>
+</servlet>
 
     <servlet-mapping>
         <servlet-name>FormValidationServlet</servlet-name>
         <url-pattern>/FormValidationServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegistrationFormValidation</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.RegistrationFormValidation</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistrationFormValidation</servlet-name>
+        <url-pattern>/RegistrationFormValidation</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

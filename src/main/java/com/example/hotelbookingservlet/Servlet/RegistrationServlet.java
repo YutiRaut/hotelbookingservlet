@@ -24,7 +24,7 @@ public class RegistrationServlet extends HttpServlet {
     LoginDao loginDao = new LoginDao();
     OtpGenarator sendOtp = new OtpGenarator();
     RoleDao roleDao=new RoleDao();
-
+    User user = new User();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,18 +49,14 @@ public class RegistrationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String role = (req.getParameter("role"));
         String verification = req.getParameter("VerificationCode");
-        User user = new User();
+
         user.setName(name);
-        System.out.println(name);
         user.setEmail(email);
         user.setContact(contact);
         user.setPassword(password);
         user.setRole(Integer.parseInt(role));
         String code = sendOtp.generatesOtp();
         user.setVerificationCode(code);
-        //List<ErrorUtil> errorList = UserValidation.validateUser(user);
-        //if(!errorList.isEmpty()){
-
         try {
             loginDao.addUser(user);
             sendMail(user);

@@ -21,30 +21,21 @@ public class FormValidationServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         if (Validation.isEmpty(email) && Validation.isEmpty(password)) {
-            errorUtil.addErrorMessage("Email and Password can't be Empty");
+            errorUtil.addErrorMessage("Email Or Password can't be Empty");
             req.setAttribute("errorUtil", errorUtil);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(req, resp);
         } else {
-            if (Validation.isEmpty(email)) {
-                errorUtil.addErrorMessage("Email can't be empty");
-            }
-            if (Validation.isEmpty(password)) {
-                errorUtil.addErrorMessage("password can't be empty");
-            }
-
-        }
-        if (!errorUtil.getErrorMessages().isEmpty()) {
-            req.setAttribute("errorUtil", errorUtil);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/LoginServlet");
             requestDispatcher.forward(req, resp);
-        }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/LoginServlet");
-        requestDispatcher.forward(req, resp);
+        }
 
     }
-        }
+
+
+}
+
 
 
 

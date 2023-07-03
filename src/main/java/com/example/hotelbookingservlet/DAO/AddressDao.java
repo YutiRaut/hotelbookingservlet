@@ -41,4 +41,40 @@ public class AddressDao {
         }
         return addresses1;
     }
+
+    public Address addAddress(Address address,int cityId) throws SQLException {
+        try {
+            PreparedStatement statement = null;
+            String insertAddress = "insert into address(address_line1,city_id,pincode) values(?,?,?)";
+            statement = DbConnection.getInstance().getMainConnection().prepareStatement(insertAddress);
+            statement.setString(1, address.getAddress());
+            statement.setInt(2,cityId);
+            statement.setInt(3, address.getPincode());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return address;
+    }
+
+    public Address getAddress() throws DAOException {
+        Address address = new Address();
+        try {
+            String getAddressQuery = "select * from address";
+            PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(getAddressQuery);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                address.setAddressId(resultSet.getInt(1));
+            }
+        }catch (SQLException e){
+            throw new DAOException("error occured",e);
+        }
+
+        return  address;
+    }
+
+
+
 }
