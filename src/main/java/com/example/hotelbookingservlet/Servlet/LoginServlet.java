@@ -4,7 +4,6 @@ import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.Common.ErrorUtil;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
-import com.example.hotelbookingservlet.Model.Role;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -14,10 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class LoginServlet extends HttpServlet {
-ErrorUtil errorUtil = new ErrorUtil();
+    ErrorUtil errorUtil = new ErrorUtil();
 
 
     @Override
@@ -44,35 +42,33 @@ ErrorUtil errorUtil = new ErrorUtil();
             if (!(user.isVerified())) {
                 response.sendRedirect("VerifyUser.jsp");
             } else {
-                checkUserRole(request,response);
+                checkUserRole(request, response);
             }
         } else {
-                errorUtil.addErrorMessage("Invalid Credentials!!");
-                request.setAttribute("InvalidError",errorUtil);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
-                requestDispatcher.forward(request, response);
+            errorUtil.addErrorMessage("Invalid Credentials!!");
+            request.setAttribute("InvalidError", errorUtil);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+            requestDispatcher.forward(request, response);
 
         }
 
 
-
     }
 
-    public void checkUserRole(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        HttpSession session =request.getSession();
+    public void checkUserRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("CurrentUser");
 
         if (user.getRole() == Constant.SYSTEM_ADMIN) {
             response.sendRedirect("index.jsp");
-        } else if (user.getRole()==Constant.HOTEL_ADMIN) {
+        } else if (user.getRole() == Constant.HOTEL_ADMIN) {
             response.sendRedirect("Welcome.jsp");
-        } else if (user.getRole()==Constant.Customer) {
+        } else if (user.getRole() == Constant.Customer) {
             response.sendRedirect("index.jsp");
         }
 
-       }
-
-
-
     }
+
+
+}
 

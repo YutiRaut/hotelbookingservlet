@@ -4,7 +4,7 @@
 <head>
     <title>Welcome to Traveller</title>
     <style>
-        .panel{
+        .panel {
             background-color: #b5dee5;
             border: 1px solid #ffffff;
             padding: 20px;
@@ -12,15 +12,17 @@
 
 
         }
-        .panel-heading{
+
+        .panel-heading {
             font-weight: bold;
             font-size: 30px;
             margin-bottom: 10px;
             alignment: center;
             text-align: center;
-            font-family:"DejaVu Serif";
+            font-family: "DejaVu Serif";
         }
-        .box{
+
+        .box {
             display: inline-block;
             width: 250px;
             height: 150px;
@@ -35,30 +37,30 @@
 
         }
 
-        .box2{
+        .box2 {
             position: absolute;
             margin-bottom: 50%;
             left: 30%;
             text-align: center;
         }
-        .box3{
+
+        .box3 {
             position: absolute;
             margin-bottom: 50%;
-            left:50%
+            left: 50%
         }
 
-        .box4{
+        .box4 {
             position: absolute;
             margin-top: 18%;
             left: 30%;
         }
-        .box5{
+
+        .box5 {
             position: absolute;
             margin-top: 18%;
-            left:50%
+            left: 50%
         }
-
-
 
 
     </style>
@@ -71,7 +73,7 @@
 
 <!-- Panel -->
 <div class="panel">
-    <div class="panel-heading" >Welcome to Traveller</div>
+    <div class="panel-heading">Welcome to Traveller</div>
 </div>
 <a href="HotelRegistrationServlet">
     <div class="box box2">Register Your Hotel</div>
@@ -79,7 +81,7 @@
 <a href="index.jsp.">
     <div class="box box3">Modify Details</div>
 </a>
-<a href="Registration.jsp">
+<a href="ViewDetails.jsp">
     <div class=" box box4">View Details</div>
 </a>
 <a href="Registration.jsp">

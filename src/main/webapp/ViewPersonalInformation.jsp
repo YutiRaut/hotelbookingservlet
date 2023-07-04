@@ -1,13 +1,12 @@
-<%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.hotelbookingservlet.Model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Traveller Login</title>
+    <title>Personal Information</title>
     <style>
         body {
-            font-family: "serif", "Segoe Print";
+            font-family: "Times New Roman";
             background-color: #fafafa;
         }
 
@@ -65,42 +64,34 @@
 </head>
 <body>
 <div class="container">
-    <h2>Traveller</h2>
-    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("errorUtil");%>
-    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
-    <div class="error messages">
+    <div class="form-group">
+
+        <h2>Personal Information</h2>
         <ul>
-            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
-            <li><%= errorMessage%>
-            </li>
-            <% } %>
+            <% List<User> user = (List<User>) request.getAttribute("datalist");
+                for (User user1 : user) {%>
+            <label for="name">Username</label>
+            <input type="text" id="name" value="<%=user1.getName()%>" readonly></input><br><br>
+
+            <label for="email">Your Email Id</label>
+            <input type="text" id="email" value="<%=user1.getEmail()%>" readonly></input><br><br>
+
+            <label for="contact">Your Contact No</label>
+            <input type="text" id="contact" value="<%=user1.getContact()%>" readonly></input><br><br>
+
+            <label for="password">Your Password</label>
+            <input type="text" id="password" value="<%=user1.getPassword()%>" readonly>
+            <%}%>
+
         </ul>
     </div>
-    <% } %>
-    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("InvalidError");%>
-    <%if (errorUtil1 != null) {%>
-    <%List<String> message = errorUtil1.getErrorMessages();%>
-    <div class="error-message">
-        <%=message%>
-    </div>
-    <% } %>
-    <form action="FormValidationServlet" method="post">
-        <div class="form-group">
-            <b><label for="username">Username</label></b>
-            <input type="text" id="username" name="username" placeholder="Enter your Email">
-        </div>
-        <div class="form-group">
-            <b><label for="password">Password</label></b>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-        </div>
-        <div class="form-group">
-            <button type="submit">Log In</button>
-        </div>
-
-        <h5>don't have account?&nbsp;&nbsp;<a href="RegistrationServlet">SignUp</a></h5>
-    </form>
 </div>
 </body>
 </html>
+
+
+
+
+
 
 

@@ -19,9 +19,9 @@ import java.util.List;
 
 public class HotelRegistrationServlet extends HttpServlet {
 
-    Address addressG= new Address();
-    AddressDao addressDao=new AddressDao();
-    Hotel hotel=new Hotel();
+    Address addressG = new Address();
+    AddressDao addressDao = new AddressDao();
+    Hotel hotel = new Hotel();
     RegisterHotelDao registerHotelDao = new RegisterHotelDao();
 
 
@@ -29,9 +29,9 @@ public class HotelRegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            List<Address> addresses=addressDao.getState();
-            req.setAttribute("stateID",addresses);
-            if(req.getParameter("stateid")!=null) {
+            List<Address> addresses = addressDao.getState();
+            req.setAttribute("stateID", addresses);
+            if (req.getParameter("stateid") != null) {
                 int stateId = Integer.parseInt(req.getParameter("stateid"));
                 List<Address> addresses1 = addressDao.getCity(stateId);
                 req.setAttribute("cityID", addresses1);
@@ -41,8 +41,8 @@ public class HotelRegistrationServlet extends HttpServlet {
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        RequestDispatcher requestDispatcher= req.getRequestDispatcher("HotelRegistrationForm.jsp");
-        requestDispatcher.forward(req,resp);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("HotelRegistrationForm.jsp");
+        requestDispatcher.forward(req, resp);
 
 
     }
@@ -50,21 +50,21 @@ public class HotelRegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String hotelName=req.getParameter("HotelName");
-        String licenceNo=req.getParameter("LicenceNo");
-        String starRating=req.getParameter("StarRating");
-        String GstNo=req.getParameter("GstNo");
-        String permits=req.getParameter("permits");
-        String address= req.getParameter("address");
-        String pincode= req.getParameter("pincode");
+        String hotelName = req.getParameter("HotelName");
+        String licenceNo = req.getParameter("LicenceNo");
+        String starRating = req.getParameter("StarRating");
+        String GstNo = req.getParameter("GstNo");
+        String permits = req.getParameter("permits");
+        String address = req.getParameter("address");
+        String pincode = req.getParameter("pincode");
 
         addressG.setAddress(address);
         addressG.setPincode(Integer.parseInt(pincode));
-        int cityId= Integer.parseInt(req.getParameter("City"));
+        int cityId = Integer.parseInt(req.getParameter("City"));
         addressG.setCityId(cityId);
         try {
-            addressDao.addAddress(addressG,cityId);
-            addressG=addressDao.getAddress();
+            addressDao.addAddress(addressG, cityId);
+            addressG = addressDao.getAddress();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (DAOException e) {
@@ -73,20 +73,22 @@ public class HotelRegistrationServlet extends HttpServlet {
 
 
         hotel.setHotelName(hotelName);
-        System.out.println(hotelName);
-        hotel.setLicenceNo(Integer.parseInt(licenceNo));
+        hotel.setLicenceNo(licenceNo);
         hotel.setStarRating(Integer.parseInt(starRating));
         hotel.setGstNo(GstNo);
         hotel.setPermits(permits);
 
-        HttpSession session =req.getSession();
+        HttpSession session = req.getSession();
         User user = (User) session.getAttribute("CurrentUser");
-        int addressId= addressG.getAddressId();
+        int addressId = addressG.getAddressId();
         try {
-            registerHotelDao.addHotelAdmin(user.getUserId(),hotel,addressId);
+            registerHotelDao.addHotelAdmin(user.getUserId(), hotel, addressId);
         } catch (DAOException e) {
             e.printStackTrace();
         }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("RoomRegistration.jsp");
+        requestDispatcher.forward(req, resp);
 
     }
 }

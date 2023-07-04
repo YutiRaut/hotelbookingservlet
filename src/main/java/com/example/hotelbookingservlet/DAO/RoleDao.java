@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RoleDao {
 
-    public  List<Role> getRole() throws SQLException {
+    public List<Role> getRole() throws SQLException {
         try {
             List<Role> role = new ArrayList<>();
             Statement statement = DbConnection.getInstance().getMainConnection().createStatement();
@@ -22,7 +22,7 @@ public class RoleDao {
                 role.add(role1);
             }
             return role;
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new SQLException("Something went wrong...", ex);
         }
 

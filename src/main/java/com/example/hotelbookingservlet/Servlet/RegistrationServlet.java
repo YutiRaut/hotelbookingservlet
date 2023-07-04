@@ -2,7 +2,6 @@ package com.example.hotelbookingservlet.Servlet;
 
 
 import com.example.hotelbookingservlet.Common.EmailValidator;
-import com.example.hotelbookingservlet.Common.ErrorUtil;
 import com.example.hotelbookingservlet.Common.OtpGenarator;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.LoginDao;
@@ -23,17 +22,17 @@ import java.util.List;
 public class RegistrationServlet extends HttpServlet {
     LoginDao loginDao = new LoginDao();
     OtpGenarator sendOtp = new OtpGenarator();
-    RoleDao roleDao=new RoleDao();
+    RoleDao roleDao = new RoleDao();
     User user = new User();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            List<Role> roles=roleDao.getRole();
-            req.setAttribute("Role",roles);
-            RequestDispatcher requestDispatcher= req.getRequestDispatcher("Registration.jsp");
-            requestDispatcher.forward(req,resp);
+            List<Role> roles = roleDao.getRole();
+            req.setAttribute("Role", roles);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("Registration.jsp");
+            requestDispatcher.forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,8 +72,8 @@ public class RegistrationServlet extends HttpServlet {
 
     private void fillSignUpMasterData(HttpServletRequest request) throws SQLException {
         RoleDao roleDao = new RoleDao();
-        List<Role> roles= roleDao.getRole();
-        request.setAttribute("Role",roles);
+        List<Role> roles = roleDao.getRole();
+        request.setAttribute("Role", roles);
 
     }
 

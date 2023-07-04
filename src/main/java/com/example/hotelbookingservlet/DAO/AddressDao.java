@@ -22,6 +22,7 @@ public class AddressDao {
         }
         return addresses;
     }
+
     public List<Address> getCity(int stateId) throws DAOException, SQLException {
         List<Address> addresses1 = new ArrayList<>();
         try {
@@ -42,13 +43,13 @@ public class AddressDao {
         return addresses1;
     }
 
-    public Address addAddress(Address address,int cityId) throws SQLException {
+    public Address addAddress(Address address, int cityId) throws SQLException {
         try {
             PreparedStatement statement = null;
             String insertAddress = "insert into address(address_line1,city_id,pincode) values(?,?,?)";
             statement = DbConnection.getInstance().getMainConnection().prepareStatement(insertAddress);
             statement.setString(1, address.getAddress());
-            statement.setInt(2,cityId);
+            statement.setInt(2, cityId);
             statement.setInt(3, address.getPincode());
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -65,16 +66,15 @@ public class AddressDao {
             String getAddressQuery = "select * from address";
             PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(getAddressQuery);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 address.setAddressId(resultSet.getInt(1));
             }
-        }catch (SQLException e){
-            throw new DAOException("error occured",e);
+        } catch (SQLException e) {
+            throw new DAOException("error occured", e);
         }
 
-        return  address;
+        return address;
     }
-
 
 
 }

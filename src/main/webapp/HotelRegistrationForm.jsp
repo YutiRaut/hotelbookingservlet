@@ -119,18 +119,10 @@
 </head>
 <body>
 <div class="container">
-    <div class="steps">
-        <div class="step active">Step 1</div>
-        <div class="step">Step 2</div>
-        <div class="step">Step 3</div>
-    </div>
-    <div class="progress-bar">
-        <div class="progress"></div>
-    </div>
     <div class="form-section current">
-        <h2>Step 1: Hotel Information</h2>
+        <h2>Hotel Information</h2>
         <form id="step1" action="HotelRegistrationServlet" method="post">
-            <input type="text" id="HotelName" name="HotelName" placeholder="Enter Hotel Name" >
+            <input type="text" id="HotelName" name="HotelName" placeholder="Enter Hotel Name">
             <input type="text" id="LicenceNo" name="LicenceNo" placeholder="Licence Number">
             <input type="text" id="StarRating" name="StarRating" placeholder="Star Rating">
             <input type="text" id="GstNo" name="GstNo" placeholder="Gst No">
@@ -145,94 +137,23 @@
             </datalist>
             <input type="text" placeholder="Select cityId" name="City" list="cityId"><br>
             <datalist id="cityId">
-                <% if(request.getAttribute("cityID")!=null){
+                <% if (request.getAttribute("cityID") != null) {
                     List<Address> addresses1 = (List<Address>) request.getAttribute("cityID");
                     for (Address address : addresses1) {%>
                 <option value="<%=address.getCityId()%>"><%=address.getViewCity()%>
                 </option>
-                <%}
-                }%>
+                <%
+                        }
+                    }
+                %>
             </datalist>
-            <input type="text" id="address" name="address" placeholder="Address" required>
-            <input type="text" id="pincode" name="pincode" placeholder="Pincode" required>
-            <button type="button1">Submit</button>
-        </form>
-    </div>
-    <div class="form-section">
-        <h2>Step 2: Room Information</h2>
-        <form>
-            <input type="text" id="totalCount" placeholder="Total Rooms You Want To List" required>
-            <input type="text" id="premium" placeholder="Premium" required>
-            <input type="text" id="semiDeluxe" placeholder="Semi Deluxe Count" required>
-            <input type="text" id="deluxe" placeholder="Deluxe Count" required>
-            <input type="text" id="suite" placeholder="Suite Count" required>
-
-            <button type="button2" onclick="previousStep()">Previous</button>
-            <button type="button1" onclick="nextStep()">Next</button>
-
-        </form>
-    </div>
-
-    <div class="form-section">
-        <h2>Step 3:Room Amenity</h2>
-        <form>
-            <input type="text" placeholder="Premium Amenity " required>
-            <input type="text" placeholder="Semi Deluxe Amenity" required>
-            <input type="text" placeholder="Deluxe Amenity" required>
-            <input type="text" placeholder="Suite Amenity" required>
-            <button type="button2" onclick="">Previous</button>
+            <input type="text" id="address" name="address" placeholder="Address">
+            <input type="text" id="pincode" name="pincode" placeholder="Pincode">
             <button type="button1">Submit</button>
         </form>
     </div>
 </div>
 
-<script>
-    const formSections = document.querySelectorAll('.form-section');
-    const progress = document.querySelector('.progress');
-    const steps = document.querySelectorAll('.step');
 
-    let currentStep = 0;
-
-    function nextStep() {
-        if (currentStep < formSections.length - 1) {
-            formSections[currentStep].classList.remove('current');
-            currentStep++;
-            formSections[currentStep].classList.add('current');
-            updateProgress();
-            updateSteps();
-        }
-    }
-
-    function previousStep() {
-        if (currentStep > 0) {
-            formSections[currentStep].classList.remove('current');
-            currentStep--;
-            formSections[currentStep].classList.add('current');
-            updateProgress();
-            updateSteps();
-        }
-    }
-
-    function updateProgress() {
-        const percent = (currentStep / (formSections.length - 1)) * 100;
-        progress.style.width = percent + '%';
-    }
-
-    function updateSteps() {
-        steps.forEach((step, index) => {
-            if (index === currentStep) {
-                step.classList.add('active');
-            } else {
-                step.classList.remove('active');
-            }
-        });
-    }
-
-    function submitAndNext(event){
-        event.preventDefault();
-        alert("Submited form and proceding to next step");
-        document.getElementById("step1").submit();
-    }
-</script>
 </body>
 </html>

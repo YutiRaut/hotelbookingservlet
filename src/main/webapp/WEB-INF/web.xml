@@ -87,4 +87,45 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>RoomCountServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.RoomCountServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RoomCountServlet</servlet-name>
+        <url-pattern>/RoomCountServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ViewDetailsServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.ViewDetailsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewDetailsServlet</servlet-name>
+        <url-pattern>/ViewDetailsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewHotelDetailsServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.ViewHotelDetailsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewHotelDetailsServlet</servlet-name>
+        <url-pattern>/ViewHotelDetailsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewRoomInformationServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.ViewRoomInformationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewRoomInformationServlet</servlet-name>
+        <url-pattern>/ViewRoomInformationServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

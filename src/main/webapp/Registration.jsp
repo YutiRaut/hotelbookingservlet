@@ -68,12 +68,13 @@
 
     <h1>Traveller</h1>
 
-    <% ErrorUtil errorUtil=(ErrorUtil) request.getAttribute("RegisterError");%>
-    <% if(errorUtil!=null && !errorUtil.getErrorMessages().isEmpty()){%>
+    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("RegisterError");%>
+    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
     <div class="error messages">
         <ul>
-            <% for (String errorMessage: errorUtil.getErrorMessages()) {%>
-            <li><%= errorMessage%></li>
+            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
+            <li><%= errorMessage%>
+            </li>
             <% } %>
         </ul>
     </div>
@@ -104,15 +105,15 @@
             <label for="role">Select Your Role:</label>
             <input type="text" id="role" name="role" list="roles"><br>
             <datalist id="roles">
-            <% List<Role> role=(List<Role>)request.getAttribute("Role");
-            for (Role role1:role)
-            {%>
-            <option value="<%=role1.getRole()%>"><%=role1.getRoleName()%></option>
-            <%}%>
+                <% List<Role> role = (List<Role>) request.getAttribute("Role");
+                    for (Role role1 : role) {%>
+                <option value="<%=role1.getRole()%>"><%=role1.getRoleName()%>
+                </option>
+                <%}%>
             </datalist>
         </div>
 
-        
+
         <div class="form-group">
             <button type="submit">Registration</button>
         </div>

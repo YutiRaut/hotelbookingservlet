@@ -1,13 +1,12 @@
-<%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Room" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Traveller Login</title>
+    <title>Room Information</title>
     <style>
         body {
-            font-family: "serif", "Segoe Print";
+            font-family: "Times New Roman";
             background-color: #fafafa;
         }
 
@@ -65,42 +64,36 @@
 </head>
 <body>
 <div class="container">
-    <h2>Traveller</h2>
-    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("errorUtil");%>
-    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
-    <div class="error messages">
+    <div class="form-group">
+        <h2>Room Information</h2>
         <ul>
-            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
-            <li><%= errorMessage%>
-            </li>
-            <% } %>
+            <% List<Room> roomList = (List<Room>) request.getAttribute("roomList");
+                for (Room room : roomList) {%>
+            <label for="name">Room Type</label>
+            <input type="text" id="name" value="<%=room.getRoomType()%>" readonly></input><br><br>
+
+            <label for="count">Room Count</label>
+            <input type="text" id="count" value="<%=room.getRoomCount()%>" readonly></input><br><br>
+
+            <label for="NOP">Number Of People</label>
+            <input type="text" id="NOP" value="<%=room.getNoOfPeople()%>" readonly></input><br><br>
+
+            <label for="aminitie">Room Aminities</label>
+            <input type="text" id="aminitie" value="<%=room.getAminities()%>" readonly ><br><br>
+
+            <label for="roomPrice">Room Price</label>
+            <input type="text" id="roomPrice" value="<%=room.getRoomPrice()%>" readonly>
+            <%}%>
         </ul>
     </div>
-    <% } %>
-    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("InvalidError");%>
-    <%if (errorUtil1 != null) {%>
-    <%List<String> message = errorUtil1.getErrorMessages();%>
-    <div class="error-message">
-        <%=message%>
-    </div>
-    <% } %>
-    <form action="FormValidationServlet" method="post">
-        <div class="form-group">
-            <b><label for="username">Username</label></b>
-            <input type="text" id="username" name="username" placeholder="Enter your Email">
-        </div>
-        <div class="form-group">
-            <b><label for="password">Password</label></b>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-        </div>
-        <div class="form-group">
-            <button type="submit">Log In</button>
-        </div>
-
-        <h5>don't have account?&nbsp;&nbsp;<a href="RegistrationServlet">SignUp</a></h5>
-    </form>
 </div>
 </body>
 </html>
+
+
+
+
+
+
 
 

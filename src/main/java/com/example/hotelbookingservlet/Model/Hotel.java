@@ -1,13 +1,22 @@
 package com.example.hotelbookingservlet.Model;
 
 public class Hotel {
+    private int hotelId;
     private String hotelName;
-    private int licenceNo;
+    private String licenceNo;
     private int starRating;
     private String gstNo;
     private String permits;
     private String existingHotelName;
 
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
 
     public String getHotelName() {
         return hotelName;
@@ -17,11 +26,11 @@ public class Hotel {
         this.hotelName = hotelName;
     }
 
-    public int getLicenceNo() {
+    public String getLicenceNo() {
         return licenceNo;
     }
 
-    public void setLicenceNo(int licenceNo) {
+    public void setLicenceNo(String licenceNo) {
         this.licenceNo = licenceNo;
     }
 

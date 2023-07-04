@@ -1,10 +1,14 @@
-<%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
-<%@ page import="java.util.List" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: rarti
+  Date: 04-07-2023
+  Time: 14:27
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Traveller Login</title>
+    <title>View Details</title>
     <style>
         body {
             font-family: "serif", "Segoe Print";
@@ -12,9 +16,9 @@
         }
 
         .container {
-            max-width: 400px;
+            max-width: 300px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 20px;
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -65,42 +69,39 @@
 </head>
 <body>
 <div class="container">
-    <h2>Traveller</h2>
-    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("errorUtil");%>
-    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
-    <div class="error messages">
-        <ul>
-            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
-            <li><%= errorMessage%>
-            </li>
-            <% } %>
-        </ul>
-    </div>
-    <% } %>
-    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("InvalidError");%>
-    <%if (errorUtil1 != null) {%>
-    <%List<String> message = errorUtil1.getErrorMessages();%>
-    <div class="error-message">
-        <%=message%>
-    </div>
-    <% } %>
-    <form action="FormValidationServlet" method="post">
+    <form action="ViewDetailsServlet">
         <div class="form-group">
-            <b><label for="username">Username</label></b>
-            <input type="text" id="username" name="username" placeholder="Enter your Email">
+            <h3>View Personal Details</h3>
+            <div class="form-group">
+                <button type="submit">View</button>
+            </div>
         </div>
-        <div class="form-group">
-            <b><label for="password">Password</label></b>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-        </div>
-        <div class="form-group">
-            <button type="submit">Log In</button>
-        </div>
-
-        <h5>don't have account?&nbsp;&nbsp;<a href="RegistrationServlet">SignUp</a></h5>
     </form>
 </div>
+<br><br>
+
+<div class="container">
+    <form action="ViewHotelDetailsServlet">
+        <div class="form-group">
+            <h3>View Hotel Details</h3>
+            <div class="form-group">
+                <button type="submit">View</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br><br>
+
+<div class="container">
+    <form action="ViewRoomInformationServlet" >
+        <div class="form-group">
+            <h3>View Room Details</h3>
+            <div class="form-group">
+                <button type="submit">View</button>
+            </div>
+        </div>
+    </form>
+</div>
+<br><br>
 </body>
 </html>
-
-
