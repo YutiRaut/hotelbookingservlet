@@ -1,5 +1,6 @@
 <%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Address" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,16 +11,6 @@
             background-color: #fafafa;
         }
 
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
 
         h2 {
             text-align: center;
@@ -60,6 +51,30 @@
         .form-group button:hover {
             background-color: #e9beee;
         }
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        .styled-table thead th {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .styled-table tbody td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
@@ -67,30 +82,36 @@
     <div class="form-group">
 
         <h2>Hotel Information</h2>
-        <ul>
-            <% List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList");
-                for (Hotel hotel :hotelList) {%>
-            <label for="name">Hotel name</label>
-            <input type="text" id="name" value="<%=hotel.getHotelName()%>" readonly></input><br><br>
+       <table class="styled-table">
+           <thead>
+           <tr>
+               <th>Hotel Name</th>
+               <th>Licence No</th>
+               <th>Star Rating</th>
+               <th>Gst No</th>
+               <th>Permites</th>
+               <th>Address</th>
+               <th>Pincode</th>
+               <th>City</th>
+               <th>State</th>
+           </tr>
+           </thead>
+           <tbody>
 
-            <label for="licence">Your Licence No</label>
-            <input type="text" id="licence" value="<%=hotel.getLicenceNo()%>" readonly></input><br><br>
 
-            <label for="starRating">Your Star Rating</label>
-            <input type="text" id="starRating" value="<%=hotel.getStarRating()%>" readonly></input><br><br>
+           <tr>
 
-            <label for="gst">Your GST Number</label>
-            <input type="text" id="gst" value="<%=hotel.getGstNo()%>" readonly><br><br>
+               <td></td>
+           </tr>
 
-            <label for="permits">Your GST Number</label>
-            <input type="text" id="permits" value="<%=hotel.getPermits()%>" readonly><br><br>
-            <%}%>
+           </tbody>
 
-        </ul>
+        </table>
     </div>
 </div>
 </body>
 </html>
+
 
 
 

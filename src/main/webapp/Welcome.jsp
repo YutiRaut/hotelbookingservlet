@@ -1,16 +1,21 @@
 <%@ page import="com.example.hotelbookingservlet.Model.User" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Welcome to Traveller</title>
     <style>
+        body {
+            font-family: "serif", "Segoe Print";
+            background-color: #fafafa;
+        }
+
         .panel {
             background-color: #b5dee5;
             border: 1px solid #ffffff;
             padding: 20px;
             margin-bottom: 20px;
-
-
         }
 
         .panel-heading {
@@ -22,46 +27,38 @@
             font-family: "DejaVu Serif";
         }
 
-        .box {
+
+
+        .form-section button[type="button1"] {
             display: inline-block;
-            width: 250px;
-            height: 150px;
-            background-color: rgb(222, 239, 195);
-            border: 1px solid rgba(255, 255, 255, 0.87);
-            margin: 20px;
-            text-align: center;
-            line-height: 150px;
-            cursor: pointer;
             font-family: "DejaVu Serif Condensed";
-            font-size: 20px;
+            width: 15%;
+            padding: 15px;
+            font-size: 18px;
+            margin-left:35%;
+            background-color: #acdc60;
+            border: none;
+            color: #fff;
+            cursor: pointer;
 
         }
 
-        .box2 {
-            position: absolute;
-            margin-bottom: 50%;
-            left: 30%;
-            text-align: center;
+        .form-section button[type="button2"] {
+            display: inline-block;
+            font-family: "DejaVu Serif Condensed";
+            width: 15%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: violet;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+
         }
 
-        .box3 {
-            position: absolute;
-            margin-bottom: 50%;
-            left: 50%
+        .form-section button:hover {
+            background-color: #b8dcba;
         }
-
-        .box4 {
-            position: absolute;
-            margin-top: 18%;
-            left: 30%;
-        }
-
-        .box5 {
-            position: absolute;
-            margin-top: 18%;
-            left: 50%
-        }
-
 
     </style>
 </head>
@@ -75,18 +72,18 @@
 <div class="panel">
     <div class="panel-heading">Welcome to Traveller</div>
 </div>
-<a href="HotelRegistrationServlet">
-    <div class="box box2">Register Your Hotel</div>
-</a>
-<a href="index.jsp.">
-    <div class="box box3">Modify Details</div>
-</a>
-<a href="ViewDetails.jsp">
-    <div class=" box box4">View Details</div>
-</a>
-<a href="Registration.jsp">
-    <div class=" box box5">Delete</div>
-</a>
 
+<div class="form-section">
+
+    <a href="ViewHotelInformation.jsp">
+        <button type="button1">Hotel Management</button>
+    </a>
+
+    <button type="button2">Room Management</button>
+
+
+
+</div>
 </body>
 </html>
+

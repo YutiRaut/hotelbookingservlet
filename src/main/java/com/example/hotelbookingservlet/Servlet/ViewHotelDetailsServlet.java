@@ -35,7 +35,6 @@ public class ViewHotelDetailsServlet extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("hotelList", hotelList);
-
         req.getRequestDispatcher("ViewHotelInformation.jsp").forward(req, resp);
 
 

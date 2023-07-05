@@ -31,8 +31,8 @@ public class VerifyUserByCodeServlet extends HttpServlet {
             loginServlet.checkUserRole(req, resp);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/VerifyUser.jsp");
-            requestDispatcher.include(req, resp);
-            resp.setContentType("text/html");
+            requestDispatcher.forward(req,resp);
+
         }
 
     }

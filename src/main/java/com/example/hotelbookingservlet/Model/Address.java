@@ -10,6 +10,13 @@ public class Address {
     private String address;
     private int pincode;
 
+    public Address() {
+    }
+
+    public Address(String addressId, int pincode, String cityname, String statename) {
+    }
+
+
     public int getAddressId() {
         return addressId;
     }

@@ -7,8 +7,12 @@ public class Hotel {
     private int starRating;
     private String gstNo;
     private String permits;
+    private Address address;
     private String existingHotelName;
 
+    public Address getAddress() {
+        return address;
+    }
 
     public int getHotelId() {
         return hotelId;
@@ -65,4 +69,8 @@ public class Hotel {
     public void setExistingHotelName(String existingHotelName) {
         this.existingHotelName = existingHotelName;
     }
+
+    public void setAddress(Address address) {
+    }
+
 }

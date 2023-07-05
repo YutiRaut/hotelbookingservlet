@@ -66,7 +66,7 @@ public class RegistrationServlet extends HttpServlet {
         }
 
 
-        resp.sendRedirect("Login.jsp");
+        req.getRequestDispatcher("Login.jsp").forward(req,resp);
 
     }
 

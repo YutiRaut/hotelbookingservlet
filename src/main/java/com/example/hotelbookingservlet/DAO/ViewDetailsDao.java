@@ -1,5 +1,6 @@
 package com.example.hotelbookingservlet.DAO;
 
+import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.Room;
 import com.example.hotelbookingservlet.Model.User;
@@ -39,17 +40,23 @@ public class ViewDetailsDao {
 
         List<Hotel> hotelList = new ArrayList<>();
         try {
-            String viewDetails = "select hotel_name,licence_no,star_rating,GST_No,permites from hotel where user_id=?";
+            String viewDetails = "SELECT h.hotel_name,h.licence_no,h.star_rating,h.GST_No," +
+                    "h.permites,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
+                    "hotel h INNER JOIN address a on h.address_id = a.id INNER JOIN city c " +
+                    "on a.city_id=c.id INNER JOIN state s on c.state_id =s.id WHERE h.user_id=?;";
+
             PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(viewDetails);
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Hotel hotel = new Hotel();
-                hotel.setHotelName(resultSet.getString(1));
-                hotel.setLicenceNo(resultSet.getString(2));
-                hotel.setStarRating(resultSet.getInt(3));
-                hotel.setGstNo(resultSet.getString(4));
-                hotel.setPermits(resultSet.getString(5));
+                hotel.setHotelName(resultSet.getString("hotel_name"));
+                hotel.setLicenceNo(resultSet.getString("licence_no"));
+                hotel.setStarRating(resultSet.getInt("star_rating"));
+                hotel.setGstNo(resultSet.getString("GST_No"));
+                hotel.setPermits(resultSet.getString("permites"));
+                Address address = new Address(resultSet.getString("address_line1"),resultSet.getInt("pincode"),resultSet.getString("city_name"),resultSet.getString("state_name"));
+                hotel.setAddress(address);
                 hotelList.add(hotel);
             }
         } catch (SQLException e) {

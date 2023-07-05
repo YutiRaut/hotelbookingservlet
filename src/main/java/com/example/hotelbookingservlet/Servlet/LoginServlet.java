@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("CurrentUser", user);
             if (!(user.isVerified())) {
-                response.sendRedirect("VerifyUser.jsp");
+                request.getRequestDispatcher("VerifyUser.jsp").forward(request,response);
             } else {
                 checkUserRole(request, response);
             }
@@ -55,16 +55,16 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    public void checkUserRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void checkUserRole(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("CurrentUser");
 
         if (user.getRole() == Constant.SYSTEM_ADMIN) {
-            response.sendRedirect("index.jsp");
+            request.getRequestDispatcher("index.jsp").forward(request,response);
         } else if (user.getRole() == Constant.HOTEL_ADMIN) {
-            response.sendRedirect("Welcome.jsp");
+            request.getRequestDispatcher("Welcome.jsp").forward(request,response);
         } else if (user.getRole() == Constant.Customer) {
-            response.sendRedirect("index.jsp");
+            request.getRequestDispatcher("index.jsp").forward(request,response);
         }
 
     }
