@@ -6,7 +6,15 @@ public class Room {
     int noOfPeople;
     int roomPrice;
     String aminities;
+    Hotel hoteldata;
 
+    public Hotel getHoteldata() {
+        return hoteldata;
+    }
+
+    public void setHoteldata(Hotel hoteldata) {
+        this.hoteldata = hoteldata;
+    }
 
     public String getRoomType() {
         return roomType;

@@ -1,9 +1,13 @@
 package com.example.hotelbookingservlet.DAO;
 
+import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.Room;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoomDao {
 
@@ -25,6 +29,33 @@ public class RoomDao {
             throw new DAOException("Opps something went wrong...", ex);
         }
 
+    }
+    public static List<Room> getAllRoomData(int userId) throws DAOException {
+
+        List<Room> roomList = new ArrayList<>();
+        try {
+            String viewDetails = "SELECT h.hotel_name,r.room_type,r.room_count,r.no_of_people,r.aminities,r.room_price FROM hotel h INNER JOIN room r on r.hotel_id = h.id WHERE h.user_id=?;";
+            PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(viewDetails);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Room room = new Room();
+                Hotel hotel= new Hotel();
+                hotel.setHotelName(resultSet.getString("hotel_name"));
+                room.setHoteldata(hotel);
+                room.setRoomType(resultSet.getString("room_type"));
+                room.setRoomCount(resultSet.getInt("room_count"));
+                room.setNoOfPeople(resultSet.getInt("no_of_people"));
+                room.setAminities(resultSet.getString("aminities"));
+                room.setRoomPrice(resultSet.getInt("room_price"));
+
+                roomList.add(room);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("error occured", e);
+        }
+
+        return roomList;
     }
 }
 

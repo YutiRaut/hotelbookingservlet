@@ -1,6 +1,7 @@
 package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.DAO.DAOException;
+import com.example.hotelbookingservlet.DAO.HotelDao;
 import com.example.hotelbookingservlet.DAO.ViewDetailsDao;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.User;
@@ -24,20 +25,20 @@ public class ViewHotelDetailsServlet extends HttpServlet {
 
         int userId = user.getUserId();
         try {
-            viewDetailsDao.getAllHotelData(userId);
+            HotelDao.getAllHotelData(userId);
         } catch (DAOException e) {
             e.printStackTrace();
         }
         List<Hotel> hotelList = null;
         try {
-            hotelList = viewDetailsDao.getAllHotelData(userId);
+            hotelList = HotelDao.getAllHotelData(userId);
         } catch (DAOException e) {
             e.printStackTrace();
         }
+
         req.setAttribute("hotelList", hotelList);
         req.getRequestDispatcher("ViewHotelInformation.jsp").forward(req, resp);
-
-
+        req.getRequestDispatcher("EditHotelInformation.jsp").forward(req,resp);
     }
 }
 

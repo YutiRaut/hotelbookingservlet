@@ -1,16 +1,18 @@
 package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.DAO.DAOException;
-import com.example.hotelbookingservlet.DAO.RegisterHotelDao;
+import com.example.hotelbookingservlet.DAO.HotelDao;
 import com.example.hotelbookingservlet.DAO.RoomDao;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.Room;
+import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RoomCountServlet extends HttpServlet {
@@ -18,10 +20,13 @@ public class RoomCountServlet extends HttpServlet {
     Room room = new Room();
     RoomDao roomDao = new RoomDao();
     Hotel hotel = new Hotel();
-    RegisterHotelDao hotelDao = new RegisterHotelDao();
+    HotelDao hotelDao = new HotelDao();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("CurrentUser");
+
         String roomType = req.getParameter("Premium");
         int preCount = Integer.parseInt(req.getParameter("premiumCount"));
         int prePrice = Integer.parseInt(req.getParameter("prePrice"));
@@ -35,7 +40,8 @@ public class RoomCountServlet extends HttpServlet {
         room.setAminities(preFacility);
 
         try {
-            hotel = hotelDao.getHotelId();
+
+            hotel = hotelDao.getHotelId(user.getUserId());
             int hotelId = hotel.getHotelId();
             roomDao.roomRegistration(room, hotelId);
 
@@ -57,7 +63,7 @@ public class RoomCountServlet extends HttpServlet {
         room.setAminities(semiFacility);
 
         try {
-            hotel = hotelDao.getHotelId();
+            hotel = hotelDao.getHotelId(user.getUserId());
             int hotelId = hotel.getHotelId();
             roomDao.roomRegistration(room, hotelId);
         } catch (DAOException e) {
@@ -76,7 +82,7 @@ public class RoomCountServlet extends HttpServlet {
         room.setNoOfPeople(deluxeNoP);
         room.setAminities(deluxeFacility);
         try {
-            hotel = hotelDao.getHotelId();
+            hotel = hotelDao.getHotelId(user.getUserId());
             int hotelId = hotel.getHotelId();
             roomDao.roomRegistration(room, hotelId);
         } catch (DAOException e) {
@@ -96,14 +102,14 @@ public class RoomCountServlet extends HttpServlet {
         room.setAminities(suiteFacility);
 
         try {
-            hotel = hotelDao.getHotelId();
+            hotel = hotelDao.getHotelId(user.getUserId());
             int hotelId = hotel.getHotelId();
             roomDao.roomRegistration(room, hotelId);
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("RoomRegistration.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("Welcome.jsp");
         requestDispatcher.forward(req, resp);
 
     }

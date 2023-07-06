@@ -75,11 +75,20 @@
 
 <div class="form-section">
 
-    <a href="ViewHotelInformation.jsp">
+    <a href="ViewHotelDetailsServlet">
         <button type="button1">Hotel Management</button>
     </a>
 
-    <button type="button2">Room Management</button>
+    <a href="HotelNameServlet">
+        <button type="button2">Room Management</button>
+    </a>
+
+</div>
+
+
+
+
+
 
 
 

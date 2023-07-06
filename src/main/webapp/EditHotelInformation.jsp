@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.hotelbookingservlet.Model.User" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -66,21 +67,38 @@
 <div class="container">
     <div class="form-group">
 
-        <h2>Personal Information</h2>
+        <h2>Hotel Information</h2>
         <ul>
-            <% List<User> user = (List<User>) request.getAttribute("datalist");
-                for (User user1 : user) {%>
-            <label for="name">Username</label>
-            <input type="text" id="name" value="<%=user1.getName()%>" readonly></input><br><br>
+            <% List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList");
+                for (Hotel hotel : hotelList) {%>
+            <label for="name">Hotel name</label>
+            <input type="text" id="name" value="<%=hotel.getHotelName()%>" readonly></input><br><br>
 
-            <label for="email">Your Email Id</label>
-            <input type="text" id="email" value="<%=user1.getEmail()%>" readonly></input><br><br>
+            <label for="LicenceNo">Your LicenceNo</label>
+            <input type="text" id="LicenceNo" value="<%=hotel.getLicenceNo()%>" readonly></input><br><br>
 
-            <label for="contact">Your Contact No</label>
-            <input type="text" id="contact" value="<%=user1.getContact()%>" readonly></input><br><br>
+            <label for="contact">Your Star Rating</label>
+            <input type="text" id="contact" value="<%=hotel.getStarRating()%>" readonly></input><br><br>
 
-            <label for="password">Your Password</label>
-            <input type="text" id="password" value="<%=user1.getPassword()%>" readonly>
+            <label for="GSTNo">Your GstNo</label>
+            <input type="text" id="GSTNo" value="<%=hotel.getGstNo()%>" readonly>
+
+            <label for="permities">Your Permities</label>
+            <input type="text" id="permities" value="<%=hotel.getPermits()%>" readonly>
+
+
+            <label for="Address">Address</label>
+            <input type="text" id="Address" value="<%=hotel.getAddressline().getAddress()%>" readonly>
+
+            <label for="Pincode">Pincode</label>
+            <input type="text" id="Pincode" value="<%=hotel.getAddressline().getPincode()%>" readonly>
+
+            <label for="city"></label>
+            <input type="text" id="city" value="<%=hotel.getAddressline().getViewCity()%>" readonly>
+
+            <label for="state">Your Password</label>
+            <input type="text" id="state" value="<%=hotel.getAddressline().getState()%>" readonly>
+
             <%}%>
 
         </ul>

@@ -2,7 +2,7 @@ package com.example.hotelbookingservlet.Model;
 
 public class Address {
     private int addressId;
-    private int state;
+   private String state;
     private int stateId;
     private String StateList;
     private int cityId;
@@ -25,11 +25,11 @@ public class Address {
         this.addressId = addressId;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 

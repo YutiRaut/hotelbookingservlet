@@ -3,7 +3,7 @@ package com.example.hotelbookingservlet.Servlet;
 import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.Common.ErrorUtil;
 import com.example.hotelbookingservlet.DAO.DAOException;
-import com.example.hotelbookingservlet.DAO.LoginDao;
+import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 
         User user = null;
         try {
-            user = LoginDao.checkUserCredentials(name, password);
+            user = UserDao.checkUserCredentials(name, password);
         } catch (DAOException e) {
             e.printStackTrace();
         }

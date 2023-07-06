@@ -35,7 +35,7 @@ public class ViewDetailsServlet extends HttpServlet {
         }
         req.setAttribute("datalist", datalist);
 
-        req.getRequestDispatcher("ViewPersonalInformation.jsp").forward(req, resp);
+        req.getRequestDispatcher("EditHotelInformation.jsp").forward(req, resp);
 
 
     }

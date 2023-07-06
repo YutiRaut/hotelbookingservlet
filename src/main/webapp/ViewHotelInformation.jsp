@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Personal Information</title>
+    <title>Hotel Information</title>
     <style>
         body {
             font-family: "Times New Roman";
@@ -27,8 +27,8 @@
             text-align: left;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="password"] {
+        .form-group input[type="text"]
+        {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -38,19 +38,20 @@
 
         .form-group button {
             font-family: DialogInput;
-            width: 30%;
+            width: 10%;
+            margin-left: 40%;
             padding: 15px;
             font-size: 18px;
-            background-color: violet;
+            background-color: #71e835;
             border: none;
-            color: #fff;
+            color: #171616;
             cursor: pointer;
-            border-radius: 50px;
         }
 
         .form-group button:hover {
-            background-color: #e9beee;
+            background-color: #d5f897;
         }
+
         .styled-table {
             width: 100%;
             border-collapse: collapse;
@@ -75,36 +76,88 @@
         .styled-table tbody tr:hover {
             background-color: #f5f5f5;
         }
+
+
+        .panel {
+            background-color: #b5dee5;
+            border: 1px solid #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .panel-heading {
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 10px;
+            alignment: center;
+            text-align: center;
+            font-family: "DejaVu Serif";
+        }
     </style>
 </head>
 <body>
+
+
+<div class="panel">
+    <div class="panel-heading">Hotel Information</div>
+</div>
+
+<div class="form-group">
+
+    <a href="HotelRegistrationServlet">
+        <button type="button">ADD HOTEL</button>
+    </a>
+</div>
 <div class="container">
     <div class="form-group">
 
-        <h2>Hotel Information</h2>
-       <table class="styled-table">
-           <thead>
-           <tr>
-               <th>Hotel Name</th>
-               <th>Licence No</th>
-               <th>Star Rating</th>
-               <th>Gst No</th>
-               <th>Permites</th>
-               <th>Address</th>
-               <th>Pincode</th>
-               <th>City</th>
-               <th>State</th>
-           </tr>
-           </thead>
-           <tbody>
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hotel Name</th>
+                <th>Licence No</th>
+                <th>Star Rating</th>
+                <th>Gst No</th>
+                <th>Permites</th>
+                <th>Address</th>
+                <th>Pincode</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Edit</th>
+            </thead>
 
 
-           <tr>
+            <tbody>
+            <% List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList");
+                for (Hotel hotel : hotelList) {%>
 
-               <td></td>
-           </tr>
+            <tr>
+                <td><%=hotel.getHotelId()%>
+                </td>
+                <td><%=hotel.getHotelName()%>
+                </td>
+                <td><%=hotel.getLicenceNo()%>
+                </td>
+                <td><%=hotel.getStarRating()%>
+                </td>
+                <td><%=hotel.getGstNo()%>
+                </td>
+                <td><%=hotel.getPermits()%>
+                </td>
+                <td><%=hotel.getAddressline().getAddress()%>
+                </td>
+                <td><%=hotel.getAddressline().getPincode()%>
+                </td>
+                <td><%=hotel.getAddressline().getViewCity()%>
+                </td>
+                <td><%=hotel.getAddressline().getState()%>
+                </td>
+                <td><a href="edit-hotel?id=<%=hotel.getHotelId()%>">Edit</a> </td>
 
-           </tbody>
+                <%}%>
+            </tr>
+            </tbody>
 
         </table>
     </div>

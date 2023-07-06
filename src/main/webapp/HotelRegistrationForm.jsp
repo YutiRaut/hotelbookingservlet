@@ -24,38 +24,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .steps {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .step {
-            flex-grow: 1;
-            text-align: center;
-            color: #999999;
-        }
-
-        .step.active {
-            color: #000000;
-            font-weight: bold;
-        }
-
-        .progress-bar {
-            width: 100%;
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            height: 10px;
-            margin-bottom: 20px;
-        }
-
-        .progress {
-            width: 0%;
-            height: 100%;
-            background-color: #4CAF50;
-            border-radius: 5px;
-        }
-
         .form-section {
             display: none;
         }

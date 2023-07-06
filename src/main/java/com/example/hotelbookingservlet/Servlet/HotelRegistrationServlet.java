@@ -2,7 +2,7 @@ package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.DAO.AddressDao;
 import com.example.hotelbookingservlet.DAO.DAOException;
-import com.example.hotelbookingservlet.DAO.RegisterHotelDao;
+import com.example.hotelbookingservlet.DAO.HotelDao;
 import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.User;
@@ -22,7 +22,7 @@ public class HotelRegistrationServlet extends HttpServlet {
     Address addressG = new Address();
     AddressDao addressDao = new AddressDao();
     Hotel hotel = new Hotel();
-    RegisterHotelDao registerHotelDao = new RegisterHotelDao();
+    HotelDao registerHotelDao = new HotelDao();
 
 
     @Override
@@ -87,7 +87,7 @@ public class HotelRegistrationServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("RoomRegistration.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("Welcome.jsp");
         requestDispatcher.forward(req, resp);
 
     }

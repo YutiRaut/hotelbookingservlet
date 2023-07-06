@@ -1,7 +1,7 @@
 package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.DAO.DAOException;
-import com.example.hotelbookingservlet.DAO.LoginDao;
+import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class VerifyUserByCodeServlet extends HttpServlet {
 
-    LoginDao loginDao = new LoginDao();
+    UserDao loginDao = new UserDao();
     LoginServlet loginServlet = new LoginServlet();
 
     @Override
@@ -30,7 +30,7 @@ public class VerifyUserByCodeServlet extends HttpServlet {
             }
             loginServlet.checkUserRole(req, resp);
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/VerifyUser.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("VerifyUser.jsp");
             requestDispatcher.forward(req,resp);
 
         }

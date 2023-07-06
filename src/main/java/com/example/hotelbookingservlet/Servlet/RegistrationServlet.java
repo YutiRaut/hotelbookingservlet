@@ -4,7 +4,7 @@ package com.example.hotelbookingservlet.Servlet;
 import com.example.hotelbookingservlet.Common.EmailValidator;
 import com.example.hotelbookingservlet.Common.OtpGenarator;
 import com.example.hotelbookingservlet.DAO.DAOException;
-import com.example.hotelbookingservlet.DAO.LoginDao;
+import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.DAO.RoleDao;
 import com.example.hotelbookingservlet.Model.Role;
 import com.example.hotelbookingservlet.Model.User;
@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RegistrationServlet extends HttpServlet {
-    LoginDao loginDao = new LoginDao();
+    UserDao loginDao = new UserDao();
     OtpGenarator sendOtp = new OtpGenarator();
     RoleDao roleDao = new RoleDao();
     User user = new User();

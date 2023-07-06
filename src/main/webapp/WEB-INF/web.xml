@@ -128,4 +128,16 @@
         <url-pattern>/ViewRoomInformationServlet</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>HotelNameServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.HotelNameServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HotelNameServlet</servlet-name>
+        <url-pattern>/HotelNameServlet</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
