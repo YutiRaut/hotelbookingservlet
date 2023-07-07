@@ -114,7 +114,6 @@
         <table class="styled-table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Hotel Name</th>
                 <th>Licence No</th>
                 <th>Star Rating</th>
@@ -129,12 +128,10 @@
 
 
             <tbody>
-            <% List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList");
-                for (Hotel hotel : hotelList) {%>
+            <% List<Hotel> GethotelList = (List<Hotel>) request.getAttribute("hotelList");
+                for (Hotel hotel : GethotelList) {%>
 
             <tr>
-                <td><%=hotel.getHotelId()%>
-                </td>
                 <td><%=hotel.getHotelName()%>
                 </td>
                 <td><%=hotel.getLicenceNo()%>
@@ -153,7 +150,7 @@
                 </td>
                 <td><%=hotel.getAddressline().getState()%>
                 </td>
-                <td><a href="edit-hotel?id=<%=hotel.getHotelId()%>">Edit</a> </td>
+                <td><a href="EditDetailsServlet?id=<%=hotel.getHotelId()%>">Edit</a> </td>
 
                 <%}%>
             </tr>

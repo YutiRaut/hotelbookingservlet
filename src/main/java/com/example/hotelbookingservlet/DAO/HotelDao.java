@@ -52,7 +52,7 @@ public class HotelDao {
 
     public static List<Hotel> getAllHotelData(int userId) throws DAOException {
 
-        List<Hotel> hotelList = new ArrayList<>();
+        List<Hotel> GethotelList = new ArrayList<>();
         try {
             String viewDetails = "SELECT h.id,h.hotel_name,h.licence_no,h.star_rating,h.GST_No," +
                     "h.permites,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
@@ -76,13 +76,13 @@ public class HotelDao {
                 address.setViewCity(resultSet.getString("city_name"));
                 address.setState(resultSet.getString("state_name"));
                 hotel.setAddressline(address);
-                hotelList.add(hotel);
+                GethotelList.add(hotel);
             }
         } catch (SQLException e) {
             throw new DAOException("error occured", e);
         }
 
-        return hotelList;
+        return GethotelList;
     }
 
     public static List<Hotel>getHotelName(int userId) throws DAOException {
@@ -106,5 +106,65 @@ public class HotelDao {
         return  hotelList1;
     }
 
+    public static List<Hotel> getDataForEdit( int hotelID) throws DAOException {
+
+        List<Hotel> EditList = new ArrayList<>();
+        try {
+            String viewDetails = "SELECT h.id,h.hotel_name,h.licence_no,h.star_rating,h.GST_No," +
+                    "h.permites,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
+                    "hotel h INNER JOIN address a on h.address_id = a.id INNER JOIN city c " +
+                    "on a.city_id=c.id INNER JOIN state s on c.state_id =s.id WHERE h.id=?;";
+
+            PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(viewDetails);
+            statement.setInt(1, hotelID);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Hotel hotels = new Hotel();
+                hotels.setHotelId(resultSet.getInt("id"));
+                hotels.setHotelName(resultSet.getString("hotel_name"));
+                hotels.setLicenceNo(resultSet.getString("licence_no"));
+                hotels.setStarRating(resultSet.getInt("star_rating"));
+                hotels.setGstNo(resultSet.getString("GST_No"));
+                hotels.setPermits(resultSet.getString("permites"));
+                Address address = new Address();
+                address.setAddress(resultSet.getString("address_line1"));
+                address.setPincode(resultSet.getInt("pincode"));
+                address.setViewCity(resultSet.getString("city_name"));
+                address.setState(resultSet.getString("state_name"));
+                hotels.setAddressline(address);
+                EditList.add(hotels);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("error occured", e);
+        }
+
+        return EditList;
+    }
+
+    public void addEditedData(Hotel hotel,int hotelID) throws DAOException {
+        try {
+            String addQuery = "UPDATE hotel h INNER JOIN address a on h.address_id = a.id  " +
+                    "SET h.hotel_name=?,h.licence_no=?,h.star_rating=?," +
+                    "h.GST_No=?,h.permites=?,a.address_line1=?," +
+                    "a.pincode=? WHERE h.id=?";
+            PreparedStatement stmt1;
+            stmt1 = DbConnection.getInstance().getMainConnection().prepareStatement(addQuery);
+            stmt1.setString(1, hotel.getHotelName());
+            stmt1.setString(2, hotel.getLicenceNo());
+            stmt1.setInt(3, hotel.getStarRating());
+            stmt1.setString(4, hotel.getGstNo());
+            stmt1.setString(5, hotel.getPermits());
+            stmt1.setString(6,hotel.getAddressline().getAddress());
+            stmt1.setInt(7,hotel.getAddressline().getPincode());
+            stmt1.setInt(8, hotelID);
+
+            stmt1.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Opps something went wrong...", ex);
+        } catch (Exception ex) {
+            throw new DAOException("Opps something went wrong...", ex);
+        }
+
+    }
 
 }

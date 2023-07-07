@@ -1,6 +1,7 @@
 package com.example.hotelbookingservlet.Model;
 
 public class Room {
+    int roomid;
     String roomType;
     int roomCount;
     int noOfPeople;
@@ -14,6 +15,15 @@ public class Room {
 
     public void setHoteldata(Hotel hoteldata) {
         this.hoteldata = hoteldata;
+    }
+
+
+    public int getRoomid() {
+        return roomid;
+    }
+
+    public void setRoomid(int roomid) {
+        this.roomid = roomid;
     }
 
     public String getRoomType() {

@@ -1,6 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: rarti
+  Date: 07-07-2023
+  Time: 15:08
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.hotelbookingservlet.Model.User" %>
 <%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Room" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -67,43 +75,32 @@
 <div class="container">
     <div class="form-group">
         <h2>Hotel Information</h2>
-        <form action="EditDetailsServlet" method="post">
-        <ul>
-            <% List<Hotel> hotelList = (List<Hotel>) request.getAttribute("hotelList1");
-                for (Hotel hotel : hotelList) {%>
-            <label for="Hotelname">Hotel name</label>
-            <input type="text" id="Hotelname" name="Hotelname" value="<%=hotel.getHotelName()%>"></input><br><br>
+        <form action="EditRoomServlet" method="post">
+            <ul>
+                <% List<Room> roomList1 = (List<Room>) request.getAttribute("roomList1");
+                    for (Room room: roomList1) {%>
 
-            <label for="Licence">Your LicenceNo</label>
-            <input type="text" id="Licence" name="Licence" value="<%=hotel.getLicenceNo()%>"></input><br><br>
+                <label for="roomName">Room Type</label>
+                <input type="text" id="roomName" name="roomName" value="<%=room.getRoomType()%>" readonly></input><br><br>
 
-            <label for="starRating">Your Star Rating</label>
-            <input type="text" id="starRating" name="starRating" value="<%=hotel.getStarRating()%>"></input><br><br>
+                <label for="Count">Room Count</label>
+                <input type="text" id="Count" name="Count" value="<%=room.getRoomCount()%>"></input><br><br>
 
-            <label for="GSTNo">Your GstNo</label>
-            <input type="text" id="GSTNo" name="GSTNo" value="<%=hotel.getGstNo()%>"><br><br>
+                <label for="NOP">No of People</label>
+                <input type="text" id="NOP" name="NOP" value="<%=room.getNoOfPeople()%>"></input><br><br>
 
-            <label for="permities">Your Permities</label>
-            <input type="text" id="permities" name="permities" value="<%=hotel.getPermits()%>"><br><br>
+                <label for="aminities">Aminities</label>
+                <input type="text" id="aminities" name="aminities" value="<%=room.getAminities()%>"></input><br><br>
 
-            <label for="Address">Address</label>
-            <input type="text" id="Address" name="Address" value="<%=hotel.getAddressline().getAddress()%>"><br><br>
+                <label for="roomPrice">Room Price</label>
+                <input type="text" id="roomPrice" name="roomPrice" value="<%=room.getRoomPrice()%>"><br><br>
 
-            <label for="Pincode">Pincode</label>
-            <input type="text" id="Pincode" name="Pincode" value="<%=hotel.getAddressline().getPincode()%>"><br><br>
+                <div class="form-group">
+                    <button type="submit">Add</button>
+                </div>
+                <%}%>
 
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" value="<%=hotel.getAddressline().getViewCity()%>" readonly><br><br>
-
-            <label for="state">State</label>
-            <input type="text" id="state" name="state" value="<%=hotel.getAddressline().getState()%>" readonly><br><br>
-
-            <div class="form-group">
-                <button type="submit">Add</button>
-            </div>
-            <%}%>
-
-        </ul>
+            </ul>
         </form>
     </div>
 </div>

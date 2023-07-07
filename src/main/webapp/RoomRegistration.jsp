@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: rarti
   Date: 04-07-2023
@@ -72,6 +73,7 @@
     <form action="RoomCountServlet" method="post">
         <div class="form-group">
             <h2>Room Information</h2>
+
             <input type="text" name="Premium" value="Premium" readonly>
             <input type="text" name="premiumCount" placeholder="Premiumcount">
             <input type="text" name="prePrice" placeholder="PricePerDay">

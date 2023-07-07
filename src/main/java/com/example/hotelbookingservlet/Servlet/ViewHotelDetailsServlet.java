@@ -29,16 +29,15 @@ public class ViewHotelDetailsServlet extends HttpServlet {
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        List<Hotel> hotelList = null;
+        List<Hotel> GethotelList = null;
         try {
-            hotelList = HotelDao.getAllHotelData(userId);
+            GethotelList = HotelDao.getAllHotelData(userId);
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
-        req.setAttribute("hotelList", hotelList);
+        req.setAttribute("hotelList", GethotelList);
         req.getRequestDispatcher("ViewHotelInformation.jsp").forward(req, resp);
-        req.getRequestDispatcher("EditHotelInformation.jsp").forward(req,resp);
     }
 }
 

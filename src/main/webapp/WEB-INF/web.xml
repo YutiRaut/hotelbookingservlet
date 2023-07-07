@@ -88,24 +88,24 @@
 
 
     <servlet>
-        <servlet-name>RoomCountServlet</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.RoomCountServlet</servlet-class>
+        <servlet-name>RoomRegistrationServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.RoomRegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>RoomCountServlet</servlet-name>
-        <url-pattern>/RoomCountServlet</url-pattern>
+        <servlet-name>RoomRegistrationServlet</servlet-name>
+        <url-pattern>/RoomRegistrationServlet</url-pattern>
     </servlet-mapping>
 
 
     <servlet>
-        <servlet-name>ViewDetailsServlet</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.ViewDetailsServlet</servlet-class>
+        <servlet-name>EditDetailsServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.EditDetailsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>ViewDetailsServlet</servlet-name>
-        <url-pattern>/ViewDetailsServlet</url-pattern>
+        <servlet-name>EditDetailsServlet</servlet-name>
+        <url-pattern>/EditDetailsServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -137,6 +137,16 @@
     <servlet-mapping>
         <servlet-name>HotelNameServlet</servlet-name>
         <url-pattern>/HotelNameServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditRoomServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.EditRoomServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditRoomServlet</servlet-name>
+        <url-pattern>/EditRoomServlet</url-pattern>
     </servlet-mapping>
 
 
