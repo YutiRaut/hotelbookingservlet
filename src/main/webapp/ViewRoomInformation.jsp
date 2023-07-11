@@ -90,10 +90,10 @@
     </style>
 
     <script>
-        $(document).on('change', '#Hotel', function () {
-            var stateID = $(this).val();
+        $(document).on('change', '#hotel', function () {
+            var hotelID = $(this).val();
             const currURL = new URL($(location).attr('href'));
-            currURL.searchParams.set("hotelName", stateID)
+            currURL.searchParams.set("hotelID", hotelID)
             location.replace(currURL.toString());
         });
     </script>
@@ -106,17 +106,19 @@
 </div>
 
 <div class="form-group label">
-    <label for="Hotel">Select Hotel:</label>
-    <input type="text" id="Hotel" name="Hotel" list="Hotels"><br>
-    <datalist id="Hotels" name="Hotels">
-        <% List<Hotel> hotelName = (List<Hotel>) request.getAttribute("hotelList");
-            for (Hotel hotel : hotelName) {%>
-        <option value="<%=hotel.getHotelId()%>"<%=hotel.getHotelName()%>></option>
-
-        <%}%>
-    </datalist>
+    <form action="HotelNameServlet" method="post">
+        <select id="hotel" name="hotel">
+            <option value="" disabled selected>Select a hotel</option>
+            <% List<Hotel> hotelName = (List<Hotel>) request.getAttribute("hotelName");
+                for (Hotel hotel : hotelName) { %>
+            <option value="<%= hotel.getHotelId() %>"><%= hotel.getHotelName() %></option>
+            <% } %>
+        </select><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
+</div>
 <div class="form-group">
     <a href="RoomRegistrationServlet.jsp">
 
@@ -143,20 +145,22 @@
 
             </thead>
 
-<%--            <tbody>--%>
-<%--            <% List<Room> roomList = (List<Room>) request.getAttribute("roomList");--%>
-<%--                for (Room room: roomList) {%>--%>
+          <tbody>
+           <% if (request.getAttribute("roomList") != null) {
+               List<Room> roomList = (List<Room>) request.getAttribute("roomList");
+               for (Room room: roomList) {%>
 
-<%--            <tr>--%>
-<%--                <td><%=room.getHoteldata().getHotelName()%></td>--%>
-<%--                <td><%=room.getRoomType()%></td>--%>
-<%--                <td><%=room.getNoOfPeople()%></td>--%>
-<%--                <td><%=room.getAminities()%></td>--%>
-<%--                <td><%=room.getRoomPrice()%></td>--%>
-<%--                <td><a href="EditRoomServlet?id=<%=room.getRoomid()%>">Edit</a> </td>--%>
-<%--                <%}%>--%>
-<%--            </tr>--%>
-<%--            </tbody>--%>
+         <tr>
+               <td><%=room.getHoteldata().getHotelName()%></td>
+               <td><%=room.getRoomType()%></td>
+               <td><%=room.getNoOfPeople()%></td>
+               <td><%=room.getAminities()%></td>
+               <td><%=room.getRoomPrice()%></td>
+              <td><a href="EditRoomServlet?id=<%=room.getRoomid()%>">Edit</a> </td>
+               <%}
+               }%>
+           </tr>
+           </tbody>
 
         </table>
     </div>

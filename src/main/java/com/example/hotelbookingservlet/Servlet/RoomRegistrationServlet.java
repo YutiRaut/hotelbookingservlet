@@ -22,27 +22,6 @@ public class RoomRegistrationServlet extends HttpServlet {
     HotelDao hotelDao = new HotelDao();
     int hotelId;
 
-
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Hotel> hotelList = null;
-        try {
-           // hotelId = Integer.parseInt(req.getParameter("hotelName"));
-            hotelList = hotelDao.getHotelName(191);
-            if(req.getParameter("hotelName")!=null)
-            {
-                System.out.println("Hello");
-            }
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        req.setAttribute("hotelList", hotelList);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("ViewRoomInformation.jsp");
-        requestDispatcher.forward(req, resp);
-    }
-
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

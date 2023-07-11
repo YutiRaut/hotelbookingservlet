@@ -79,7 +79,7 @@
         <button type="button1">Hotel Management</button>
     </a>
 
-    <a href="RoomRegistrationServlet">
+    <a href="HotelNameServlet">
         <button type="button2">Room Management</button>
     </a>
 

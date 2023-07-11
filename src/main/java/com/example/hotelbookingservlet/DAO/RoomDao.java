@@ -30,13 +30,13 @@ public class RoomDao {
         }
 
     }
-    public static List<Room> getAllRoomData(int userId) throws DAOException {
+    public static List<Room> getAllRoomData(int hotelId) throws DAOException {
 
         List<Room> roomList = new ArrayList<>();
         try {
-            String viewDetails = "SELECT h.hotel_name,r.id,r.room_type,r.room_count,r.no_of_people,r.aminities,r.room_price FROM hotel h INNER JOIN room r on r.hotel_id = h.id WHERE h.user_id=?;";
+            String viewDetails = "SELECT h.hotel_name,r.id,r.room_type,r.room_count,r.no_of_people,r.aminities,r.room_price FROM hotel h INNER JOIN room r on r.hotel_id = h.id WHERE h.id=?";
             PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(viewDetails);
-            statement.setInt(1, userId);
+            statement.setInt(1, hotelId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Room room = new Room();
