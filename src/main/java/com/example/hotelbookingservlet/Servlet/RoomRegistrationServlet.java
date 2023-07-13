@@ -5,12 +5,14 @@ import com.example.hotelbookingservlet.DAO.HotelDao;
 import com.example.hotelbookingservlet.DAO.RoomDao;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.Room;
+import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,10 +24,29 @@ public class RoomRegistrationServlet extends HttpServlet {
     HotelDao hotelDao = new HotelDao();
     int hotelId;
 
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("CurrentUser");
+
+        int userId = user.getUserId();
+        try {
+            HotelDao.getHotelName(userId);
+            List<Hotel> hotelName = hotelDao.getHotelName(userId);
+            req.setAttribute("hotelName", hotelName);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("RoomRegistration.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        hotelId= Integer.parseInt(req.getParameter("id"));
+        hotelId = Integer.parseInt(req.getParameter("hotel"));
         String roomType = req.getParameter("Premium");
         int preCount = Integer.parseInt(req.getParameter("premiumCount"));
         int prePrice = Integer.parseInt(req.getParameter("prePrice"));

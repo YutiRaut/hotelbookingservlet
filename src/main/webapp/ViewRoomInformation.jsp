@@ -120,7 +120,7 @@
 
 </div>
 <div class="form-group">
-    <a href="RoomRegistrationServlet.jsp">
+    <a href="RoomRegistrationServlet">
 
             <button type="button">ADD ROOM</button>
     </a>

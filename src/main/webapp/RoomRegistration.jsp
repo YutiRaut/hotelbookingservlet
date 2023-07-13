@@ -70,9 +70,18 @@
 </head>
 <body>
 <div class="container">
-    <form action="RoomCountServlet" method="post">
+    <form action="RoomRegistrationServlet" method="post">
         <div class="form-group">
             <h2>Room Information</h2>
+
+
+                    <select id="hotel" name="hotel">
+                        <option value="" disabled selected>Select a hotel</option>
+                        <% List<Hotel> hotelName = (List<Hotel>) request.getAttribute("hotelName");
+                            for (Hotel hotel : hotelName) { %>
+                        <option value="<%= hotel.getHotelId() %>"><%= hotel.getHotelName() %></option>
+                        <% } %>
+                    </select><br><br>
 
             <input type="text" name="Premium" value="Premium" readonly>
             <input type="text" name="premiumCount" placeholder="Premiumcount">
