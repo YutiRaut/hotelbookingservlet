@@ -20,7 +20,6 @@ public class RoomRegistrationServlet extends HttpServlet {
 
     Room room = new Room();
     RoomDao roomDao = new RoomDao();
-    Hotel hotel = new Hotel();
     HotelDao hotelDao = new HotelDao();
     int hotelId;
 

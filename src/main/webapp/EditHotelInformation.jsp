@@ -1,8 +1,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.hotelbookingservlet.Model.User" %>
 <%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
+<%@ page import="com.example.hotelbookingservlet.Model.Address" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+</script>
 <head>
     <title>Personal Information</title>
     <style>
@@ -62,6 +67,17 @@
             background-color: #e9beee;
         }
     </style>
+
+
+    <script>
+        $(document).on('change', '#states', function () {
+            var stateID = $(this).val();
+            const currURL = new URL($(location).attr('href'));
+            currURL.searchParams.set("stateid1", stateID)
+            location.replace(currURL.toString());
+        });
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -91,13 +107,27 @@
 
             <label for="Pincode">Pincode</label>
             <input type="text" id="Pincode" name="Pincode" value="<%=hotel.getAddressline().getPincode()%>"><br><br>
+            <input type="text" placeholder="Select State" id="states" list="state"><br>
+            <datalist id="state" onchange="">
+                <% List<Address> addresses = (List<Address>) request.getAttribute("stateID1");
+                    for (Address address : addresses) {%>
+                <option value="<%=address.getStateId()%>"><%=address.getStateList()%>
+                </option>
+                <%}%>
+            </datalist><br><br>
 
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" value="<%=hotel.getAddressline().getViewCity()%>" readonly><br><br>
-
-            <label for="state">State</label>
-            <input type="text" id="state" name="state" value="<%=hotel.getAddressline().getState()%>" readonly><br><br>
-
+            <input type="text" placeholder="Select cityId" name="City" list="cityId"><br>
+            <datalist id="cityId">
+                <% if (request.getAttribute("cityID1") != null) {
+                    List<Address> addresses1 = (List<Address>) request.getAttribute("cityID1");
+                    for (Address address : addresses1) {%>
+                <option value="<%=address.getCityId()%>"><%=address.getViewCity()%>
+                </option>
+                <%
+                        }
+                    }
+                %>
+            </datalist><br><br>
             <div class="form-group">
                 <button type="submit">Add</button>
             </div>
