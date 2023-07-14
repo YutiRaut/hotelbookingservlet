@@ -119,6 +119,7 @@
                 <th>Star Rating</th>
                 <th>Gst No</th>
                 <th>Permites</th>
+                <th>Image</th>
                 <th>Address</th>
                 <th>Pincode</th>
                 <th>City</th>
@@ -142,6 +143,8 @@
                 </td>
                 <td><%=hotel.getPermits()%>
                 </td>
+                <td><img src="<%=hotel.getImage()%>" alt="No Image" width="80px" height="80px"></td>
+
                 <td><%=hotel.getAddressline().getAddress()%>
                 </td>
                 <td><%=hotel.getAddressline().getPincode()%>

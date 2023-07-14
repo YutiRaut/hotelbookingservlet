@@ -9,6 +9,15 @@ public class Hotel {
     private String permits;
     private Address addressline;
     private String existingHotelName;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public Address getAddressline() {
         return addressline;

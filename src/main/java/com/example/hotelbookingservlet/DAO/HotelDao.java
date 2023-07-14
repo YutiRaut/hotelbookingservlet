@@ -13,7 +13,7 @@ public class HotelDao {
 
     public void addHotelAdmin(int userId, Hotel hotels, int addressId) throws DAOException {
         try {
-            String addQuery = "INSERT INTO hotel(hotel_name,licence_no,star_rating,GST_No,permites,user_id,address_id) values(?,?,?,?,?,?,?)";
+            String addQuery = "INSERT INTO hotel(hotel_name,licence_no,star_rating,GST_No,permites,images,user_id,address_id) values(?,?,?,?,?,?,?,?)";
             PreparedStatement stmt1;
             stmt1 = DbConnection.getInstance().getMainConnection().prepareStatement(addQuery);
 
@@ -22,8 +22,9 @@ public class HotelDao {
             stmt1.setInt(3, hotels.getStarRating());
             stmt1.setString(4, hotels.getGstNo());
             stmt1.setString(5, hotels.getPermits());
-            stmt1.setInt(6, userId);
-            stmt1.setInt(7, addressId);
+            stmt1.setString(6,hotels.getImage());
+            stmt1.setInt(7, userId);
+            stmt1.setInt(8, addressId);
             stmt1.executeUpdate();
         } catch (SQLException ex) {
             throw new DAOException("Opps something went wrong...", ex);
@@ -55,7 +56,7 @@ public class HotelDao {
         List<Hotel> GethotelList = new ArrayList<>();
         try {
             String viewDetails = "SELECT h.id,h.hotel_name,h.licence_no,h.star_rating,h.GST_No," +
-                    "h.permites,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
+                    "h.permites,h.images,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
                     "hotel h INNER JOIN address a on h.address_id = a.id INNER JOIN city c " +
                     "on a.city_id=c.id INNER JOIN state s on c.state_id =s.id WHERE h.user_id=?;";
 
@@ -70,6 +71,7 @@ public class HotelDao {
                 hotel.setStarRating(resultSet.getInt("star_rating"));
                 hotel.setGstNo(resultSet.getString("GST_No"));
                 hotel.setPermits(resultSet.getString("permites"));
+                hotel.setImage(resultSet.getString("images"));
                 Address address = new Address();
                 address.setAddress(resultSet.getString("address_line1"));
                 address.setPincode(resultSet.getInt("pincode"));

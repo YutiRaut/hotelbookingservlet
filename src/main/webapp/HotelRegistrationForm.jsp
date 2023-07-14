@@ -89,7 +89,9 @@
 <div class="container">
     <div class="form-section current">
         <h2>Hotel Information</h2>
-        <form id="step1" action="HotelRegistrationServlet" method="post">
+        <form id="step1" action="HotelRegistrationServlet" method="post" enctype="multipart/form-data">
+
+
             <input type="text" id="HotelName" name="HotelName" placeholder="Enter Hotel Name">
             <input type="text" id="LicenceNo" name="LicenceNo" placeholder="Licence Number">
             <input type="text" id="StarRating" name="StarRating" placeholder="Star Rating">
@@ -117,6 +119,10 @@
             </datalist>
             <input type="text" id="address" name="address" placeholder="Address">
             <input type="text" id="pincode" name="pincode" placeholder="Pincode">
+
+            <label for="image">Upload Image: </label><br><br>
+            <input type="file" id="image" name="image">
+
             <button type="button1">Submit</button>
         </form>
     </div>

@@ -1,5 +1,4 @@
 package com.example.hotelbookingservlet.DAO;
-
 import javax.servlet.http.HttpServlet;
 import java.sql.Connection;
 import java.sql.SQLException;

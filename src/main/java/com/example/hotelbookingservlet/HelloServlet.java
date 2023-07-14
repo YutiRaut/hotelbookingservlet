@@ -1,10 +1,12 @@
 package com.example.hotelbookingservlet;
 
-import java.io.*;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 
 public class HelloServlet extends HttpServlet {
     private String message;
