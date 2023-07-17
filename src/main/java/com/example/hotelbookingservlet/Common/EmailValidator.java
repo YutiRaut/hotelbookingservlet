@@ -15,8 +15,6 @@ public class EmailValidator {
         String receiptMail = email;
         String msg = "your welcome code is " + verificationCode;
         Properties props = new Properties();
-        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
-        props.put("mail.smtp.ssl.trust", "smtp.1and1.com");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
