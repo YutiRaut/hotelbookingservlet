@@ -137,9 +137,11 @@
             <tr>
                 <th>Hotel Name</th>
                 <th>Room Type</th>
+                <th>Room Count</th>
                 <th>No Of People</th>
                 <th>Aminities</th>
                 <th>Room Price</th>
+                <th>images</th>
                 <th>Edit</th>
 
 
@@ -153,9 +155,12 @@
          <tr>
                <td><%=room.getHoteldata().getHotelName()%></td>
                <td><%=room.getRoomType()%></td>
+                <td><%=room.getRoomCount()%></td>
                <td><%=room.getNoOfPeople()%></td>
                <td><%=room.getAminities()%></td>
                <td><%=room.getRoomPrice()%></td>
+             <td><img src="<%=room.getImage()%>" alt="No Image" width="80px" height="80px"></td>
+
               <td><a href="EditRoomServlet?id=<%=room.getRoomid()%>">Edit</a> </td>
                <%}
                }%>

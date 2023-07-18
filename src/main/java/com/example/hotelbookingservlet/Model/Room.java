@@ -7,6 +7,16 @@ public class Room {
     int noOfPeople;
     int roomPrice;
     String aminities;
+    String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     Hotel hoteldata;
 
     public Hotel getHoteldata() {

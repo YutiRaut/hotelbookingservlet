@@ -7,16 +7,19 @@ import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.User;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.*;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
 
+@MultipartConfig
+
 public class EditDetailsServlet extends HttpServlet {
+
+
     Hotel hotel= new Hotel();
     Address addressData= new Address();
     HotelDao hotelDao= new HotelDao();
@@ -52,6 +55,15 @@ public class EditDetailsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext servletContext = getServletContext();
+        Part imagePart = req.getPart("image");
+
+        String imageFileName = getFileName(imagePart);
+        String uploadDirectory = uploadFileAndGetImagePath(imagePart, imageFileName, servletContext);
+
+
+
+
         String hotelName = req.getParameter("Hotelname");
         String licenceNo = req.getParameter("Licence");
         int starRating = Integer.parseInt(req.getParameter("starRating"));
@@ -65,6 +77,7 @@ public class EditDetailsServlet extends HttpServlet {
         hotel.setStarRating(starRating);
         hotel.setGstNo(GstNo);
         hotel.setPermits(permits);
+        hotel.setImage(uploadDirectory);
         addressData.setAddress(address);
         addressData.setPincode(pincode);
         hotel.setAddressline(addressData);
@@ -77,4 +90,37 @@ public class EditDetailsServlet extends HttpServlet {
 
 req.getRequestDispatcher("Welcome.jsp").forward(req,resp);
     }
+
+    public static String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        String[] elements = contentDisposition.split(";");
+        for (String element : elements) {
+            if (element.trim().startsWith("filename")) {
+                return element.substring(element.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
+    }
+
+
+    public static String uploadFileAndGetImagePath(Part part, String fileName, ServletContext servletContext) throws IOException {
+        String basePath = servletContext.getRealPath("/");
+        String savePath = basePath + "hotel" + File.separator + fileName;
+        File outputFile = new File(savePath);
+
+        InputStream inputStream = part.getInputStream();
+        OutputStream outputStream = new FileOutputStream(outputFile);
+        int read;
+        byte[] buffer = new byte[4096];
+        while ((read = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, read);
+        }
+        inputStream.close();
+        outputStream.close();
+
+        String imagePath = "hotel" + File.separator + fileName;
+        return imagePath;
+    }
+
+
 }

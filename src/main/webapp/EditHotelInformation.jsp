@@ -129,7 +129,7 @@
                 %>
             </datalist><br><br>
             <div class="form-group">
-                <button type="submit">Add</button>
+                <button type="submit">Save</button>
             </div>
             <%}%>
 

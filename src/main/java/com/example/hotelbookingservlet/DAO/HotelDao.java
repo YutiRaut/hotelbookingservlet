@@ -113,7 +113,7 @@ public class HotelDao {
         List<Hotel> EditList = new ArrayList<>();
         try {
             String viewDetails = "SELECT h.id,h.hotel_name,h.licence_no,h.star_rating,h.GST_No," +
-                    "h.permites,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
+                    "h.permites,h.images,a.address_line1,a.pincode,c.city_name, s.state_name FROM " +
                     "hotel h INNER JOIN address a on h.address_id = a.id INNER JOIN city c " +
                     "on a.city_id=c.id INNER JOIN state s on c.state_id =s.id WHERE h.id=?;";
 
@@ -128,6 +128,7 @@ public class HotelDao {
                 hotels.setStarRating(resultSet.getInt("star_rating"));
                 hotels.setGstNo(resultSet.getString("GST_No"));
                 hotels.setPermits(resultSet.getString("permites"));
+                hotels.setImage(resultSet.getString("images"));
                 Address address = new Address();
                 address.setAddress(resultSet.getString("address_line1"));
                 address.setPincode(resultSet.getInt("pincode"));
@@ -147,7 +148,7 @@ public class HotelDao {
         try {
             String addQuery = "UPDATE hotel h INNER JOIN address a on h.address_id = a.id  " +
                     "SET h.hotel_name=?,h.licence_no=?,h.star_rating=?," +
-                    "h.GST_No=?,h.permites=?,a.address_line1=?," +
+                    "h.GST_No=?,h.permites=?,h.images=?,a.address_line1=?," +
                     "a.pincode=? WHERE h.id=?";
             PreparedStatement stmt1;
             stmt1 = DbConnection.getInstance().getMainConnection().prepareStatement(addQuery);
@@ -156,9 +157,10 @@ public class HotelDao {
             stmt1.setInt(3, hotel.getStarRating());
             stmt1.setString(4, hotel.getGstNo());
             stmt1.setString(5, hotel.getPermits());
-            stmt1.setString(6,hotel.getAddressline().getAddress());
-            stmt1.setInt(7,hotel.getAddressline().getPincode());
-            stmt1.setInt(8, hotelID);
+            stmt1.setString(6,hotel.getImage());
+            stmt1.setString(7,hotel.getAddressline().getAddress());
+            stmt1.setInt(8,hotel.getAddressline().getPincode());
+            stmt1.setInt(9, hotelID);
 
             stmt1.executeUpdate();
         } catch (SQLException ex) {

@@ -70,7 +70,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="RoomRegistrationServlet" method="post">
+    <form action="RoomRegistrationServlet" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <h2>Room Information</h2>
 
@@ -87,28 +87,34 @@
             <input type="text" name="premiumCount" placeholder="Premiumcount">
             <input type="text" name="prePrice" placeholder="PricePerDay">
             <input type="text" name="preNoP" placeholder="No Of People">
-            <input type="text" name="preFacility" placeholder="Provided Facility"><br><br>
-
+            <input type="text" name="preFacility" placeholder="Provided Facility">
+            <label for="preimage">Upload Image: </label>
+            <input type="file" id="preimage" name="preimage"><br><br>
 
             <input type="text" name="SemiDeluxe" value="Semi Deluxe" readonly>
             <input type="text" name="semiCount" placeholder="Semi Deluxe Count">
             <input type="text" name="semiPrice" placeholder="PricePerDay">
             <input type="text" name="semiNoP" placeholder="No Of People">
-            <input type="text" name="semiFacility" placeholder="Provided Facility"><br><br>
+            <input type="text" name="semiFacility" placeholder="Provided Facility">
+            <label for="semiimage">Upload Image: </label>
+            <input type="file" id="semiimage" name="semiimage"><br><br>
 
 
             <input type="text" name="Deluxe" value="Deluxe" readonly>
             <input type="text" name="deluxeCount" placeholder="Deluxe Count">
             <input type="text" name="deluxePrice" placeholder="PricePerDay">
             <input type="text" name="deluxeNoP" placeholder="No Of People">
-            <input type="text" name="deluxeFacility" placeholder="Provided Facility"><br><br>
-
+            <input type="text" name="deluxeFacility" placeholder="Provided Facility">
+            <label for="deimage">Upload Image: </label>
+            <input type="file" id="deimage" name="deimage"><br><br>
 
             <input type="text" name="Suite" value="Suite" readonly>
             <input type="text" name="suiteCount" placeholder="Suite Count">
             <input type="text" name="suitePrice" placeholder="PricePerDay">
             <input type="text" name="suitNoP" placeholder="No Of People">
-            <input type="text" name="suiteFacility" placeholder="Provided Facility"><br><br>
+            <input type="text" name="suiteFacility" placeholder="Provided Facility">
+            <label for="suitimage">Upload Image: </label>
+            <input type="file" id="suitimage" name="suitimage"><br><br>
         </div>
         <div class="form-group">
             <button type="submit">Submit</button>

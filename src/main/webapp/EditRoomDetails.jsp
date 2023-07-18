@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Personal Information</title>
+
     <style>
         body {
             font-family: "Times New Roman";
@@ -74,7 +75,7 @@
 <body>
 <div class="container">
     <div class="form-group">
-        <h2>Hotel Information</h2>
+        <h2>Room Information</h2>
         <form action="EditRoomServlet" method="post">
             <ul>
                 <% List<Room> roomList1 = (List<Room>) request.getAttribute("roomList1");
@@ -96,7 +97,7 @@
                 <input type="text" id="roomPrice" name="roomPrice" value="<%=room.getRoomPrice()%>"><br><br>
 
                 <div class="form-group">
-                    <button type="submit">Add</button>
+                    <button type="submit">Save</button>
                 </div>
                 <%}%>
 
