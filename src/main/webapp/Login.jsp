@@ -84,7 +84,7 @@
         <%=message%>
     </div>
     <% } %>
-    <form action="FormValidationServlet" method="post">
+    <form action="JpaLoginServlet" method="post">
         <div class="form-group">
             <b><label for="username">Username</label></b>
             <input type="text" id="username" name="username" placeholder="Enter your Email">

@@ -149,5 +149,26 @@
         <url-pattern>/EditRoomServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserValidation</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Common.UserValidation</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserValidation</servlet-name>
+        <url-pattern>/UserValidation</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>JpaLoginServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.JpaLoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JpaLoginServlet</servlet-name>
+        <url-pattern>/JpaLoginServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

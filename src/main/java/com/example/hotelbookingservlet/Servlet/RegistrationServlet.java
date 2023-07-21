@@ -66,7 +66,7 @@ public class RegistrationServlet extends HttpServlet {
         }
 
 
-        req.getRequestDispatcher("Login.jsp").forward(req,resp);
+        req.getRequestDispatcher("UserValidation").forward(req,resp);
 
     }
 
