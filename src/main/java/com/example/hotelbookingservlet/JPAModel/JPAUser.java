@@ -1,12 +1,9 @@
 package com.example.hotelbookingservlet.JPAModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "user" ,uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class JPAUser {
     @Id
 
@@ -16,7 +13,7 @@ public class JPAUser {
     @Column(name = "user_name")
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "contact_no")

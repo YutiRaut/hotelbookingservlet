@@ -6,7 +6,7 @@ import com.example.hotelbookingservlet.Common.Validation;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.JPAModel.JPAUser;
-import com.example.hotelbookingservlet.Model.User;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
