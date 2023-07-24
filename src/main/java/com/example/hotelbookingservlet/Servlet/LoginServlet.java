@@ -2,6 +2,7 @@ package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.Common.ErrorUtil;
+import com.example.hotelbookingservlet.Common.Validation;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.Model.User;
@@ -36,22 +37,28 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        if (user != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("CurrentUser", user);
-            if (!(user.isVerified())) {
-                request.getRequestDispatcher("VerifyUser.jsp").forward(request,response);
-            } else {
-                checkUserRole(request, response);
-            }
-        } else {
-            errorUtil.addErrorMessage("Invalid Credentials!!");
-            request.setAttribute("InvalidError", errorUtil);
+
+        if (Validation.isEmpty(name) && Validation.isEmpty(password)) {
+            errorUtil.addErrorMessage("Email Or Password can't be Empty");
+            request.setAttribute("errorUtil", errorUtil);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(request, response);
-
+        }else {
+            if (user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("CurrentUser", user);
+                if (!(user.isVerified())) {
+                    request.getRequestDispatcher("VerifyUser.jsp").forward(request, response);
+                } else {
+                    checkUserRole(request, response);
+                }
+            } else {
+                errorUtil.addErrorMessage("Invalid Credentials!!");
+                request.setAttribute("InvalidError", errorUtil);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request, response);
+            }
         }
-
 
     }
 

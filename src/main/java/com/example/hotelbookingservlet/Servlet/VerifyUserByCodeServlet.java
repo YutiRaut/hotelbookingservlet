@@ -2,6 +2,7 @@ package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.UserDao;
+import com.example.hotelbookingservlet.JPAModel.JPAUser;
 import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -13,22 +14,18 @@ import java.io.IOException;
 
 public class VerifyUserByCodeServlet extends HttpServlet {
 
-    UserDao loginDao = new UserDao();
-    LoginServlet loginServlet = new LoginServlet();
-
+    UserDao userDao = new UserDao();
+JpaLoginServlet jpaLoginServlet = new JpaLoginServlet();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        User user = (User) req.getSession().getAttribute("CurrentUser");
+        JPAUser user = (JPAUser) req.getSession().getAttribute("CurrentUser");
         String code = req.getParameter("VerificationCode");
 
         if (code.equals(user.getVerificationCode())) {
-            try {
-                loginDao.updateUserIsVerified(user.setVerified(true), user.getEmail());
-            } catch (DAOException e) {
-                e.printStackTrace();
-            }
-            loginServlet.checkUserRole(req, resp);
+
+                 userDao.jpaUpdateUserIsVerified(user.setVerified(true), user.getEmail());
+                jpaLoginServlet.checkUserRole(req, resp);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("VerifyUser.jsp");
             requestDispatcher.forward(req,resp);

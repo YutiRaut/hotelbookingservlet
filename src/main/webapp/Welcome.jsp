@@ -1,6 +1,7 @@
 <%@ page import="com.example.hotelbookingservlet.Model.User" %>
 <%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.JPAUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -64,7 +65,7 @@
 </head>
 <body>
 <%
-    String name = ((User) session.getAttribute("CurrentUser")).getName();
+    String name = ((JPAUser) session.getAttribute("CurrentUser")).getName();
 %>
 <h2>Hello <%=name%>!!! </h2>
 

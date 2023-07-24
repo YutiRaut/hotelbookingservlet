@@ -3,14 +3,17 @@ package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.Common.EmailValidator;
 import com.example.hotelbookingservlet.Common.OtpGenarator;
-import com.example.hotelbookingservlet.Common.Validation;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.DAO.RoleDao;
+import com.example.hotelbookingservlet.JPAModel.JPAUser;
 import com.example.hotelbookingservlet.Model.Role;
-import com.example.hotelbookingservlet.Model.User;
+
 
 import javax.mail.MessagingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +23,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class RegistrationServlet extends HttpServlet {
-    UserDao loginDao = new UserDao();
+public class JPARegistrationServlet extends HttpServlet {
+    UserDao userDao= new UserDao();
     OtpGenarator sendOtp = new OtpGenarator();
     RoleDao roleDao = new RoleDao();
-    User user = new User();
+    JPAUser user = new JPAUser();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,11 +60,10 @@ public class RegistrationServlet extends HttpServlet {
         user.setRole(Integer.parseInt(role));
         String code = sendOtp.generatesOtp();
         user.setVerificationCode(code);
+
+        userDao.JPAaddUser(user);
         try {
-            loginDao.addUser(user);
             sendMail(user);
-        } catch (DAOException e) {
-            e.printStackTrace();
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -77,7 +79,7 @@ public class RegistrationServlet extends HttpServlet {
 
     }
 
-    private void sendMail(User user) throws MessagingException {
+    private void sendMail(JPAUser user) throws MessagingException {
         EmailValidator sendmail = new EmailValidator();
         StringBuilder mailContent = new StringBuilder();
         mailContent.append("<H1>").append("Hi, ").append(user.getName()).append(" ").append("</H1>").append("Your verification code :").append(user.getVerificationCode());

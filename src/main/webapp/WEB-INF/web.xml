@@ -171,4 +171,15 @@
         <url-pattern>/JpaLoginServlet</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>JPARegistrationServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.JPARegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JPARegistrationServlet</servlet-name>
+        <url-pattern>/JPARegistrationServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -68,31 +68,31 @@
 
     <h1>Traveller</h1>
 
-<%--    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("RegisterError");%>--%>
-<%--    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>--%>
-<%--    <div class="error messages">--%>
-<%--        <ul>--%>
-<%--            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>--%>
-<%--            <li><%= errorMessage%>--%>
-<%--            </li>--%>
-<%--            <% } %>--%>
-<%--        </ul>--%>
-<%--    </div>--%>
-<%--    <% } %>--%>
+    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("RegisterError");%>
+    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
+    <div class="error messages">
+        <ul>
+            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
+            <li><%= errorMessage%>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+    <% } %>
 
 
-    <%-- Display errors if they exist --%>
-    <c:if test="${not empty errors}">
-        <div class="error">
-            <ul>
-                <c:forEach var="error" items="${errors}">
-                    <li>${error}</li>
-                </c:forEach>
-            </ul>
-        </div>
-    </c:if>
+<%--    &lt;%&ndash; Display errors if they exist &ndash;%&gt;--%>
+<%--    <c:if test="${not empty errors}">--%>
+<%--        <div class="error">--%>
+<%--            <ul>--%>
+<%--                <c:forEach var="error" items="${errors}">--%>
+<%--                    <li>${error}</li>--%>
+<%--                </c:forEach>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </c:if>--%>
 
-    <form action="RegistrationServlet" method="post">
+    <form action="JPARegistrationServlet" method="post">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name"><br>

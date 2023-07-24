@@ -26,7 +26,7 @@ public class FormValidationServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(req, resp);
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/LoginServlet");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("LoginServlet");
             requestDispatcher.forward(req, resp);
 
         }

@@ -97,7 +97,7 @@
             <button type="submit">Log In</button>
         </div>
 
-        <h5>don't have account?&nbsp;&nbsp;<a href="RegistrationServlet">SignUp</a></h5>
+        <h5>don't have account?&nbsp;&nbsp;<a href="JPARegistrationServlet">SignUp</a></h5>
     </form>
 </div>
 </body>
