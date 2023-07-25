@@ -8,4 +8,13 @@ public class Validation {
         }
         return  false;
     }
+
+    public static boolean isEmpty(int val) {
+      if(val==Integer.parseInt(null) ){
+
+          return true;
+      }
+        return  false;
+    }
+
 }

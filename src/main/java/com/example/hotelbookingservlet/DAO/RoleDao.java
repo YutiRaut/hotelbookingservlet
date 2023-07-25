@@ -1,7 +1,12 @@
 package com.example.hotelbookingservlet.DAO;
 
+import com.example.hotelbookingservlet.JPAModel.JPARole;
 import com.example.hotelbookingservlet.Model.Role;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,6 +31,18 @@ public class RoleDao {
             throw new SQLException("Something went wrong...", ex);
         }
 
-
     }
+
+//THIS IS JPA QUERY
+    
+    public List<JPARole> roleList(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<JPARole> role = new ArrayList<>();
+        String jpql = "SELECT r FROM Role r";
+        Query query = entityManager.createQuery(jpql);
+        role=query.getResultList();
+        return role;
+    }
+
 }

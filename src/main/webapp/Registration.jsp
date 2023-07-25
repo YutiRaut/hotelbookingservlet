@@ -1,6 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.hotelbookingservlet.Model.Role" %>
 <%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
+<%@ page import="com.example.hotelbookingservlet.Common.Error" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.JPARole" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.JPAUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -68,17 +71,33 @@
 
     <h1>Traveller</h1>
 
-    <% ErrorUtil errorUtil = (ErrorUtil) request.getAttribute("RegisterError");%>
-    <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
-    <div class="error messages">
-        <ul>
-            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
-            <li><%= errorMessage%>
-            </li>
-            <% } %>
-        </ul>
-    </div>
-    <% } %>
+   <div class="errorList">
+       <%
+           List<Error>errorList=(List<Error>) request.getAttribute("errorList");
+           if(errorList !=null && !errorList.isEmpty()){
+       %>
+       <ul>
+           <% for (Error error: errorList){ %>
+           <div>
+               <li><%=error.getMessage()%></li>
+               <%}%>
+
+
+           </div>
+
+       </ul>
+       <%}%>
+
+
+
+<%--    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("error");%>--%>
+<%--    <%if (errorUtil1 != null) {%>--%>
+<%--    <%List<String> message = errorUtil1.getErrorMessages();%>--%>
+<%--    <div class="error-message">--%>
+<%--        <%=message%>--%>
+<%--    </div>--%>
+<%--    <% } %>--%>
+<%--   </div>--%>
 
 
 <%--    &lt;%&ndash; Display errors if they exist &ndash;%&gt;--%>
@@ -117,8 +136,8 @@
             <label for="role">Select Your Role:</label>
             <input type="text" id="role" name="role" list="roles"><br>
             <datalist id="roles">
-                <% List<Role> role = (List<Role>) request.getAttribute("Role");
-                    for (Role role1 : role) {%>
+                <% List<JPARole> role = (List<JPARole>) request.getAttribute("Role");
+                    for (JPARole role1 : role) {%>
                 <option value="<%=role1.getRole()%>"><%=role1.getRoleName()%>
                 </option>
                 <%}%>

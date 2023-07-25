@@ -1,11 +1,9 @@
 package com.example.hotelbookingservlet.Servlet;
-
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.HotelDao;
 import com.example.hotelbookingservlet.DAO.ViewDetailsDao;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,5 +1,7 @@
 package com.example.hotelbookingservlet.DAO;
 
+import com.example.hotelbookingservlet.DTO.JPASignupDto;
+import com.example.hotelbookingservlet.DTO.SignupDto;
 import com.example.hotelbookingservlet.JPAModel.JPAUser;
 import com.example.hotelbookingservlet.Model.User;
 
@@ -41,6 +43,42 @@ public class UserDao {
         }
     }
 
+    public static int addUser(SignupDto signupDto) throws DAOException {
+        try {
+            String insertQuery = "INSERT INTO user(user_name,email,contact_no,password,verification_code,is_verified,role_id) values(?,?,?,?,?,?,?)";
+            PreparedStatement stmt3;
+            stmt3 = DbConnection.getInstance().getMainConnection().prepareStatement(insertQuery);
+            stmt3.setString(1, signupDto.getName());
+            stmt3.setString(2, signupDto.getEmail());
+            stmt3.setString(3, signupDto.getContact());
+            stmt3.setString(4, signupDto.getPassword());
+            stmt3.setString(5, signupDto.getVerificationCode());
+            stmt3.setBoolean(6, signupDto.isVerified());
+            stmt3.setInt(7, Integer.parseInt(signupDto.getRole()));
+            return stmt3.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Something went wrong...", ex);
+        } catch (Exception ex) {
+            throw new DAOException("Something went wrong...", ex);
+        }
+    }
+
+    public void updateUserIsVerified(boolean isVerified, String email) throws DAOException {
+        try {
+            String update = "update user set is_verified=? where email=?";
+            PreparedStatement stmt0 = DbConnection.getInstance().getMainConnection().prepareStatement(update);
+            stmt0.setBoolean(1, isVerified);
+            stmt0.setString(2, email);
+            stmt0.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("something went wrong...", e);
+        } catch (Exception e) {
+            throw new DAOException("Something went wrong...", e);
+        }
+    }
+
+    //JPA QUERY STARTED HERE
+
     public static JPAUser jpaCheckUserCredentials(String email, String password) throws DAOException {
         JPAUser user = null;
         try {
@@ -69,8 +107,35 @@ public class UserDao {
         }
     }
 
-//Register User
-    public void JPAaddUser(JPAUser user) {
+    //Update to is verified
+    public void jpaUpdateUserIsVerified(boolean isVerified, String email) {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        int updatedRows = entityManager.createQuery("UPDATE User u SET u.isVerified = :is_verified WHERE u.email = :email").setParameter("is_verified", isVerified).setParameter("email", email).executeUpdate();
+
+        transaction.commit();
+    }
+
+    public JPAUser getUser(int userId) {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.find(JPAUser.class, userId);
+    }
+
+    //Update to is verified
+    public void updateUser(JPAUser user) {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.merge(user);
+        transaction.commit();
+    }
+
+    //Register User
+    public void JPAaddUser(JPASignupDto user) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -79,65 +144,17 @@ public class UserDao {
     }
 
 
-    public static int addUser(User signIn) throws DAOException {
-        try {
-            String insertQuery = "INSERT INTO user(user_name,email,contact_no,password,verification_code,is_verified,role_id) values(?,?,?,?,?,?,?)";
-            PreparedStatement stmt3;
-            stmt3 = DbConnection.getInstance().getMainConnection().prepareStatement(insertQuery);
-            stmt3.setString(1, signIn.getName());
-            stmt3.setString(2, signIn.getEmail());
-            stmt3.setString(3, signIn.getContact());
-            stmt3.setString(4, signIn.getPassword());
-            stmt3.setString(5, signIn.getVerificationCode());
-            stmt3.setBoolean(6, signIn.isVerified());
-            stmt3.setInt(7, signIn.getRole());
-            return stmt3.executeUpdate();
-        } catch (SQLException ex) {
-            throw new DAOException("Something went wrong...", ex);
-        } catch (Exception ex) {
-            throw new DAOException("Something went wrong...", ex);
-        }
-    }
-
-    public void updateUserIsVerified(boolean isVerified, String email) throws DAOException {
-        try {
-            String update = "update user set is_verified=? where email=?";
-            PreparedStatement stmt0 = DbConnection.getInstance().getMainConnection().prepareStatement(update);
-            stmt0.setBoolean(1, isVerified);
-            stmt0.setString(2, email);
-            stmt0.executeUpdate();
-        } catch (SQLException e) {
-            throw new DAOException("something went wrong...", e);
-        } catch (Exception e) {
-            throw new DAOException("Something went wrong...", e);
-        }
-    }
-
-    //Update to is verified
-    public void jpaUpdateUserIsVerified(boolean isVerified, String email) {
+    public JPAUser loginUser(String email, String password) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        int updatedRows = entityManager.createQuery("UPDATE User u SET u.isVerified = :is_verified WHERE u.email = :email")
-                .setParameter("is_verified", isVerified)
+        JPAUser user;
+        user = (JPAUser) entityManager.createQuery("SELECT s FROM User s WHERE s.email = :email AND s.password =:password", JPAUser.class)
                 .setParameter("email", email)
-                .executeUpdate();
-        //entityManager.merge(updatedRows);
-        transaction.commit();
+                .setParameter("password", password).getResultList();
+        return user;
     }
 
-public JPAUser loginUser(String email, String password){
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction transaction = entityManager.getTransaction();
-    transaction.begin();
-    JPAUser user;
-     user= (JPAUser) entityManager.createQuery("SELECT s FROM User s WHERE s.email = :email AND s.password =:password", JPAUser.class)
-             .setParameter("email", email)
-             .setParameter("password", password)
-             .getResultList();
 
-return  user;
-}
 }

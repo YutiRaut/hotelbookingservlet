@@ -3,10 +3,13 @@ package com.example.hotelbookingservlet.JPAModel;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Role")
+@Table(name = "role")
 public class JPARole {
     @Id
+    @Column(name = "id")
     private int role;
 
     @Column(name = "role_name")

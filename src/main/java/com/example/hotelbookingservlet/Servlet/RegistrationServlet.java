@@ -1,12 +1,15 @@
 package com.example.hotelbookingservlet.Servlet;
-
-
 import com.example.hotelbookingservlet.Common.EmailValidator;
+import com.example.hotelbookingservlet.Common.Error;
 import com.example.hotelbookingservlet.Common.OtpGenarator;
+import com.example.hotelbookingservlet.Common.UserValidation;
 import com.example.hotelbookingservlet.Common.Validation;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.DAO.RoleDao;
+
+import com.example.hotelbookingservlet.DTO.JPASignupDto;
+import com.example.hotelbookingservlet.DTO.SignupDto;
 import com.example.hotelbookingservlet.Model.Role;
 import com.example.hotelbookingservlet.Model.User;
 
@@ -24,8 +27,7 @@ public class RegistrationServlet extends HttpServlet {
     UserDao loginDao = new UserDao();
     OtpGenarator sendOtp = new OtpGenarator();
     RoleDao roleDao = new RoleDao();
-    User user = new User();
-
+ SignupDto signupDto = new SignupDto();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -50,19 +52,30 @@ public class RegistrationServlet extends HttpServlet {
         String role = (req.getParameter("role"));
         String verification = req.getParameter("VerificationCode");
 
-        user.setName(name);
-        user.setEmail(email);
-        user.setContact(contact);
-        user.setPassword(password);
-        user.setRole(Integer.parseInt(role));
+       signupDto.setName(name);
+         signupDto.setEmail(email);
+       signupDto.setContact(contact);
+       signupDto.setPassword(password);
+        signupDto.setRole(role);
         String code = sendOtp.generatesOtp();
-        user.setVerificationCode(code);
+       signupDto.setVerificationCode(code);
+        List<Error>errorList= UserValidation.validateUser(signupDto);
+        if(!errorList.isEmpty()){
+            try {
+                fillSignUpMasterData(req);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            req.setAttribute("errorList",errorList);
+            req.getRequestDispatcher("Registration.jsp").forward(req,resp);
+
+        }
         try {
-            loginDao.addUser(user);
-            sendMail(user);
-        } catch (DAOException e) {
-            e.printStackTrace();
+            loginDao.addUser(signupDto);
+            sendMail(signupDto);
         } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (DAOException e) {
             e.printStackTrace();
         }
 
@@ -77,7 +90,7 @@ public class RegistrationServlet extends HttpServlet {
 
     }
 
-    private void sendMail(User user) throws MessagingException {
+    private void sendMail(SignupDto user) throws MessagingException {
         EmailValidator sendmail = new EmailValidator();
         StringBuilder mailContent = new StringBuilder();
         mailContent.append("<H1>").append("Hi, ").append(user.getName()).append(" ").append("</H1>").append("Your verification code :").append(user.getVerificationCode());
