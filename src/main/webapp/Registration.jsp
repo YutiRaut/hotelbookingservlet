@@ -82,12 +82,10 @@
                <li><%=error.getMessage()%></li>
                <%}%>
 
-
            </div>
-
        </ul>
        <%}%>
-
+   </div>
 
 
 <%--    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("error");%>--%>
