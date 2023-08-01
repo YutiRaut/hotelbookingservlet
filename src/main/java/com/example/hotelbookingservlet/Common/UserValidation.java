@@ -50,8 +50,8 @@ return errorList;
         if(Validation.isEmpty(signupDto.getPassword())){
             errorList.add(new Error("password reqired"));
         }
-        if(Validation.isEmpty(signupDto.getRole())){
-            errorList.add(new Error("role reqired"));
+        if (Validation.isEmpty(String.valueOf(signupDto.getJpaRole()))) {
+            errorList.add(new Error("role required"));
         }
         return errorList;
     }

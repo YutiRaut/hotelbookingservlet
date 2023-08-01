@@ -1,6 +1,6 @@
 package com.example.hotelbookingservlet.DAO;
 
-import com.example.hotelbookingservlet.JPAModel.JPARole;
+import com.example.hotelbookingservlet.JPAModel.RoleEntity;
 import com.example.hotelbookingservlet.Model.Role;
 
 import javax.persistence.EntityManager;
@@ -35,10 +35,10 @@ public class RoleDao {
 
 //THIS IS JPA QUERY
     
-    public List<JPARole> roleList(){
+    public List<RoleEntity> roleList(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<JPARole> role = new ArrayList<>();
+        List<RoleEntity> role = new ArrayList<>();
         String jpql = "SELECT r FROM Role r";
         Query query = entityManager.createQuery(jpql);
         role=query.getResultList();

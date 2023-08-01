@@ -2,6 +2,8 @@ package com.example.hotelbookingservlet.DTO;
 
 
 
+import com.example.hotelbookingservlet.JPAModel.RoleEntity;
+
 import javax.persistence.*;
 
 @Entity(name = "User")
@@ -30,8 +32,12 @@ public class JPASignupDto {
     @Column(name = "is_verified")
     private boolean isVerified;
 
-    @Column(name = "role_id")
-    private String role;
+
+//    private String role;
+
+    @OneToOne
+    @JoinColumn(name ="role_id",referencedColumnName = "id")
+    private RoleEntity jpaRole;
 
     public String getName() {
         return name;
@@ -90,12 +96,20 @@ public class JPASignupDto {
         return true;
     }
 
-    public String getRole() {
-        return role;
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+
+    public RoleEntity getJpaRole() {
+        return jpaRole;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setJpaRole(RoleEntity jpaRole) {
+        this.jpaRole = jpaRole;
     }
 }
 

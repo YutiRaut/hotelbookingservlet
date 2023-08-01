@@ -70,21 +70,20 @@
     <% if (errorUtil != null && !errorUtil.getErrorMessages().isEmpty()) {%>
     <div class="error messages">
         <ul>
-            <% for (String errorMessage : errorUtil.getErrorMessages()) {%>
+            <% String errorMessage =errorUtil.getErrorMessages();%>
             <li><%= errorMessage%>
             </li>
-            <% } %>
         </ul>
     </div>
     <% } %>
     <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("InvalidError");%>
     <%if (errorUtil1 != null) {%>
-    <%List<String> message = errorUtil1.getErrorMessages();%>
+    <%String message = errorUtil1.getErrorMessages();%>
     <div class="error-message">
         <%=message%>
     </div>
     <% } %>
-    <form action="LoginServlet" method="post">
+    <form action="JpaLoginServlet" method="post">
         <div class="form-group">
             <b><label for="username">Username</label></b>
             <input type="text" id="username" name="username" placeholder="Enter your Email">

@@ -2,7 +2,7 @@ package com.example.hotelbookingservlet.Model;
 
 public class Address {
     private int addressId;
-   private String state;
+    private String state;
     private int stateId;
     private String StateList;
     private int cityId;

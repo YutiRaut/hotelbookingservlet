@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 
 
         if (Validation.isEmpty(name) && Validation.isEmpty(password)) {
-            errorUtil.addErrorMessage("Email Or Password can't be Empty");
+            //errorUtil.addErrorMessage("Email Or Password can't be Empty");
             request.setAttribute("errorUtil", errorUtil);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(request, response);
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                     checkUserRole(request, response);
                 }
             } else {
-                errorUtil.addErrorMessage("Invalid Credentials!!");
+                //errorUtil.addErrorMessage("Invalid Credentials!!");
                 request.setAttribute("InvalidError", errorUtil);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
                 requestDispatcher.forward(request, response);

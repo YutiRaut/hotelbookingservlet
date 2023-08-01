@@ -2,7 +2,7 @@ package com.example.hotelbookingservlet.Servlet;
 
 import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.DAO.UserDao;
-import com.example.hotelbookingservlet.JPAModel.JPAUser;
+import com.example.hotelbookingservlet.JPAModel.UserEntity;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,11 +19,11 @@ public class VerifyUserByCodeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        JPAUser user = (JPAUser) req.getSession().getAttribute("CurrentUser");
+        UserEntity user = (UserEntity) req.getSession().getAttribute("CurrentUser");
         String code = req.getParameter("VerificationCode");
 
         if (code.equals(user.getVerificationCode())) {
-            JPAUser user1 = userDao.getUser(user.getUserId());
+            UserEntity user1 = userDao.getUser(user.getUserId());
 //            user1.setEmail("yutiraut2002@gmail.com");
             user1.setVerified(true);
             userDao.updateUser(user1);
@@ -39,7 +39,7 @@ public class VerifyUserByCodeServlet extends HttpServlet {
 
     public void checkUserRole(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        JPAUser user = (JPAUser) session.getAttribute("CurrentUser");
+        UserEntity user = (UserEntity) session.getAttribute("CurrentUser");
 
         if (user.getRole() == Constant.SYSTEM_ADMIN) {
             request.getRequestDispatcher("index.jsp").forward(request, response);

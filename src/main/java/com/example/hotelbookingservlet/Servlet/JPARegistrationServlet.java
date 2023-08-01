@@ -7,7 +7,7 @@ import com.example.hotelbookingservlet.Common.UserValidation;
 import com.example.hotelbookingservlet.DAO.RoleDao;
 import com.example.hotelbookingservlet.DAO.UserDao;
 import com.example.hotelbookingservlet.DTO.JPASignupDto;
-import com.example.hotelbookingservlet.JPAModel.JPARole;
+import com.example.hotelbookingservlet.JPAModel.RoleEntity;
 
 import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
@@ -24,11 +24,11 @@ public class JPARegistrationServlet extends HttpServlet {
     OtpGenarator sendOtp = new OtpGenarator();
     RoleDao roleDao = new RoleDao();
     JPASignupDto user = new JPASignupDto();
-
+    RoleEntity jpaRoles = new RoleEntity();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<JPARole> roles = roleDao.roleList();
+        List<RoleEntity> roles = roleDao.roleList();
         req.setAttribute("Role", roles);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("Registration.jsp");
         requestDispatcher.forward(req, resp);
@@ -50,9 +50,10 @@ public class JPARegistrationServlet extends HttpServlet {
         user.setEmail(email);
         user.setContact(contact);
         user.setPassword(password);
-        user.setRole(role);
         String code = sendOtp.generatesOtp();
         user.setVerificationCode(code);
+        jpaRoles.setRole(Integer.parseInt(role));
+        user.setJpaRole(jpaRoles);
 
         List<Error> errorList = UserValidation.JPAvalidateUser(user);
         if (!errorList.isEmpty()) {
@@ -65,6 +66,7 @@ public class JPARegistrationServlet extends HttpServlet {
             req.getRequestDispatcher("Registration.jsp").forward(req, resp);
 
         } else {
+
             userDao.JPAaddUser(user);
             try {
                 sendMail(user);
@@ -78,7 +80,7 @@ public class JPARegistrationServlet extends HttpServlet {
 
     private void fillSignUpMasterData(HttpServletRequest request) throws SQLException {
         RoleDao roleDao = new RoleDao();
-        List<JPARole> roles = roleDao.roleList();
+        List<RoleEntity> roles = roleDao.roleList();
         request.setAttribute("Role", roles);
 
     }

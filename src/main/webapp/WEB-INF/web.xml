@@ -76,15 +76,15 @@
         <url-pattern>/FormValidationServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>RegistrationFormValidation</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.RegistrationFormValidation</servlet-class>
-    </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>RegistrationFormValidation</servlet-name>-->
+<!--        <servlet-class>com.example.hotelbookingservlet.Servlet.RegistrationFormValidation</servlet-class>-->
+<!--    </servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>RegistrationFormValidation</servlet-name>
-        <url-pattern>/RegistrationFormValidation</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>RegistrationFormValidation</servlet-name>-->
+<!--        <url-pattern>/RegistrationFormValidation</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 
     <servlet>
@@ -149,15 +149,15 @@
         <url-pattern>/EditRoomServlet</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>UserValidation</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Common.UserValidation</servlet-class>
-    </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>UserValidation</servlet-name>-->
+<!--        <servlet-class>com.example.hotelbookingservlet.Common.UserValidation</servlet-class>-->
+<!--    </servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>UserValidation</servlet-name>
-        <url-pattern>/UserValidation</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>UserValidation</servlet-name>-->
+<!--        <url-pattern>/UserValidation</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 
 
@@ -180,6 +180,17 @@
     <servlet-mapping>
         <servlet-name>JPARegistrationServlet</servlet-name>
         <url-pattern>/JPARegistrationServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>JPAViewHotel</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.JPAViewHotel</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JPAViewHotel</servlet-name>
+        <url-pattern>/JPAViewHotel</url-pattern>
     </servlet-mapping>
 
 </web-app>

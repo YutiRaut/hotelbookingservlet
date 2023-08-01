@@ -5,7 +5,7 @@ import com.example.hotelbookingservlet.Common.ErrorUtil;
 import com.example.hotelbookingservlet.Common.Validation;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.UserDao;
-import com.example.hotelbookingservlet.JPAModel.JPAUser;
+import com.example.hotelbookingservlet.JPAModel.UserEntity;
 
 
 import javax.servlet.RequestDispatcher;
@@ -31,16 +31,17 @@ public class JpaLoginServlet extends HttpServlet {
         String email = request.getParameter("username");
         String password = request.getParameter("password");
 
-        JPAUser user = null;
+
+        UserEntity user = null;
         try {
-          user = UserDao.jpaCheckUserCredentials(email, password);
+            user = UserDao.loginUser(email, password);
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
 
         if (Validation.isEmpty(email) && Validation.isEmpty(password)) {
-            errorUtil.addErrorMessage("Email Or Password can't be Empty");
+            errorUtil.setErrorMessages("Email And Password can't be Empty");
             request.setAttribute("errorUtil", errorUtil);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(request, response);
@@ -54,7 +55,7 @@ public class JpaLoginServlet extends HttpServlet {
                     checkUserRole(request, response);
                 }
             } else {
-                errorUtil.addErrorMessage("Invalid Credentials!!");
+                errorUtil.setErrorMessages("Invalid Credentials!!");
                 request.setAttribute("InvalidError", errorUtil);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
                 requestDispatcher.forward(request, response);
@@ -65,7 +66,7 @@ public class JpaLoginServlet extends HttpServlet {
 
     public void checkUserRole(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        JPAUser user = (JPAUser) session.getAttribute("CurrentUser");
+        UserEntity user = (UserEntity) session.getAttribute("CurrentUser");
 
         if (user.getRole() == Constant.SYSTEM_ADMIN) {
             request.getRequestDispatcher("index.jsp").forward(request,response);

@@ -2,8 +2,8 @@
 <%@ page import="com.example.hotelbookingservlet.Model.Role" %>
 <%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
 <%@ page import="com.example.hotelbookingservlet.Common.Error" %>
-<%@ page import="com.example.hotelbookingservlet.JPAModel.JPARole" %>
-<%@ page import="com.example.hotelbookingservlet.JPAModel.JPAUser" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.RoleEntity" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.UserEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -134,8 +134,8 @@
             <label for="role">Select Your Role:</label>
             <input type="text" id="role" name="role" list="roles"><br>
             <datalist id="roles">
-                <% List<JPARole> role = (List<JPARole>) request.getAttribute("Role");
-                    for (JPARole role1 : role) {%>
+                <% List<RoleEntity> role = (List<RoleEntity>) request.getAttribute("Role");
+                    for (RoleEntity role1 : role) {%>
                 <option value="<%=role1.getRole()%>"><%=role1.getRoleName()%>
                 </option>
                 <%}%>

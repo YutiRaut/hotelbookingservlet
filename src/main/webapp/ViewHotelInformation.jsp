@@ -1,6 +1,7 @@
 <%@ page import="com.example.hotelbookingservlet.Model.Hotel" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.hotelbookingservlet.Model.Address" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.HotelEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -129,8 +130,8 @@
 
 
             <tbody>
-            <% List<Hotel> GethotelList = (List<Hotel>) request.getAttribute("hotelList");
-                for (Hotel hotel : GethotelList) {%>
+            <% List<HotelEntity> hotelList = (List<HotelEntity>) request.getAttribute("hotellist");
+                for (HotelEntity hotel : hotelList) {%>
 
             <tr>
                 <td><%=hotel.getHotelName()%>
@@ -145,13 +146,13 @@
                 </td>
                 <td><img src="<%=hotel.getImage()%>" alt="No Image" width="80px" height="80px"></td>
 
-                <td><%=hotel.getAddressline().getAddress()%>
+                <td><%=hotel.getAddressEntity().getAddress()%>
                 </td>
-                <td><%=hotel.getAddressline().getPincode()%>
+                <td><%=hotel.getAddressEntity().getPincode()%>
                 </td>
-                <td><%=hotel.getAddressline().getViewCity()%>
+                <td><%=hotel.getAddressEntity().getCityEntity().getCityNames()%>
                 </td>
-                <td><%=hotel.getAddressline().getState()%>
+                <td><%=hotel.getAddressEntity().getCityEntity().getStateEntity().getState()%>
                 </td>
                 <td><a href="EditDetailsServlet?id=<%=hotel.getHotelId()%>">Edit</a> </td>
 

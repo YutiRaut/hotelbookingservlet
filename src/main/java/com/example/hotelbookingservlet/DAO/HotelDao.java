@@ -1,8 +1,13 @@
 package com.example.hotelbookingservlet.DAO;
 
+import com.example.hotelbookingservlet.JPAModel.HotelEntity;
 import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.Hotel;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +27,7 @@ public class HotelDao {
             stmt1.setInt(3, hotels.getStarRating());
             stmt1.setString(4, hotels.getGstNo());
             stmt1.setString(5, hotels.getPermits());
-            stmt1.setString(6,hotels.getImage());
+            stmt1.setString(6, hotels.getImage());
             stmt1.setInt(7, userId);
             stmt1.setInt(8, addressId);
             stmt1.executeUpdate();
@@ -39,7 +44,7 @@ public class HotelDao {
         try {
             String getAddressQuery = "select * from hotel where user_id=?";
             PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(getAddressQuery);
-            statement.setInt(1,userId);
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 hotel.setHotelId(resultSet.getInt(1));
@@ -87,7 +92,7 @@ public class HotelDao {
         return GethotelList;
     }
 
-    public static List<Hotel>getHotelName(int userId) throws DAOException {
+    public static List<Hotel> getHotelName(int userId) throws DAOException {
         List<Hotel> hotelList1 = new ArrayList<>();
         try {
             String getAddressQuery = "SELECT * FROM hotel WHERE user_id=?";
@@ -95,7 +100,7 @@ public class HotelDao {
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Hotel hotel= new Hotel();
+                Hotel hotel = new Hotel();
                 hotel.setHotelId(resultSet.getInt("id"));
                 hotel.setHotelName(resultSet.getString("hotel_name"));
                 hotelList1.add(hotel);
@@ -105,10 +110,10 @@ public class HotelDao {
             throw new DAOException("error occured", e);
         }
 
-        return  hotelList1;
+        return hotelList1;
     }
 
-    public static List<Hotel> getDataForEdit( int hotelID) throws DAOException {
+    public static List<Hotel> getDataForEdit(int hotelID) throws DAOException {
 
         List<Hotel> EditList = new ArrayList<>();
         try {
@@ -144,7 +149,7 @@ public class HotelDao {
         return EditList;
     }
 
-    public void addEditedData(Hotel hotel,int hotelID) throws DAOException {
+    public void addEditedData(Hotel hotel, int hotelID) throws DAOException {
         try {
             String addQuery = "UPDATE hotel h INNER JOIN address a on h.address_id = a.id  " +
                     "SET h.hotel_name=?,h.licence_no=?,h.star_rating=?," +
@@ -157,9 +162,9 @@ public class HotelDao {
             stmt1.setInt(3, hotel.getStarRating());
             stmt1.setString(4, hotel.getGstNo());
             stmt1.setString(5, hotel.getPermits());
-            stmt1.setString(6,hotel.getImage());
-            stmt1.setString(7,hotel.getAddressline().getAddress());
-            stmt1.setInt(8,hotel.getAddressline().getPincode());
+            stmt1.setString(6, hotel.getImage());
+            stmt1.setString(7, hotel.getAddressline().getAddress());
+            stmt1.setInt(8, hotel.getAddressline().getPincode());
             stmt1.setInt(9, hotelID);
 
             stmt1.executeUpdate();
@@ -171,4 +176,45 @@ public class HotelDao {
 
     }
 
+    //    public static List<HotelEntity> getHotelDetails(int userId) {
+//
+//
+//            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+//            EntityManager entityManager = null;
+//        List<HotelEntity> hotelEntities = null;
+//            entityManager = entityManagerFactory.createEntityManager();
+//        try {
+//            Query query = entityManager.createQuery("SELECT h FROM HotelEntity h WHERE h.userEntity.userId = :id");
+//            query.setParameter("id", userId);
+//            hotelEntities = query.getResultList();
+//
+//        } catch (Exception ex) {
+//            // Handle exceptions, log or rethrow as needed
+//            ex.printStackTrace();
+//        }
+//
+//        return hotelEntities;
+//
+//    }
+//}
+    public List<HotelEntity> getHotelDetails(int userId) {
+
+        List<HotelEntity> hotelEntities = null;
+
+        try {
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+            EntityManager entityManager = null;
+            entityManager = entityManagerFactory.createEntityManager();
+
+            Query query = entityManager.createQuery("SELECT h FROM HotelEntity h WHERE h.userEntity.userId = :id");
+            query.setParameter("id", userId);
+            hotelEntities = query.getResultList();
+
+
+        } catch (Exception ex) {
+            // Handle exceptions, log or rethrow as needed
+            ex.printStackTrace();
+        }
+        return hotelEntities;
+    }
 }

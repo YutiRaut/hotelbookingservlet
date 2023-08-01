@@ -1,12 +1,12 @@
 package com.example.hotelbookingservlet.JPAModel;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "User")
 @Table(name = "user" ,uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class JPAUser {
+public class UserEntity {
     @Id
-
     @Column(name = "id")
     private int userId;
 
@@ -30,6 +30,9 @@ public class JPAUser {
 
     @Column(name = "role_id")
     private int role;
+
+    @OneToMany
+    private List<HotelEntity> hotels;
 
     public String getName() {
         return name;
@@ -94,6 +97,14 @@ public class JPAUser {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public List<HotelEntity> getHotels() {
+        return hotels;
+    }
+
+    public void setHotels(List<HotelEntity> hotels) {
+        this.hotels = hotels;
     }
 }
 

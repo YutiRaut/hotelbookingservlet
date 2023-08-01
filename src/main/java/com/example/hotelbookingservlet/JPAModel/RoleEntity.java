@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity(name = "Role")
 @Table(name = "role")
-public class JPARole {
+public class RoleEntity {
     @Id
     @Column(name = "id")
     private int role;
