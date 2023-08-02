@@ -1,4 +1,4 @@
-package com.example.hotelbookingservlet.Servlet;
+package com.example.hotelbookingservlet.JPAServlet;
 
 import com.example.hotelbookingservlet.Common.Constant;
 import com.example.hotelbookingservlet.Common.ErrorUtil;
@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class JpaLoginServlet extends HttpServlet {
     ErrorUtil errorUtil = new ErrorUtil();
-
+    UserDao userDao = new UserDao();
 
     @Override
     public void init() throws ServletException {
@@ -34,7 +34,7 @@ public class JpaLoginServlet extends HttpServlet {
 
         UserEntity user = null;
         try {
-            user = UserDao.loginUser(email, password);
+            user = userDao.loginUser(email, password);
         } catch (DAOException e) {
             e.printStackTrace();
         }

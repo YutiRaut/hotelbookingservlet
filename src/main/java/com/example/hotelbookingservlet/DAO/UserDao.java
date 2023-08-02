@@ -14,6 +14,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = entityManager.getTransaction();
+
 
     public static User checkUserCredentials(String email, String password) throws DAOException {
         User user = null;
@@ -79,10 +83,11 @@ public class UserDao {
 //============================================================================================================
     //JPA QUERY STARTED HERE
 
-    public static UserEntity loginUser(String email, String password) throws DAOException {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
+
+
+
+    public UserEntity loginUser(String email, String password) throws DAOException {
+
         transaction.begin();
         UserEntity user = null;
         try {
@@ -100,12 +105,8 @@ public class UserDao {
 
     //Update to is verified
     public void jpaUpdateUserIsVerified(boolean isVerified, String email) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         int updatedRows = entityManager.createQuery("UPDATE User u SET u.isVerified = :is_verified WHERE u.email = :email").setParameter("is_verified", isVerified).setParameter("email", email).executeUpdate();
-
         transaction.commit();
     }
 
@@ -117,9 +118,6 @@ public class UserDao {
 
     //Update to is verified
     public void updateUser(UserEntity user) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.merge(user);
         transaction.commit();
@@ -128,8 +126,6 @@ public class UserDao {
     //Register User
 
     public void JPAaddUser(JPASignupDto user) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();

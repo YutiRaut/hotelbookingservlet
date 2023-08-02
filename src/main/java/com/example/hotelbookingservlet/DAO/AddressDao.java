@@ -1,7 +1,14 @@
 package com.example.hotelbookingservlet.DAO;
 
+import com.example.hotelbookingservlet.JPAModel.AddressEntity;
+import com.example.hotelbookingservlet.JPAModel.CityEntity;
+import com.example.hotelbookingservlet.JPAModel.StateEntity;
 import com.example.hotelbookingservlet.Model.Address;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressDao {
+
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("Login");
+    EntityManager em = emf.createEntityManager();
+
     public List<Address> getState() throws DAOException, SQLException {
         List<Address> addresses = new ArrayList<>();
         Statement statement = DbConnection.getInstance().getMainConnection().createStatement();
@@ -75,6 +86,63 @@ public class AddressDao {
 
         return address;
     }
+//================================================================================================================
 
+//          JPA QUERY START FROM HERE
+
+    public List<StateEntity> jpaGetState() throws DAOException, SQLException {
+        List<StateEntity> stateEntities = new ArrayList<>();
+        try {
+            Query query = em.createQuery("SELECT s FROM StateEntity s");
+            stateEntities = query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return stateEntities;
+    }
+
+
+    public List<CityEntity> jpaGetCity(int stateId) throws DAOException, SQLException {
+        List<CityEntity> getCity = new ArrayList<>();
+        try {
+            Query query = em.createQuery("SELECT c FROM CityEntity c WHERE c.stateEntity.stateId = :stateId");
+            query.setParameter("stateId", stateId);
+            getCity = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getCity;
+    }
+
+
+    public AddressEntity jpaAddAddress(AddressEntity address) throws SQLException {
+        try {
+            em.getTransaction().begin();
+
+            em.persist(address);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return address;
+    }
+
+
+    public AddressEntity jpaGetAddress() throws DAOException {
+        AddressEntity address = new AddressEntity();
+        try {
+            String getAddressQuery = "select * from address";
+            PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(getAddressQuery);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                address.setAddressId(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new DAOException("error occured", e);
+        }
+
+        return address;
+    }
 
 }

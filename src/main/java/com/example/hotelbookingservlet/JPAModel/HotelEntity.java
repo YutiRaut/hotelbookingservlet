@@ -8,42 +8,41 @@ public class HotelEntity {
 
     @Id
     @Column(name = "id")
-        private int hotelId;
+    private int hotelId;
 
 
     @Column(name="hotel_name")
-        private String hotelName;
+    private String hotelName;
     @Column(name = "licence_no")
-        private String licenceNo;
+    private String licenceNo;
 
     @Column(name = "star_rating")
-        private int starRating;
+    private int starRating;
 
     @Column(name = "Gst_No")
-        private String gstNo;
+    private String gstNo;
 
     @Column(name = "permites")
-        private String permits;
-
+    private String permits;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    @OneToOne
-    @JoinColumn(name ="address_id",referencedColumnName = "id")
-        private AddressEntity addressEntity;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="address_id")
+    private AddressEntity addressEntity;
 
-        @Column(name = "images")
-        private String image;
+    @Column(name = "images")
+    private String image;
 
-        public String getImage() {
-            return image;
-        }
+    public String getImage() {
+        return image;
+    }
 
-        public void setImage(String image) {
-            this.image = image;
-        }
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public AddressEntity getAddressEntity() {
         return addressEntity;
@@ -54,52 +53,52 @@ public class HotelEntity {
     }
 
     public int getHotelId() {
-            return hotelId;
-        }
+        return hotelId;
+    }
 
-        public void setHotelId(int hotelId) {
-            this.hotelId = hotelId;
-        }
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
 
-        public String getHotelName() {
-            return hotelName;
-        }
+    public String getHotelName() {
+        return hotelName;
+    }
 
-        public void setHotelName(String hotelName) {
-            this.hotelName = hotelName;
-        }
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
 
-        public String getLicenceNo() {
-            return licenceNo;
-        }
+    public String getLicenceNo() {
+        return licenceNo;
+    }
 
-        public void setLicenceNo(String licenceNo) {
-            this.licenceNo = licenceNo;
-        }
+    public void setLicenceNo(String licenceNo) {
+        this.licenceNo = licenceNo;
+    }
 
-        public int getStarRating() {
-            return starRating;
-        }
+    public int getStarRating() {
+        return starRating;
+    }
 
-        public void setStarRating(int starRating) {
-            this.starRating = starRating;
-        }
+    public void setStarRating(int starRating) {
+        this.starRating = starRating;
+    }
 
-        public String getGstNo() {
-            return gstNo;
-        }
+    public String getGstNo() {
+        return gstNo;
+    }
 
-        public void setGstNo(String gstNo) {
-            this.gstNo = gstNo;
-        }
+    public void setGstNo(String gstNo) {
+        this.gstNo = gstNo;
+    }
 
-        public String getPermits() {
-            return permits;
-        }
+    public String getPermits() {
+        return permits;
+    }
 
-        public void setPermits(String permits) {
-            this.permits = permits;
-        }
+    public void setPermits(String permits) {
+        this.permits = permits;
+    }
 
     public UserEntity getUserEntity() {
         return userEntity;
@@ -109,5 +108,3 @@ public class HotelEntity {
         this.userEntity = userEntity;
     }
 }
-
-

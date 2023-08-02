@@ -2,8 +2,8 @@
 <%@ page import="com.example.hotelbookingservlet.Model.Role" %>
 <%@ page import="com.example.hotelbookingservlet.Common.ErrorUtil" %>
 <%@ page import="com.example.hotelbookingservlet.Common.Error" %>
-<%@ page import="com.example.hotelbookingservlet.JPAModel.RoleEntity" %>
 <%@ page import="com.example.hotelbookingservlet.JPAModel.UserEntity" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.RoleEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -71,43 +71,43 @@
 
     <h1>Traveller</h1>
 
-   <div class="errorList">
-       <%
-           List<Error>errorList=(List<Error>) request.getAttribute("errorList");
-           if(errorList !=null && !errorList.isEmpty()){
-       %>
-       <ul>
-           <% for (Error error: errorList){ %>
-           <div>
-               <li><%=error.getMessage()%></li>
-               <%}%>
+    <div class="errorList">
+        <%
+            List<Error>errorList=(List<Error>) request.getAttribute("errorList");
+            if(errorList !=null && !errorList.isEmpty()){
+        %>
+        <ul>
+            <% for (Error error: errorList){ %>
+            <div>
+                <li><%=error.getMessage()%></li>
+                <%}%>
 
-           </div>
-       </ul>
-       <%}%>
-   </div>
-
-
-<%--    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("error");%>--%>
-<%--    <%if (errorUtil1 != null) {%>--%>
-<%--    <%List<String> message = errorUtil1.getErrorMessages();%>--%>
-<%--    <div class="error-message">--%>
-<%--        <%=message%>--%>
-<%--    </div>--%>
-<%--    <% } %>--%>
-<%--   </div>--%>
+            </div>
+        </ul>
+        <%}%>
+    </div>
 
 
-<%--    &lt;%&ndash; Display errors if they exist &ndash;%&gt;--%>
-<%--    <c:if test="${not empty errors}">--%>
-<%--        <div class="error">--%>
-<%--            <ul>--%>
-<%--                <c:forEach var="error" items="${errors}">--%>
-<%--                    <li>${error}</li>--%>
-<%--                </c:forEach>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--    </c:if>--%>
+    <%--    <%ErrorUtil errorUtil1 = (ErrorUtil) request.getAttribute("error");%>--%>
+    <%--    <%if (errorUtil1 != null) {%>--%>
+    <%--    <%List<String> message = errorUtil1.getErrorMessages();%>--%>
+    <%--    <div class="error-message">--%>
+    <%--        <%=message%>--%>
+    <%--    </div>--%>
+    <%--    <% } %>--%>
+    <%--   </div>--%>
+
+
+    <%--    &lt;%&ndash; Display errors if they exist &ndash;%&gt;--%>
+    <%--    <c:if test="${not empty errors}">--%>
+    <%--        <div class="error">--%>
+    <%--            <ul>--%>
+    <%--                <c:forEach var="error" items="${errors}">--%>
+    <%--                    <li>${error}</li>--%>
+    <%--                </c:forEach>--%>
+    <%--            </ul>--%>
+    <%--        </div>--%>
+    <%--    </c:if>--%>
 
     <form action="JPARegistrationServlet" method="post">
         <div class="form-group">

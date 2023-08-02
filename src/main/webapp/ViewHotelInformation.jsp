@@ -105,7 +105,7 @@
 
 <div class="form-group">
 
-    <a href="HotelRegistrationServlet">
+    <a href="JPAHotelRegistration">
         <button type="button">ADD HOTEL</button>
     </a>
 </div>
@@ -130,7 +130,7 @@
 
 
             <tbody>
-            <% List<HotelEntity> hotelList = (List<HotelEntity>) request.getAttribute("hotellist");
+            <% List<HotelEntity> hotelList = (List<HotelEntity>) request.getAttribute("hotelList");
                 for (HotelEntity hotel : hotelList) {%>
 
             <tr>
@@ -165,12 +165,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-package com.example.hotelbookingservlet.Servlet;
+package com.example.hotelbookingservlet.JPAServlet;
 
 import com.example.hotelbookingservlet.Common.EmailValidator;
 import com.example.hotelbookingservlet.Common.Error;

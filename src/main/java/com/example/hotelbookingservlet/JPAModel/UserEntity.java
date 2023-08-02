@@ -31,7 +31,7 @@ public class UserEntity {
     @Column(name = "role_id")
     private int role;
 
-    @OneToMany
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HotelEntity> hotels;
 
     public String getName() {
@@ -107,4 +107,3 @@ public class UserEntity {
         this.hotels = hotels;
     }
 }
-

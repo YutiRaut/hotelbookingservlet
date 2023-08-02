@@ -1,8 +1,9 @@
-package com.example.hotelbookingservlet.Servlet;
+package com.example.hotelbookingservlet.JPAServlet;
 
 import com.example.hotelbookingservlet.DAO.AddressDao;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.HotelDao;
+import com.example.hotelbookingservlet.JPAModel.*;
 import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.Hotel;
 import com.example.hotelbookingservlet.Model.User;
@@ -20,22 +21,22 @@ import java.util.List;
 
 public class JPAHotelRegistration extends HttpServlet {
 
-    Address addressG = new Address();
+    AddressEntity addressEntity = new AddressEntity();
     AddressDao addressDao = new AddressDao();
-    Hotel hotel = new Hotel();
-    HotelDao registerHotelDao = new HotelDao();
+    HotelEntity hotel = new HotelEntity();
+    HotelDao hotelDao = new HotelDao();
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            List<Address> addresses = addressDao.getState();
-            req.setAttribute("stateID", addresses);
+            List<StateEntity> state = addressDao.jpaGetState();
+            req.setAttribute("stateID", state);
             if (req.getParameter("stateid") != null) {
                 int stateId = Integer.parseInt(req.getParameter("stateid"));
-                List<Address> addresses1 = addressDao.getCity(stateId);
-                req.setAttribute("cityID", addresses1);
+                List<CityEntity> cityEntityList = addressDao.jpaGetCity(stateId);
+                req.setAttribute("cityID", cityEntityList);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,18 +67,22 @@ public class JPAHotelRegistration extends HttpServlet {
         String permits = req.getParameter("permits");
         String address = req.getParameter("address");
         String pincode = req.getParameter("pincode");
-        addressG.setAddress(address);
-        addressG.setPincode(Integer.parseInt(pincode));
+        addressEntity.setAddress(address);
+         addressEntity.setPincode(Integer.parseInt(pincode));
+
+// Get the selected cityId from the request parameter
         int cityId = Integer.parseInt(req.getParameter("City"));
-        addressG.setCityId(cityId);
+
+// Get the CityEntity from the AddressEntity and set its cityId
+        addressEntity.getCityEntity().setCityId(cityId);
+
         try {
-            addressDao.addAddress(addressG, cityId);
-            addressG = addressDao.getAddress();
+            // Save the addressEntity with the updated cityId to the database
+            addressDao.jpaAddAddress(addressEntity);
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (DAOException e) {
-            e.printStackTrace();
         }
+
 
 
         hotel.setHotelName(hotelName);
@@ -86,14 +91,13 @@ public class JPAHotelRegistration extends HttpServlet {
         hotel.setGstNo(GstNo);
         hotel.setPermits(permits);
         hotel.setImage(uploadDirectory);
+
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("CurrentUser");
-        int addressId = addressG.getAddressId();
-        try {
-            registerHotelDao.addHotelAdmin(user.getUserId(), hotel, addressId);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        UserEntity user = (UserEntity) session.getAttribute("CurrentUser");
+        int addressId = addressEntity.getAddressId();
+
+            hotelDao.JPAaddHotel(user.getUserId(), hotel, addressId);
+
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("Welcome.jsp");
         requestDispatcher.forward(req, resp);

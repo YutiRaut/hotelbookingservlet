@@ -67,24 +67,24 @@
     </servlet-mapping>
 
     <servlet>
-    <servlet-name>FormValidationServlet</servlet-name>
-    <servlet-class>com.example.hotelbookingservlet.Servlet.FormValidationServlet</servlet-class>
-</servlet>
+        <servlet-name>FormValidationServlet</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.Servlet.FormValidationServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>FormValidationServlet</servlet-name>
         <url-pattern>/FormValidationServlet</url-pattern>
     </servlet-mapping>
 
-<!--    <servlet>-->
-<!--        <servlet-name>RegistrationFormValidation</servlet-name>-->
-<!--        <servlet-class>com.example.hotelbookingservlet.Servlet.RegistrationFormValidation</servlet-class>-->
-<!--    </servlet>-->
+    <!--    <servlet>-->
+    <!--        <servlet-name>RegistrationFormValidation</servlet-name>-->
+    <!--        <servlet-class>com.example.hotelbookingservlet.Servlet.RegistrationFormValidation</servlet-class>-->
+    <!--    </servlet>-->
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>RegistrationFormValidation</servlet-name>-->
-<!--        <url-pattern>/RegistrationFormValidation</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>RegistrationFormValidation</servlet-name>-->
+    <!--        <url-pattern>/RegistrationFormValidation</url-pattern>-->
+    <!--    </servlet-mapping>-->
 
 
     <servlet>
@@ -149,21 +149,21 @@
         <url-pattern>/EditRoomServlet</url-pattern>
     </servlet-mapping>
 
-<!--    <servlet>-->
-<!--        <servlet-name>UserValidation</servlet-name>-->
-<!--        <servlet-class>com.example.hotelbookingservlet.Common.UserValidation</servlet-class>-->
-<!--    </servlet>-->
+    <!--    <servlet>-->
+    <!--        <servlet-name>UserValidation</servlet-name>-->
+    <!--        <servlet-class>com.example.hotelbookingservlet.Common.UserValidation</servlet-class>-->
+    <!--    </servlet>-->
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>UserValidation</servlet-name>-->
-<!--        <url-pattern>/UserValidation</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>UserValidation</servlet-name>-->
+    <!--        <url-pattern>/UserValidation</url-pattern>-->
+    <!--    </servlet-mapping>-->
 
 
 
     <servlet>
         <servlet-name>JpaLoginServlet</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.JpaLoginServlet</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.JPAServlet.JpaLoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -174,7 +174,7 @@
 
     <servlet>
         <servlet-name>JPARegistrationServlet</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.JPARegistrationServlet</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.JPAServlet.JPARegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -185,12 +185,24 @@
 
     <servlet>
         <servlet-name>JPAViewHotel</servlet-name>
-        <servlet-class>com.example.hotelbookingservlet.Servlet.JPAViewHotel</servlet-class>
+        <servlet-class>com.example.hotelbookingservlet.JPAServlet.JPAViewHotel</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>JPAViewHotel</servlet-name>
         <url-pattern>/JPAViewHotel</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>JPAHotelRegistration</servlet-name>
+        <servlet-class>com.example.hotelbookingservlet.JPAServlet.JPAHotelRegistration</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JPAHotelRegistration</servlet-name>
+        <url-pattern>/JPAHotelRegistration</url-pattern>
     </servlet-mapping>
 
 </web-app>

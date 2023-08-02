@@ -8,6 +8,7 @@ public class AddressEntity {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
 
     @Column(name="address_line1")
@@ -16,7 +17,8 @@ public class AddressEntity {
     @Column(name = "pincode")
     private int pincode;
 
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private CityEntity cityEntity;
 
@@ -51,4 +53,5 @@ public class AddressEntity {
     public void setCityEntity(CityEntity cityEntity) {
         this.cityEntity = cityEntity;
     }
+
 }

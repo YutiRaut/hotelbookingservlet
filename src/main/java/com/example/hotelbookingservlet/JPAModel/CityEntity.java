@@ -6,19 +6,16 @@ import java.util.List;
 @Entity
 @Table(name = "city")
 public class CityEntity {
-@Id
-@Column(name = "id")
+    @Id
+    @Column(name = "id")
     private int cityId;
 
-@Column(name = "city_name")
+    @Column(name = "city_name")
     private String cityNames;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "state_id")
     private StateEntity stateEntity;
-
-    @OneToOne(mappedBy = "cityEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private AddressEntity addressEntity;
 
 
     public int getCityId() {
@@ -45,11 +42,5 @@ public class CityEntity {
         this.stateEntity = stateEntity;
     }
 
-    public AddressEntity getAddressEntity() {
-        return addressEntity;
-    }
 
-    public void setAddressEntity(AddressEntity addressEntity) {
-        this.addressEntity = addressEntity;
-    }
 }

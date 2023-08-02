@@ -1,5 +1,8 @@
 <%@ page import="com.example.hotelbookingservlet.Model.Address" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.AddressEntity" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.CityEntity" %>
+<%@ page import="com.example.hotelbookingservlet.JPAModel.StateEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -89,7 +92,7 @@
 <div class="container">
     <div class="form-section current">
         <h2>Hotel Information</h2>
-        <form id="step1" action="HotelRegistrationServlet" method="post" enctype="multipart/form-data">
+        <form id="step1" action="JPAHotelRegistration" method="post" enctype="multipart/form-data">
 
 
             <input type="text" id="HotelName" name="HotelName" placeholder="Enter Hotel Name">
@@ -99,18 +102,18 @@
             <input type="text" id="permits" name="permits" placeholder="Permits">
             <input type="text" placeholder="Select State" id="states" list="state"><br>
             <datalist id="state" onchange="">
-                <% List<Address> addresses = (List<Address>) request.getAttribute("stateID");
-                    for (Address address : addresses) {%>
-                <option value="<%=address.getStateId()%>"><%=address.getStateList()%>
+                <% List<StateEntity> stateEntities = (List<StateEntity>) request.getAttribute("stateID");
+                    for (StateEntity stateEntity : stateEntities) {%>
+                <option value="<%=stateEntity.getStateId()%>"><%=stateEntity.getState()%>
                 </option>
                 <%}%>
             </datalist>
             <input type="text" placeholder="Select cityId" name="City" list="cityId"><br>
             <datalist id="cityId">
                 <% if (request.getAttribute("cityID") != null) {
-                    List<Address> addresses1 = (List<Address>) request.getAttribute("cityID");
-                    for (Address address : addresses1) {%>
-                <option value="<%=address.getCityId()%>"><%=address.getViewCity()%>
+                    List<CityEntity> cityEntities = (List<CityEntity>) request.getAttribute("cityID");
+                    for (CityEntity cityEntity : cityEntities) {%>
+                <option value="<%=cityEntity.getCityId()%>"><%=cityEntity.getCityNames()%>
                 </option>
                 <%
                         }
