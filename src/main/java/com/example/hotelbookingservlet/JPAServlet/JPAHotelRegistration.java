@@ -4,9 +4,6 @@ import com.example.hotelbookingservlet.DAO.AddressDao;
 import com.example.hotelbookingservlet.DAO.DAOException;
 import com.example.hotelbookingservlet.DAO.HotelDao;
 import com.example.hotelbookingservlet.JPAModel.*;
-import com.example.hotelbookingservlet.Model.Address;
-import com.example.hotelbookingservlet.Model.Hotel;
-import com.example.hotelbookingservlet.Model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -25,7 +22,7 @@ public class JPAHotelRegistration extends HttpServlet {
     AddressDao addressDao = new AddressDao();
     HotelEntity hotel = new HotelEntity();
     HotelDao hotelDao = new HotelDao();
-
+    CityEntity cityEntity = new CityEntity();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,8 +55,6 @@ public class JPAHotelRegistration extends HttpServlet {
         String uploadDirectory = uploadFileAndGetImagePath(imagePart, imageFileName, servletContext);
 
 
-
-
         String hotelName = req.getParameter("HotelName");
         String licenceNo = req.getParameter("LicenceNo");
         String starRating = req.getParameter("StarRating");
@@ -68,22 +63,20 @@ public class JPAHotelRegistration extends HttpServlet {
         String address = req.getParameter("address");
         String pincode = req.getParameter("pincode");
         addressEntity.setAddress(address);
-         addressEntity.setPincode(Integer.parseInt(pincode));
-
-// Get the selected cityId from the request parameter
-        int cityId = Integer.parseInt(req.getParameter("City"));
-
-// Get the CityEntity from the AddressEntity and set its cityId
-        addressEntity.getCityEntity().setCityId(cityId);
+        addressEntity.setPincode(Integer.parseInt(pincode));
+        addressEntity.getAddressId();
 
         try {
-            // Save the addressEntity with the updated cityId to the database
+            int cityId = Integer.parseInt(req.getParameter("City"));
+
+            CityEntity cityEntity = new CityEntity();
+            cityEntity.setCityId(cityId);
+            addressEntity.setCityEntity(cityEntity);
             addressDao.jpaAddAddress(addressEntity);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
 
         hotel.setHotelName(hotelName);
         hotel.setLicenceNo(licenceNo);
@@ -94,15 +87,70 @@ public class JPAHotelRegistration extends HttpServlet {
 
         HttpSession session = req.getSession();
         UserEntity user = (UserEntity) session.getAttribute("CurrentUser");
-        int addressId = addressEntity.getAddressId();
 
-            hotelDao.JPAaddHotel(user.getUserId(), hotel, addressId);
+        addressEntity.setAddressId(addressEntity.getAddressId());
+        hotel.setAddressEntity(addressEntity);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserId(user.getUserId());
+        hotel.setUserEntity(userEntity);
+        hotelDao.JPAaddHotel(hotel);
 
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("Welcome.jsp");
         requestDispatcher.forward(req, resp);
 
     }
+
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        ServletContext servletContext = getServletContext();
+//        Part imagePart = req.getPart("image");
+//
+//        String imageFileName = getFileName(imagePart);
+//        String uploadDirectory = uploadFileAndGetImagePath(imagePart, imageFileName, servletContext);
+//
+//        String hotelName = req.getParameter("HotelName");
+//        String licenceNo = req.getParameter("LicenceNo");
+//        String starRating = req.getParameter("StarRating");
+//        String GstNo = req.getParameter("GstNo");
+//        String permits = req.getParameter("permits");
+//        String address = req.getParameter("address");
+//        String pincode = req.getParameter("pincode");
+//
+//        addressEntity.setAddress(address);
+//        addressEntity.setPincode(Integer.parseInt(pincode));
+//
+//        try {
+//            int cityId = Integer.parseInt(req.getParameter("City"));
+//            CityEntity cityEntity = new CityEntity();
+//            cityEntity.setCityId(cityId);
+//            addressEntity.setCityEntity(cityEntity);
+//
+//            // Merge the addressEntity to make sure it's managed
+//            addressEntity=addressDao.jpaAddAddress(addressEntity);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        hotel.setHotelName(hotelName);
+//        hotel.setLicenceNo(licenceNo);
+//        hotel.setStarRating(Integer.parseInt(starRating));
+//        hotel.setGstNo(GstNo);
+//        hotel.setPermits(permits);
+//        hotel.setImage(uploadDirectory);
+//
+//        HttpSession session = req.getSession();
+//        UserEntity user = (UserEntity) session.getAttribute("CurrentUser");
+//
+//        // Set the merged addressEntity into the hotel entity
+//        hotel.setAddressEntity(addressEntity);
+//
+//        hotelDao.JPAaddHotel(user, hotel);
+//
+//        RequestDispatcher requestDispatcher = req.getRequestDispatcher("Welcome.jsp");
+//        requestDispatcher.forward(req, resp);
+//    }
+
 
     public static String getFileName(Part part) {
         String contentDisposition = part.getHeader("content-disposition");
@@ -134,9 +182,6 @@ public class JPAHotelRegistration extends HttpServlet {
         String imagePath = "hotel" + File.separator + fileName;
         return imagePath;
     }
-
-
-
 
 
 }

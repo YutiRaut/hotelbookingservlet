@@ -130,7 +130,7 @@
 
 
             <tbody>
-            <% List<HotelEntity> hotelList = (List<HotelEntity>) request.getAttribute("hotelList");
+            <% List<HotelEntity> hotelList = (List<HotelEntity>) request.getAttribute("hotelEntities");
                 for (HotelEntity hotel : hotelList) {%>
 
             <tr>

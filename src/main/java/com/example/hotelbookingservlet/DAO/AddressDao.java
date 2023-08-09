@@ -18,8 +18,8 @@ import java.util.List;
 
 public class AddressDao {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("Login");
-    EntityManager em = emf.createEntityManager();
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public List<Address> getState() throws DAOException, SQLException {
         List<Address> addresses = new ArrayList<>();
@@ -93,7 +93,7 @@ public class AddressDao {
     public List<StateEntity> jpaGetState() throws DAOException, SQLException {
         List<StateEntity> stateEntities = new ArrayList<>();
         try {
-            Query query = em.createQuery("SELECT s FROM StateEntity s");
+            Query query = entityManager.createQuery("SELECT s FROM StateEntity s");
             stateEntities = query.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -105,7 +105,7 @@ public class AddressDao {
     public List<CityEntity> jpaGetCity(int stateId) throws DAOException, SQLException {
         List<CityEntity> getCity = new ArrayList<>();
         try {
-            Query query = em.createQuery("SELECT c FROM CityEntity c WHERE c.stateEntity.stateId = :stateId");
+            Query query = entityManager.createQuery("SELECT c FROM CityEntity c WHERE c.stateEntity.stateId = :stateId");
             query.setParameter("stateId", stateId);
             getCity = query.getResultList();
         } catch (Exception e) {
@@ -117,11 +117,9 @@ public class AddressDao {
 
     public AddressEntity jpaAddAddress(AddressEntity address) throws SQLException {
         try {
-            em.getTransaction().begin();
-
-            em.persist(address);
-
-            em.getTransaction().commit();
+            entityManager.getTransaction().begin();
+            entityManager.persist(address);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,20 +127,33 @@ public class AddressDao {
     }
 
 
-    public AddressEntity jpaGetAddress() throws DAOException {
-        AddressEntity address = new AddressEntity();
-        try {
-            String getAddressQuery = "select * from address";
-            PreparedStatement statement = DbConnection.getInstance().getMainConnection().prepareStatement(getAddressQuery);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                address.setAddressId(resultSet.getInt(1));
-            }
-        } catch (SQLException e) {
-            throw new DAOException("error occured", e);
-        }
+//    public AddressEntity jpaGetAddress(String address, int pincode) throws DAOException {
+//        AddressEntity addresses = new AddressEntity();
+//        try {
+//                Query query = entityManager.createQuery("SELECT a.addressId FROM AddressEntity a WHERE a.address = :address AND a.pincode = :pincode");
+//                query.setParameter("address", address);
+//                query.setParameter("pincode", pincode);
+//
+//            addresses  = (AddressEntity) query.getSingleResult();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return addresses;
+//    }
+public AddressEntity jpaGetAddress(String address, int pincode) throws DAOException {
+    AddressEntity addresses = null;
+    try {
+        Query query = entityManager.createQuery("SELECT a FROM AddressEntity a WHERE a.address = :address AND a.pincode = :pincode", AddressEntity.class);
+        query.setParameter("address", address);
+        query.setParameter("pincode", pincode);
 
-        return address;
+        addresses = (AddressEntity) query.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+
+    return addresses;
+}
 
 }

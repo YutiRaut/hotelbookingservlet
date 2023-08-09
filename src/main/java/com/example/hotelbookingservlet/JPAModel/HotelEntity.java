@@ -29,7 +29,7 @@ public class HotelEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name ="address_id")
     private AddressEntity addressEntity;
 

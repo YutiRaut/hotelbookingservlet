@@ -31,7 +31,7 @@ public class JPAViewHotel extends HttpServlet {
 
         hotelEntities = hotelDao.getHotelDetails(userId);
 
-        req.setAttribute("hotelList", hotelEntities);
+        req.setAttribute("hotelEntities", hotelEntities);
         req.getRequestDispatcher("ViewHotelInformation.jsp").forward(req, resp);
     }
 }

@@ -1,14 +1,13 @@
 package com.example.hotelbookingservlet.DAO;
 
 import com.example.hotelbookingservlet.DTO.JPASignupDto;
+import com.example.hotelbookingservlet.JPAModel.AddressEntity;
 import com.example.hotelbookingservlet.JPAModel.HotelEntity;
+import com.example.hotelbookingservlet.JPAModel.UserEntity;
 import com.example.hotelbookingservlet.Model.Address;
 import com.example.hotelbookingservlet.Model.Hotel;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +17,8 @@ import java.util.List;
 public class HotelDao {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Login");
-    EntityManager entityManager = null;
-
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = entityManager.getTransaction();
 
     public void addHotelAdmin(int userId, Hotel hotels, int addressId) throws DAOException {
         try {
@@ -210,7 +209,7 @@ public class HotelDao {
         List<HotelEntity> hotelEntities = null;
 
         try {
-            entityManager = entityManagerFactory.createEntityManager();
+
             Query query = entityManager.createQuery("SELECT h FROM HotelEntity h WHERE h.userEntity.userId = :id");
             query.setParameter("id", userId);
             hotelEntities = query.getResultList();
@@ -223,13 +222,21 @@ public class HotelDao {
         return hotelEntities;
     }
 
-    public void JPAaddHotel(int userId, HotelEntity hotels, int addressId) {
+    public void JPAaddHotel(HotelEntity hotel) {
         entityManager.getTransaction().begin();
-        hotels.getUserEntity().setUserId(userId);
-        hotels.getAddressEntity().setAddressId(addressId);
-        entityManager.persist(hotels);
+        // Check if the addressEntity is detached and reattach it
+//        AddressEntity addressEntity = hotel.getAddressEntity();
+//        if (addressEntity != null && !entityManager.contains(addressEntity)) {
+//            addressEntity = entityManager.merge(addressEntity);
+//            hotel.setAddressEntity(addressEntity);
+//        }
+//        hotel.getAddressEntity().setAddressId(addressId);
+//        hotel.setUserEntity(user);
+        entityManager.persist(hotel);
         entityManager.getTransaction().commit();
     }
+
+
 
     public void jpaAddHotelAdmin(int userId, HotelEntity hotels, int addressId) throws DAOException {
         try {

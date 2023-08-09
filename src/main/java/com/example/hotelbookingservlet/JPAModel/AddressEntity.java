@@ -17,8 +17,11 @@ public class AddressEntity {
     @Column(name = "pincode")
     private int pincode;
 
+//    @OneToOne(mappedBy = "addressEntity")
+//    private HotelEntity hotelEntity;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name = "city_id")
     private CityEntity cityEntity;
 
@@ -54,4 +57,11 @@ public class AddressEntity {
         this.cityEntity = cityEntity;
     }
 
+//    public HotelEntity getHotelEntity() {
+//        return hotelEntity;
+//    }
+//
+//    public void setHotelEntity(HotelEntity hotelEntity) {
+//        this.hotelEntity = hotelEntity;
+//    }
 }
